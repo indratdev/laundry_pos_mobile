@@ -10,6 +10,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Menus menus = Menus(context: context);
+    List<Widget> menuList = menus.getServiceMenuList();
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -160,7 +163,7 @@ class HomePage extends StatelessWidget {
                 mainAxisSpacing: 12,
                 crossAxisSpacing: 12,
                 childAspectRatio: 3 / 4,
-                children: Menus().serviceMenuList,
+                children: menuList,
               ),
             ),
             // Spacer(),

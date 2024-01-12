@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:laundry_app/core/constants/variables.dart';
-import 'package:laundry_app/core/extensions/build_context_ext.dart';
 
 import '../../../core/constants/colors.dart';
 
 class ServiceMenuWidget extends StatelessWidget {
-  String title;
-  String iconName;
+  final String title;
+  final String iconName;
+  final Function()? onTap;
 
   ServiceMenuWidget({
     super.key,
     required this.title,
     required this.iconName,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
@@ -35,7 +35,7 @@ class ServiceMenuWidget extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 8),
+              margin: const EdgeInsets.only(top: 8),
               padding: const EdgeInsets.symmetric(horizontal: 8),
               height: MediaQuery.of(context).size.width / 18,
               child: FittedBox(

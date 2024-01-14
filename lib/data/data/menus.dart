@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:laundry_app/presentation/blocs/product_bloc/product_bloc.dart';
 import 'package:laundry_app/presentation/settings/pages/management_product/manage_product_page.dart';
 import 'package:laundry_app/presentation/settings/settings_page.dart';
 
@@ -27,20 +29,23 @@ class Menus {
   List<Widget> getSettingMenuList() {
     return [
       ServiceMenuWidget(
-          title: "Kelola Produk",
-          iconName: Variables.serviceIcon,
+        title: "Kelola Produk",
+        iconName: Variables.manageProductIcon,
+        onTap: () {
+          context.read<ProductBloc>().add(const ProductEvent.fetchAllFromState());
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const ManageProductPage()));
+        },
+      ),
+      ServiceMenuWidget(
+          title: "Kelola Printer",
+          iconName: Variables.managePrinterIcon,
           onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => const ManageProductPage()))),
-      // ServiceMenuWidget(title: "Pelanggan", iconName: Variables.customersIcon),
-      // ServiceMenuWidget(title: "Riwayat", iconName: Variables.historyIcon),
-      // ServiceMenuWidget(title: "Laporan", iconName: Variables.reportsIcon),
-      // ServiceMenuWidget(
-      //     title: "Kelola",
-      //     iconName: Variables.settingsIcon,
-      //     onTap: () => Navigator.push(context,
-      //         MaterialPageRoute(builder: (context) => const SettingPage()))),
     ];
   }
 }

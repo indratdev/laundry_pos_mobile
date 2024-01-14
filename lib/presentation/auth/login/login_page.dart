@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:laundry_app/presentation/home/home_page.dart';
@@ -78,50 +77,53 @@ class _LoginPageState extends State<LoginPage> {
           // Button.filled(onPressed: (){}, label: 'Masuk',)
           BlocListener<LoginBloc, LoginState>(
             listener: (context, state) {
-               print(">>> state BlocListener : $state");
-              state.maybeWhen( orElse: () {},
-              success: (authResponseModel) {
-                AuthLocalDatasource().saveAuthData(authResponseModel);
-                Navigator.pushReplacement(
+              print(">>> state BlocListener : $state");
+              state.maybeWhen(
+                orElse: () {},
+                success: (authResponseModel) {
+                  AuthLocalDatasource().saveAuthData(authResponseModel);
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const HomePage(),
                     ),
                   );
-              },
-              error: (message) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message),
-                backgroundColor: Colors.red,
-                ),
-                );
-              },
-            );
-          
+                },
+                error: (message) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(message),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                },
+              );
             },
             child: BlocBuilder<LoginBloc, LoginState>(
               builder: (context, state) {
                 print(">>> state BlocBuilder : $state");
                 state.maybeWhen(
                   orElse: () {
-                    return Button.filled(
-                      onPressed: () {
-                        print(">>> print");
-                        context.read<LoginBloc>().add(
-                              LoginEvent.login(
-                                email: usernameController.text,
-                                password: passwordController.text,
-                              ),
-                            );
-                      },
-                      label: 'Masuka',
-                    );
+                    // return Button.filled(
+                    //   onPressed: () {
+                    //     print(">>> print");
+                    //     context.read<LoginBloc>().add(
+                    //           LoginEvent.login(
+                    //             email: usernameController.text,
+                    //             password: passwordController.text,
+                    //           ),
+                    //         );
+                    //   },
+                    //   label: 'Masuk',
+                    // );
                   },
                   loading: () {
                     return const Center(
                       child: CircularProgressIndicator.adaptive(),
-                      // child: Text("Loading..."),
-
                     );
+                  },
+                  error: (message) {
+                    return Center(child: Container(child: Text("Gagal")),);
                   },
                 );
                 return Button.filled(
@@ -136,11 +138,11 @@ class _LoginPageState extends State<LoginPage> {
                     context.read<LoginBloc>().add(
                           const LoginEvent.login(
                             email: 'indrat@mail.com',
-                            password:'123123',
+                            password: '123123',
                           ),
                         );
                   },
-                  label: 'Masuka',
+                  label: 'Masuk',
                 );
               },
             ),

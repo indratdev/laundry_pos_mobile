@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.fromLTRB(0, 12, 0, 12),
+              margin: const EdgeInsets.fromLTRB(0, 12, 0, 12),
               height: MediaQuery.sizeOf(context).height / 8,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
@@ -57,6 +57,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
             SizedBox(
+              // color: Colors.green,
               height: context.deviceHeight / 12,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -64,8 +65,8 @@ class HomePage extends StatelessWidget {
                   Flexible(
                     flex: 1,
                     child: Container(
-                      padding: const EdgeInsets.all(2),
-                      margin: const EdgeInsets.symmetric(horizontal: 4),
+                      // padding: const EdgeInsets.all(2),
+                      margin: const EdgeInsets.symmetric(horizontal: 2),
                       height: context.infoContainerWidth,
                       decoration: BoxDecoration(
                           color: AppColors.yellow,
@@ -92,8 +93,8 @@ class HomePage extends StatelessWidget {
                   Flexible(
                     flex: 1,
                     child: Container(
-                      padding: const EdgeInsets.all(2),
-                      margin: const EdgeInsets.symmetric(horizontal: 4),
+                      // padding: const EdgeInsets.all(2),
+                      margin: const EdgeInsets.symmetric(horizontal: 2),
                       height: context.infoContainerWidth,
                       decoration: BoxDecoration(
                           color: AppColors.yellow,
@@ -123,8 +124,8 @@ class HomePage extends StatelessWidget {
                   Flexible(
                     flex: 1,
                     child: Container(
-                      padding: const EdgeInsets.all(2),
-                      margin: const EdgeInsets.symmetric(horizontal: 4),
+                      // padding: const EdgeInsets.all(2),
+                      margin: const EdgeInsets.symmetric(horizontal: 2),
                       height: context.infoContainerWidth,
                       decoration: BoxDecoration(
                           color: AppColors.yellow,
@@ -162,7 +163,7 @@ class HomePage extends StatelessWidget {
                 crossAxisCount: 3,
                 mainAxisSpacing: 12,
                 crossAxisSpacing: 12,
-                childAspectRatio: 3 / 4,
+                childAspectRatio: 3 / 3,
                 children: menuList,
               ),
             ),
@@ -171,23 +172,23 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: Container(
-        margin: const EdgeInsets.only(bottom: 14),
-        width: context.deviceWidth / 1.2,
-        child: FloatingActionButton.extended(
-          elevation: 3,
-          backgroundColor: AppColors.yellow,
-          onPressed: () {},
-          label: const Text(
-            "TRANSAKSI",
-            style: TextStyle(
-              color: AppColors.whiteBriliant,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButton: Container(
+      //   margin: const EdgeInsets.only(bottom: 14),
+      //   width: context.deviceWidth / 1.2,
+      //   child: FloatingActionButton.extended(
+      //     elevation: 3,
+      //     backgroundColor: AppColors.yellow,
+      //     onPressed: () {},
+      //     label: const Text(
+      //       "TRANSAKSI",
+      //       style: TextStyle(
+      //         color: AppColors.whiteBriliant,
+      //         fontWeight: FontWeight.bold,
+      //       ),
+      //     ),
+      //   ),
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

@@ -19,23 +19,26 @@ class _SettingPageState extends State<SettingPage> {
       appBar: AppBar(
         title: const Text('Setting'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: GridView.count(
-              physics: const ScrollPhysics(),
-              shrinkWrap: true,
-              primary: false,
-              scrollDirection: Axis.vertical,
-              padding: const EdgeInsets.all(10),
-              crossAxisCount: 3,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-              childAspectRatio: 3 / 4,
-              children: menuList,
+      body: Padding(
+        padding: const EdgeInsets.all(14.0),
+        child: Column(
+          children: [
+            Expanded(
+              child: GridView.count(
+                physics: const ScrollPhysics(),
+                shrinkWrap: true,
+                primary: false,
+                scrollDirection: Axis.vertical,
+                padding: const EdgeInsets.all(10),
+                crossAxisCount: 3,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+                childAspectRatio: 3 / 3,
+                children: menuList,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

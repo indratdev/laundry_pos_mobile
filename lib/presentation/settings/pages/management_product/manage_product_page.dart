@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:laundry_app/data/models/response/product_response_model.dart';
+import 'package:laundry_app/presentation/blocs/product_bloc/product_bloc.dart';
+import 'package:laundry_app/presentation/settings/pages/management_product/menu_product_item.dart';
 
 import '../../../../core/componets/spaces.dart';
 import '../../../../data/models/product_category.dart';
@@ -13,36 +16,36 @@ class ManageProductPage extends StatefulWidget {
 }
 
 class _ManageProductPageState extends State<ManageProductPage> {
-  final List<ProductModel> products = [
-    ProductModel(
-      image: '',
-      name: 'Vanila Late Vanila itu',
-      category: ProductCategory.kiloan,
-      price: 200000,
-      stock: 10,
-    ),
-    ProductModel(
-      image: '',
-      name: 'V60',
-      category: ProductCategory.satuan,
-      price: 1200000,
-      stock: 10,
-    ),
-    ProductModel(
-      image: '',
-      name: 'Americano',
-      category: ProductCategory.kiloan,
-      price: 2100000,
-      stock: 10,
-    ),
-    ProductModel(
-      image: '',
-      name: 'Cappucino',
-      category: ProductCategory.kiloan,
-      price: 200000,
-      stock: 10,
-    ),
-  ];
+  // final List<Product> products = [
+  //   Product(
+  //     image: '',
+  //     name: 'Vanila Late Vanila itu',
+  //     category: ProductCategory.kiloan,
+  //     price: 200000,
+  //     working_time: 10,
+  //   ),
+  //   Product(
+  //     image: '',
+  //     name: 'V60',
+  //     category: ProductCategory.satuan,
+  //     price: 1200000,
+  //     stock: 10,
+  //   ),
+  //   Product(
+  //     image: '',
+  //     name: 'Americano',
+  //     category: ProductCategory.kiloan,
+  //     price: 2100000,
+  //     stock: 10,
+  //   ),
+  //   Product(
+  //     image: '',
+  //     name: 'Cappucino',
+  //     category: ProductCategory.kiloan,
+  //     price: 200000,
+  //     stock: 10,
+  //   ),
+  // ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,34 +64,34 @@ class _ManageProductPageState extends State<ManageProductPage> {
             ),
           ),
           const SpaceHeight(20.0),
-          // BlocBuilder<ProductBloc, ProductState>(
-          //   builder: (context, state) {
-          //     return state.maybeWhen(orElse: () {
-          //       return const Center(
-          //         child: CircularProgressIndicator(),
-          //       );
-          //     }, success: (products) {
-          //       return ListView.separated(
-          //         shrinkWrap: true,
-          //         physics: const NeverScrollableScrollPhysics(),
-          //         itemCount: products.length,
-          //         separatorBuilder: (context, index) => const SpaceHeight(20.0),
-          //         itemBuilder: (context, index) => MenuProductItem(
-          //           data: products[index],
-          //         ),
-          //       );
-          //     });
-          //     // return ListView.separated(
-          //     //   shrinkWrap: true,
-          //     //   physics: const NeverScrollableScrollPhysics(),
-          //     //   itemCount: products.length,
-          //     //   separatorBuilder: (context, index) => const SpaceHeight(20.0),
-          //     //   itemBuilder: (context, index) => MenuProductItem(
-          //     //     data: products[index],
-          //     //   ),
-          //     // );
-          //   },
-          // ),
+          BlocBuilder<ProductBloc, ProductState>(
+            builder: (context, state) {
+              return state.maybeWhen(orElse: () {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }, success: (products) {
+                return ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: products.length,
+                  separatorBuilder: (context, index) => const SpaceHeight(20.0),
+                  itemBuilder: (context, index) => MenuProductItem(
+                    data: products[index],
+                  ),
+                );
+              });
+              // return ListView.separated(
+              //   shrinkWrap: true,
+              //   physics: const NeverScrollableScrollPhysics(),
+              //   itemCount: products.length,
+              //   separatorBuilder: (context, index) => const SpaceHeight(20.0),
+              //   itemBuilder: (context, index) => MenuProductItem(
+              //     data: products[index],
+              //   ),
+              // );
+            },
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(

@@ -5,7 +5,7 @@ extension BuildContextExt on BuildContext {
 
   double get deviceWidth => MediaQuery.of(this).size.width;
 
-  double get infoContainerWidth => MediaQuery.of(this).size.height / 15;
+  double get infoContainerWidth => MediaQuery.of(this).size.height / 14;
 }
 
 extension NavigatorExt on BuildContext {

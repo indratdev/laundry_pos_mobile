@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'product_bloc.dart';
+part of 'customer_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,15 +15,14 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$ProductEvent {
+mixin _$CustomerEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
-    required TResult Function(String category) fetchByCategory,
     required TResult Function() fetchLocal,
-    required TResult Function(Product product, XFile image) addProduct,
-    required TResult Function(String query) searchProduct,
+    required TResult Function(CustomerRequestModel customer) addCustomer,
+    required TResult Function(String query) searchCustomer,
     required TResult Function() fetchAllFromState,
   }) =>
       throw _privateConstructorUsedError;
@@ -31,10 +30,9 @@ mixin _$ProductEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
-    TResult? Function(String category)? fetchByCategory,
     TResult? Function()? fetchLocal,
-    TResult? Function(Product product, XFile image)? addProduct,
-    TResult? Function(String query)? searchProduct,
+    TResult? Function(CustomerRequestModel customer)? addCustomer,
+    TResult? Function(String query)? searchCustomer,
     TResult? Function()? fetchAllFromState,
   }) =>
       throw _privateConstructorUsedError;
@@ -42,10 +40,9 @@ mixin _$ProductEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
-    TResult Function(String category)? fetchByCategory,
     TResult Function()? fetchLocal,
-    TResult Function(Product product, XFile image)? addProduct,
-    TResult Function(String query)? searchProduct,
+    TResult Function(CustomerRequestModel customer)? addCustomer,
+    TResult Function(String query)? searchCustomer,
     TResult Function()? fetchAllFromState,
     required TResult orElse(),
   }) =>
@@ -54,10 +51,9 @@ mixin _$ProductEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_FetchByCategory value) fetchByCategory,
     required TResult Function(_FetchLocal value) fetchLocal,
-    required TResult Function(_AddProduct value) addProduct,
-    required TResult Function(_SearchProduct value) searchProduct,
+    required TResult Function(_AddCustomer value) addCustomer,
+    required TResult Function(_SearchCustomer value) searchCustomer,
     required TResult Function(_FetchAllFromState value) fetchAllFromState,
   }) =>
       throw _privateConstructorUsedError;
@@ -65,10 +61,9 @@ mixin _$ProductEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_FetchByCategory value)? fetchByCategory,
     TResult? Function(_FetchLocal value)? fetchLocal,
-    TResult? Function(_AddProduct value)? addProduct,
-    TResult? Function(_SearchProduct value)? searchProduct,
+    TResult? Function(_AddCustomer value)? addCustomer,
+    TResult? Function(_SearchCustomer value)? searchCustomer,
     TResult? Function(_FetchAllFromState value)? fetchAllFromState,
   }) =>
       throw _privateConstructorUsedError;
@@ -76,10 +71,9 @@ mixin _$ProductEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_FetchByCategory value)? fetchByCategory,
     TResult Function(_FetchLocal value)? fetchLocal,
-    TResult Function(_AddProduct value)? addProduct,
-    TResult Function(_SearchProduct value)? searchProduct,
+    TResult Function(_AddCustomer value)? addCustomer,
+    TResult Function(_SearchCustomer value)? searchCustomer,
     TResult Function(_FetchAllFromState value)? fetchAllFromState,
     required TResult orElse(),
   }) =>
@@ -87,16 +81,16 @@ mixin _$ProductEvent {
 }
 
 /// @nodoc
-abstract class $ProductEventCopyWith<$Res> {
-  factory $ProductEventCopyWith(
-          ProductEvent value, $Res Function(ProductEvent) then) =
-      _$ProductEventCopyWithImpl<$Res, ProductEvent>;
+abstract class $CustomerEventCopyWith<$Res> {
+  factory $CustomerEventCopyWith(
+          CustomerEvent value, $Res Function(CustomerEvent) then) =
+      _$CustomerEventCopyWithImpl<$Res, CustomerEvent>;
 }
 
 /// @nodoc
-class _$ProductEventCopyWithImpl<$Res, $Val extends ProductEvent>
-    implements $ProductEventCopyWith<$Res> {
-  _$ProductEventCopyWithImpl(this._value, this._then);
+class _$CustomerEventCopyWithImpl<$Res, $Val extends CustomerEvent>
+    implements $CustomerEventCopyWith<$Res> {
+  _$CustomerEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -113,7 +107,7 @@ abstract class _$$StartedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$StartedImplCopyWithImpl<$Res>
-    extends _$ProductEventCopyWithImpl<$Res, _$StartedImpl>
+    extends _$CustomerEventCopyWithImpl<$Res, _$StartedImpl>
     implements _$$StartedImplCopyWith<$Res> {
   __$$StartedImplCopyWithImpl(
       _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
@@ -127,7 +121,7 @@ class _$StartedImpl implements _Started {
 
   @override
   String toString() {
-    return 'ProductEvent.started()';
+    return 'CustomerEvent.started()';
   }
 
   @override
@@ -144,10 +138,9 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
-    required TResult Function(String category) fetchByCategory,
     required TResult Function() fetchLocal,
-    required TResult Function(Product product, XFile image) addProduct,
-    required TResult Function(String query) searchProduct,
+    required TResult Function(CustomerRequestModel customer) addCustomer,
+    required TResult Function(String query) searchCustomer,
     required TResult Function() fetchAllFromState,
   }) {
     return started();
@@ -158,10 +151,9 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
-    TResult? Function(String category)? fetchByCategory,
     TResult? Function()? fetchLocal,
-    TResult? Function(Product product, XFile image)? addProduct,
-    TResult? Function(String query)? searchProduct,
+    TResult? Function(CustomerRequestModel customer)? addCustomer,
+    TResult? Function(String query)? searchCustomer,
     TResult? Function()? fetchAllFromState,
   }) {
     return started?.call();
@@ -172,10 +164,9 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
-    TResult Function(String category)? fetchByCategory,
     TResult Function()? fetchLocal,
-    TResult Function(Product product, XFile image)? addProduct,
-    TResult Function(String query)? searchProduct,
+    TResult Function(CustomerRequestModel customer)? addCustomer,
+    TResult Function(String query)? searchCustomer,
     TResult Function()? fetchAllFromState,
     required TResult orElse(),
   }) {
@@ -190,10 +181,9 @@ class _$StartedImpl implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_FetchByCategory value) fetchByCategory,
     required TResult Function(_FetchLocal value) fetchLocal,
-    required TResult Function(_AddProduct value) addProduct,
-    required TResult Function(_SearchProduct value) searchProduct,
+    required TResult Function(_AddCustomer value) addCustomer,
+    required TResult Function(_SearchCustomer value) searchCustomer,
     required TResult Function(_FetchAllFromState value) fetchAllFromState,
   }) {
     return started(this);
@@ -204,10 +194,9 @@ class _$StartedImpl implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_FetchByCategory value)? fetchByCategory,
     TResult? Function(_FetchLocal value)? fetchLocal,
-    TResult? Function(_AddProduct value)? addProduct,
-    TResult? Function(_SearchProduct value)? searchProduct,
+    TResult? Function(_AddCustomer value)? addCustomer,
+    TResult? Function(_SearchCustomer value)? searchCustomer,
     TResult? Function(_FetchAllFromState value)? fetchAllFromState,
   }) {
     return started?.call(this);
@@ -218,10 +207,9 @@ class _$StartedImpl implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_FetchByCategory value)? fetchByCategory,
     TResult Function(_FetchLocal value)? fetchLocal,
-    TResult Function(_AddProduct value)? addProduct,
-    TResult Function(_SearchProduct value)? searchProduct,
+    TResult Function(_AddCustomer value)? addCustomer,
+    TResult Function(_SearchCustomer value)? searchCustomer,
     TResult Function(_FetchAllFromState value)? fetchAllFromState,
     required TResult orElse(),
   }) {
@@ -232,7 +220,7 @@ class _$StartedImpl implements _Started {
   }
 }
 
-abstract class _Started implements ProductEvent {
+abstract class _Started implements CustomerEvent {
   const factory _Started() = _$StartedImpl;
 }
 
@@ -245,7 +233,7 @@ abstract class _$$FetchImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$FetchImplCopyWithImpl<$Res>
-    extends _$ProductEventCopyWithImpl<$Res, _$FetchImpl>
+    extends _$CustomerEventCopyWithImpl<$Res, _$FetchImpl>
     implements _$$FetchImplCopyWith<$Res> {
   __$$FetchImplCopyWithImpl(
       _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
@@ -259,7 +247,7 @@ class _$FetchImpl implements _Fetch {
 
   @override
   String toString() {
-    return 'ProductEvent.fetch()';
+    return 'CustomerEvent.fetch()';
   }
 
   @override
@@ -276,10 +264,9 @@ class _$FetchImpl implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
-    required TResult Function(String category) fetchByCategory,
     required TResult Function() fetchLocal,
-    required TResult Function(Product product, XFile image) addProduct,
-    required TResult Function(String query) searchProduct,
+    required TResult Function(CustomerRequestModel customer) addCustomer,
+    required TResult Function(String query) searchCustomer,
     required TResult Function() fetchAllFromState,
   }) {
     return fetch();
@@ -290,10 +277,9 @@ class _$FetchImpl implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
-    TResult? Function(String category)? fetchByCategory,
     TResult? Function()? fetchLocal,
-    TResult? Function(Product product, XFile image)? addProduct,
-    TResult? Function(String query)? searchProduct,
+    TResult? Function(CustomerRequestModel customer)? addCustomer,
+    TResult? Function(String query)? searchCustomer,
     TResult? Function()? fetchAllFromState,
   }) {
     return fetch?.call();
@@ -304,10 +290,9 @@ class _$FetchImpl implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
-    TResult Function(String category)? fetchByCategory,
     TResult Function()? fetchLocal,
-    TResult Function(Product product, XFile image)? addProduct,
-    TResult Function(String query)? searchProduct,
+    TResult Function(CustomerRequestModel customer)? addCustomer,
+    TResult Function(String query)? searchCustomer,
     TResult Function()? fetchAllFromState,
     required TResult orElse(),
   }) {
@@ -322,10 +307,9 @@ class _$FetchImpl implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_FetchByCategory value) fetchByCategory,
     required TResult Function(_FetchLocal value) fetchLocal,
-    required TResult Function(_AddProduct value) addProduct,
-    required TResult Function(_SearchProduct value) searchProduct,
+    required TResult Function(_AddCustomer value) addCustomer,
+    required TResult Function(_SearchCustomer value) searchCustomer,
     required TResult Function(_FetchAllFromState value) fetchAllFromState,
   }) {
     return fetch(this);
@@ -336,10 +320,9 @@ class _$FetchImpl implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_FetchByCategory value)? fetchByCategory,
     TResult? Function(_FetchLocal value)? fetchLocal,
-    TResult? Function(_AddProduct value)? addProduct,
-    TResult? Function(_SearchProduct value)? searchProduct,
+    TResult? Function(_AddCustomer value)? addCustomer,
+    TResult? Function(_SearchCustomer value)? searchCustomer,
     TResult? Function(_FetchAllFromState value)? fetchAllFromState,
   }) {
     return fetch?.call(this);
@@ -350,10 +333,9 @@ class _$FetchImpl implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_FetchByCategory value)? fetchByCategory,
     TResult Function(_FetchLocal value)? fetchLocal,
-    TResult Function(_AddProduct value)? addProduct,
-    TResult Function(_SearchProduct value)? searchProduct,
+    TResult Function(_AddCustomer value)? addCustomer,
+    TResult Function(_SearchCustomer value)? searchCustomer,
     TResult Function(_FetchAllFromState value)? fetchAllFromState,
     required TResult orElse(),
   }) {
@@ -364,173 +346,8 @@ class _$FetchImpl implements _Fetch {
   }
 }
 
-abstract class _Fetch implements ProductEvent {
+abstract class _Fetch implements CustomerEvent {
   const factory _Fetch() = _$FetchImpl;
-}
-
-/// @nodoc
-abstract class _$$FetchByCategoryImplCopyWith<$Res> {
-  factory _$$FetchByCategoryImplCopyWith(_$FetchByCategoryImpl value,
-          $Res Function(_$FetchByCategoryImpl) then) =
-      __$$FetchByCategoryImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String category});
-}
-
-/// @nodoc
-class __$$FetchByCategoryImplCopyWithImpl<$Res>
-    extends _$ProductEventCopyWithImpl<$Res, _$FetchByCategoryImpl>
-    implements _$$FetchByCategoryImplCopyWith<$Res> {
-  __$$FetchByCategoryImplCopyWithImpl(
-      _$FetchByCategoryImpl _value, $Res Function(_$FetchByCategoryImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? category = null,
-  }) {
-    return _then(_$FetchByCategoryImpl(
-      null == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$FetchByCategoryImpl implements _FetchByCategory {
-  const _$FetchByCategoryImpl(this.category);
-
-  @override
-  final String category;
-
-  @override
-  String toString() {
-    return 'ProductEvent.fetchByCategory(category: $category)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FetchByCategoryImpl &&
-            (identical(other.category, category) ||
-                other.category == category));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, category);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FetchByCategoryImplCopyWith<_$FetchByCategoryImpl> get copyWith =>
-      __$$FetchByCategoryImplCopyWithImpl<_$FetchByCategoryImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() fetch,
-    required TResult Function(String category) fetchByCategory,
-    required TResult Function() fetchLocal,
-    required TResult Function(Product product, XFile image) addProduct,
-    required TResult Function(String query) searchProduct,
-    required TResult Function() fetchAllFromState,
-  }) {
-    return fetchByCategory(category);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? fetch,
-    TResult? Function(String category)? fetchByCategory,
-    TResult? Function()? fetchLocal,
-    TResult? Function(Product product, XFile image)? addProduct,
-    TResult? Function(String query)? searchProduct,
-    TResult? Function()? fetchAllFromState,
-  }) {
-    return fetchByCategory?.call(category);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? fetch,
-    TResult Function(String category)? fetchByCategory,
-    TResult Function()? fetchLocal,
-    TResult Function(Product product, XFile image)? addProduct,
-    TResult Function(String query)? searchProduct,
-    TResult Function()? fetchAllFromState,
-    required TResult orElse(),
-  }) {
-    if (fetchByCategory != null) {
-      return fetchByCategory(category);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_FetchByCategory value) fetchByCategory,
-    required TResult Function(_FetchLocal value) fetchLocal,
-    required TResult Function(_AddProduct value) addProduct,
-    required TResult Function(_SearchProduct value) searchProduct,
-    required TResult Function(_FetchAllFromState value) fetchAllFromState,
-  }) {
-    return fetchByCategory(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_FetchByCategory value)? fetchByCategory,
-    TResult? Function(_FetchLocal value)? fetchLocal,
-    TResult? Function(_AddProduct value)? addProduct,
-    TResult? Function(_SearchProduct value)? searchProduct,
-    TResult? Function(_FetchAllFromState value)? fetchAllFromState,
-  }) {
-    return fetchByCategory?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_FetchByCategory value)? fetchByCategory,
-    TResult Function(_FetchLocal value)? fetchLocal,
-    TResult Function(_AddProduct value)? addProduct,
-    TResult Function(_SearchProduct value)? searchProduct,
-    TResult Function(_FetchAllFromState value)? fetchAllFromState,
-    required TResult orElse(),
-  }) {
-    if (fetchByCategory != null) {
-      return fetchByCategory(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _FetchByCategory implements ProductEvent {
-  const factory _FetchByCategory(final String category) = _$FetchByCategoryImpl;
-
-  String get category;
-  @JsonKey(ignore: true)
-  _$$FetchByCategoryImplCopyWith<_$FetchByCategoryImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -542,7 +359,7 @@ abstract class _$$FetchLocalImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$FetchLocalImplCopyWithImpl<$Res>
-    extends _$ProductEventCopyWithImpl<$Res, _$FetchLocalImpl>
+    extends _$CustomerEventCopyWithImpl<$Res, _$FetchLocalImpl>
     implements _$$FetchLocalImplCopyWith<$Res> {
   __$$FetchLocalImplCopyWithImpl(
       _$FetchLocalImpl _value, $Res Function(_$FetchLocalImpl) _then)
@@ -556,7 +373,7 @@ class _$FetchLocalImpl implements _FetchLocal {
 
   @override
   String toString() {
-    return 'ProductEvent.fetchLocal()';
+    return 'CustomerEvent.fetchLocal()';
   }
 
   @override
@@ -573,10 +390,9 @@ class _$FetchLocalImpl implements _FetchLocal {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
-    required TResult Function(String category) fetchByCategory,
     required TResult Function() fetchLocal,
-    required TResult Function(Product product, XFile image) addProduct,
-    required TResult Function(String query) searchProduct,
+    required TResult Function(CustomerRequestModel customer) addCustomer,
+    required TResult Function(String query) searchCustomer,
     required TResult Function() fetchAllFromState,
   }) {
     return fetchLocal();
@@ -587,10 +403,9 @@ class _$FetchLocalImpl implements _FetchLocal {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
-    TResult? Function(String category)? fetchByCategory,
     TResult? Function()? fetchLocal,
-    TResult? Function(Product product, XFile image)? addProduct,
-    TResult? Function(String query)? searchProduct,
+    TResult? Function(CustomerRequestModel customer)? addCustomer,
+    TResult? Function(String query)? searchCustomer,
     TResult? Function()? fetchAllFromState,
   }) {
     return fetchLocal?.call();
@@ -601,10 +416,9 @@ class _$FetchLocalImpl implements _FetchLocal {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
-    TResult Function(String category)? fetchByCategory,
     TResult Function()? fetchLocal,
-    TResult Function(Product product, XFile image)? addProduct,
-    TResult Function(String query)? searchProduct,
+    TResult Function(CustomerRequestModel customer)? addCustomer,
+    TResult Function(String query)? searchCustomer,
     TResult Function()? fetchAllFromState,
     required TResult orElse(),
   }) {
@@ -619,10 +433,9 @@ class _$FetchLocalImpl implements _FetchLocal {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_FetchByCategory value) fetchByCategory,
     required TResult Function(_FetchLocal value) fetchLocal,
-    required TResult Function(_AddProduct value) addProduct,
-    required TResult Function(_SearchProduct value) searchProduct,
+    required TResult Function(_AddCustomer value) addCustomer,
+    required TResult Function(_SearchCustomer value) searchCustomer,
     required TResult Function(_FetchAllFromState value) fetchAllFromState,
   }) {
     return fetchLocal(this);
@@ -633,10 +446,9 @@ class _$FetchLocalImpl implements _FetchLocal {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_FetchByCategory value)? fetchByCategory,
     TResult? Function(_FetchLocal value)? fetchLocal,
-    TResult? Function(_AddProduct value)? addProduct,
-    TResult? Function(_SearchProduct value)? searchProduct,
+    TResult? Function(_AddCustomer value)? addCustomer,
+    TResult? Function(_SearchCustomer value)? searchCustomer,
     TResult? Function(_FetchAllFromState value)? fetchAllFromState,
   }) {
     return fetchLocal?.call(this);
@@ -647,10 +459,9 @@ class _$FetchLocalImpl implements _FetchLocal {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_FetchByCategory value)? fetchByCategory,
     TResult Function(_FetchLocal value)? fetchLocal,
-    TResult Function(_AddProduct value)? addProduct,
-    TResult Function(_SearchProduct value)? searchProduct,
+    TResult Function(_AddCustomer value)? addCustomer,
+    TResult Function(_SearchCustomer value)? searchCustomer,
     TResult Function(_FetchAllFromState value)? fetchAllFromState,
     required TResult orElse(),
   }) {
@@ -661,91 +472,83 @@ class _$FetchLocalImpl implements _FetchLocal {
   }
 }
 
-abstract class _FetchLocal implements ProductEvent {
+abstract class _FetchLocal implements CustomerEvent {
   const factory _FetchLocal() = _$FetchLocalImpl;
 }
 
 /// @nodoc
-abstract class _$$AddProductImplCopyWith<$Res> {
-  factory _$$AddProductImplCopyWith(
-          _$AddProductImpl value, $Res Function(_$AddProductImpl) then) =
-      __$$AddProductImplCopyWithImpl<$Res>;
+abstract class _$$AddCustomerImplCopyWith<$Res> {
+  factory _$$AddCustomerImplCopyWith(
+          _$AddCustomerImpl value, $Res Function(_$AddCustomerImpl) then) =
+      __$$AddCustomerImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Product product, XFile image});
+  $Res call({CustomerRequestModel customer});
 }
 
 /// @nodoc
-class __$$AddProductImplCopyWithImpl<$Res>
-    extends _$ProductEventCopyWithImpl<$Res, _$AddProductImpl>
-    implements _$$AddProductImplCopyWith<$Res> {
-  __$$AddProductImplCopyWithImpl(
-      _$AddProductImpl _value, $Res Function(_$AddProductImpl) _then)
+class __$$AddCustomerImplCopyWithImpl<$Res>
+    extends _$CustomerEventCopyWithImpl<$Res, _$AddCustomerImpl>
+    implements _$$AddCustomerImplCopyWith<$Res> {
+  __$$AddCustomerImplCopyWithImpl(
+      _$AddCustomerImpl _value, $Res Function(_$AddCustomerImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? product = null,
-    Object? image = null,
+    Object? customer = null,
   }) {
-    return _then(_$AddProductImpl(
-      null == product
-          ? _value.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as Product,
-      null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as XFile,
+    return _then(_$AddCustomerImpl(
+      null == customer
+          ? _value.customer
+          : customer // ignore: cast_nullable_to_non_nullable
+              as CustomerRequestModel,
     ));
   }
 }
 
 /// @nodoc
 
-class _$AddProductImpl implements _AddProduct {
-  const _$AddProductImpl(this.product, this.image);
+class _$AddCustomerImpl implements _AddCustomer {
+  const _$AddCustomerImpl(this.customer);
 
   @override
-  final Product product;
-  @override
-  final XFile image;
+  final CustomerRequestModel customer;
 
   @override
   String toString() {
-    return 'ProductEvent.addProduct(product: $product, image: $image)';
+    return 'CustomerEvent.addCustomer(customer: $customer)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddProductImpl &&
-            (identical(other.product, product) || other.product == product) &&
-            (identical(other.image, image) || other.image == image));
+            other is _$AddCustomerImpl &&
+            (identical(other.customer, customer) ||
+                other.customer == customer));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, product, image);
+  int get hashCode => Object.hash(runtimeType, customer);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddProductImplCopyWith<_$AddProductImpl> get copyWith =>
-      __$$AddProductImplCopyWithImpl<_$AddProductImpl>(this, _$identity);
+  _$$AddCustomerImplCopyWith<_$AddCustomerImpl> get copyWith =>
+      __$$AddCustomerImplCopyWithImpl<_$AddCustomerImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
-    required TResult Function(String category) fetchByCategory,
     required TResult Function() fetchLocal,
-    required TResult Function(Product product, XFile image) addProduct,
-    required TResult Function(String query) searchProduct,
+    required TResult Function(CustomerRequestModel customer) addCustomer,
+    required TResult Function(String query) searchCustomer,
     required TResult Function() fetchAllFromState,
   }) {
-    return addProduct(product, image);
+    return addCustomer(customer);
   }
 
   @override
@@ -753,13 +556,12 @@ class _$AddProductImpl implements _AddProduct {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
-    TResult? Function(String category)? fetchByCategory,
     TResult? Function()? fetchLocal,
-    TResult? Function(Product product, XFile image)? addProduct,
-    TResult? Function(String query)? searchProduct,
+    TResult? Function(CustomerRequestModel customer)? addCustomer,
+    TResult? Function(String query)? searchCustomer,
     TResult? Function()? fetchAllFromState,
   }) {
-    return addProduct?.call(product, image);
+    return addCustomer?.call(customer);
   }
 
   @override
@@ -767,15 +569,14 @@ class _$AddProductImpl implements _AddProduct {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
-    TResult Function(String category)? fetchByCategory,
     TResult Function()? fetchLocal,
-    TResult Function(Product product, XFile image)? addProduct,
-    TResult Function(String query)? searchProduct,
+    TResult Function(CustomerRequestModel customer)? addCustomer,
+    TResult Function(String query)? searchCustomer,
     TResult Function()? fetchAllFromState,
     required TResult orElse(),
   }) {
-    if (addProduct != null) {
-      return addProduct(product, image);
+    if (addCustomer != null) {
+      return addCustomer(customer);
     }
     return orElse();
   }
@@ -785,13 +586,12 @@ class _$AddProductImpl implements _AddProduct {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_FetchByCategory value) fetchByCategory,
     required TResult Function(_FetchLocal value) fetchLocal,
-    required TResult Function(_AddProduct value) addProduct,
-    required TResult Function(_SearchProduct value) searchProduct,
+    required TResult Function(_AddCustomer value) addCustomer,
+    required TResult Function(_SearchCustomer value) searchCustomer,
     required TResult Function(_FetchAllFromState value) fetchAllFromState,
   }) {
-    return addProduct(this);
+    return addCustomer(this);
   }
 
   @override
@@ -799,13 +599,12 @@ class _$AddProductImpl implements _AddProduct {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_FetchByCategory value)? fetchByCategory,
     TResult? Function(_FetchLocal value)? fetchLocal,
-    TResult? Function(_AddProduct value)? addProduct,
-    TResult? Function(_SearchProduct value)? searchProduct,
+    TResult? Function(_AddCustomer value)? addCustomer,
+    TResult? Function(_SearchCustomer value)? searchCustomer,
     TResult? Function(_FetchAllFromState value)? fetchAllFromState,
   }) {
-    return addProduct?.call(this);
+    return addCustomer?.call(this);
   }
 
   @override
@@ -813,46 +612,44 @@ class _$AddProductImpl implements _AddProduct {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_FetchByCategory value)? fetchByCategory,
     TResult Function(_FetchLocal value)? fetchLocal,
-    TResult Function(_AddProduct value)? addProduct,
-    TResult Function(_SearchProduct value)? searchProduct,
+    TResult Function(_AddCustomer value)? addCustomer,
+    TResult Function(_SearchCustomer value)? searchCustomer,
     TResult Function(_FetchAllFromState value)? fetchAllFromState,
     required TResult orElse(),
   }) {
-    if (addProduct != null) {
-      return addProduct(this);
+    if (addCustomer != null) {
+      return addCustomer(this);
     }
     return orElse();
   }
 }
 
-abstract class _AddProduct implements ProductEvent {
-  const factory _AddProduct(final Product product, final XFile image) =
-      _$AddProductImpl;
+abstract class _AddCustomer implements CustomerEvent {
+  const factory _AddCustomer(final CustomerRequestModel customer) =
+      _$AddCustomerImpl;
 
-  Product get product;
-  XFile get image;
+  CustomerRequestModel get customer;
   @JsonKey(ignore: true)
-  _$$AddProductImplCopyWith<_$AddProductImpl> get copyWith =>
+  _$$AddCustomerImplCopyWith<_$AddCustomerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$SearchProductImplCopyWith<$Res> {
-  factory _$$SearchProductImplCopyWith(
-          _$SearchProductImpl value, $Res Function(_$SearchProductImpl) then) =
-      __$$SearchProductImplCopyWithImpl<$Res>;
+abstract class _$$SearchCustomerImplCopyWith<$Res> {
+  factory _$$SearchCustomerImplCopyWith(_$SearchCustomerImpl value,
+          $Res Function(_$SearchCustomerImpl) then) =
+      __$$SearchCustomerImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String query});
 }
 
 /// @nodoc
-class __$$SearchProductImplCopyWithImpl<$Res>
-    extends _$ProductEventCopyWithImpl<$Res, _$SearchProductImpl>
-    implements _$$SearchProductImplCopyWith<$Res> {
-  __$$SearchProductImplCopyWithImpl(
-      _$SearchProductImpl _value, $Res Function(_$SearchProductImpl) _then)
+class __$$SearchCustomerImplCopyWithImpl<$Res>
+    extends _$CustomerEventCopyWithImpl<$Res, _$SearchCustomerImpl>
+    implements _$$SearchCustomerImplCopyWith<$Res> {
+  __$$SearchCustomerImplCopyWithImpl(
+      _$SearchCustomerImpl _value, $Res Function(_$SearchCustomerImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -860,7 +657,7 @@ class __$$SearchProductImplCopyWithImpl<$Res>
   $Res call({
     Object? query = null,
   }) {
-    return _then(_$SearchProductImpl(
+    return _then(_$SearchCustomerImpl(
       null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
@@ -871,22 +668,22 @@ class __$$SearchProductImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SearchProductImpl implements _SearchProduct {
-  const _$SearchProductImpl(this.query);
+class _$SearchCustomerImpl implements _SearchCustomer {
+  const _$SearchCustomerImpl(this.query);
 
   @override
   final String query;
 
   @override
   String toString() {
-    return 'ProductEvent.searchProduct(query: $query)';
+    return 'CustomerEvent.searchCustomer(query: $query)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SearchProductImpl &&
+            other is _$SearchCustomerImpl &&
             (identical(other.query, query) || other.query == query));
   }
 
@@ -896,21 +693,21 @@ class _$SearchProductImpl implements _SearchProduct {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SearchProductImplCopyWith<_$SearchProductImpl> get copyWith =>
-      __$$SearchProductImplCopyWithImpl<_$SearchProductImpl>(this, _$identity);
+  _$$SearchCustomerImplCopyWith<_$SearchCustomerImpl> get copyWith =>
+      __$$SearchCustomerImplCopyWithImpl<_$SearchCustomerImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
-    required TResult Function(String category) fetchByCategory,
     required TResult Function() fetchLocal,
-    required TResult Function(Product product, XFile image) addProduct,
-    required TResult Function(String query) searchProduct,
+    required TResult Function(CustomerRequestModel customer) addCustomer,
+    required TResult Function(String query) searchCustomer,
     required TResult Function() fetchAllFromState,
   }) {
-    return searchProduct(query);
+    return searchCustomer(query);
   }
 
   @override
@@ -918,13 +715,12 @@ class _$SearchProductImpl implements _SearchProduct {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
-    TResult? Function(String category)? fetchByCategory,
     TResult? Function()? fetchLocal,
-    TResult? Function(Product product, XFile image)? addProduct,
-    TResult? Function(String query)? searchProduct,
+    TResult? Function(CustomerRequestModel customer)? addCustomer,
+    TResult? Function(String query)? searchCustomer,
     TResult? Function()? fetchAllFromState,
   }) {
-    return searchProduct?.call(query);
+    return searchCustomer?.call(query);
   }
 
   @override
@@ -932,15 +728,14 @@ class _$SearchProductImpl implements _SearchProduct {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
-    TResult Function(String category)? fetchByCategory,
     TResult Function()? fetchLocal,
-    TResult Function(Product product, XFile image)? addProduct,
-    TResult Function(String query)? searchProduct,
+    TResult Function(CustomerRequestModel customer)? addCustomer,
+    TResult Function(String query)? searchCustomer,
     TResult Function()? fetchAllFromState,
     required TResult orElse(),
   }) {
-    if (searchProduct != null) {
-      return searchProduct(query);
+    if (searchCustomer != null) {
+      return searchCustomer(query);
     }
     return orElse();
   }
@@ -950,13 +745,12 @@ class _$SearchProductImpl implements _SearchProduct {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_FetchByCategory value) fetchByCategory,
     required TResult Function(_FetchLocal value) fetchLocal,
-    required TResult Function(_AddProduct value) addProduct,
-    required TResult Function(_SearchProduct value) searchProduct,
+    required TResult Function(_AddCustomer value) addCustomer,
+    required TResult Function(_SearchCustomer value) searchCustomer,
     required TResult Function(_FetchAllFromState value) fetchAllFromState,
   }) {
-    return searchProduct(this);
+    return searchCustomer(this);
   }
 
   @override
@@ -964,13 +758,12 @@ class _$SearchProductImpl implements _SearchProduct {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_FetchByCategory value)? fetchByCategory,
     TResult? Function(_FetchLocal value)? fetchLocal,
-    TResult? Function(_AddProduct value)? addProduct,
-    TResult? Function(_SearchProduct value)? searchProduct,
+    TResult? Function(_AddCustomer value)? addCustomer,
+    TResult? Function(_SearchCustomer value)? searchCustomer,
     TResult? Function(_FetchAllFromState value)? fetchAllFromState,
   }) {
-    return searchProduct?.call(this);
+    return searchCustomer?.call(this);
   }
 
   @override
@@ -978,26 +771,25 @@ class _$SearchProductImpl implements _SearchProduct {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_FetchByCategory value)? fetchByCategory,
     TResult Function(_FetchLocal value)? fetchLocal,
-    TResult Function(_AddProduct value)? addProduct,
-    TResult Function(_SearchProduct value)? searchProduct,
+    TResult Function(_AddCustomer value)? addCustomer,
+    TResult Function(_SearchCustomer value)? searchCustomer,
     TResult Function(_FetchAllFromState value)? fetchAllFromState,
     required TResult orElse(),
   }) {
-    if (searchProduct != null) {
-      return searchProduct(this);
+    if (searchCustomer != null) {
+      return searchCustomer(this);
     }
     return orElse();
   }
 }
 
-abstract class _SearchProduct implements ProductEvent {
-  const factory _SearchProduct(final String query) = _$SearchProductImpl;
+abstract class _SearchCustomer implements CustomerEvent {
+  const factory _SearchCustomer(final String query) = _$SearchCustomerImpl;
 
   String get query;
   @JsonKey(ignore: true)
-  _$$SearchProductImplCopyWith<_$SearchProductImpl> get copyWith =>
+  _$$SearchCustomerImplCopyWith<_$SearchCustomerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1010,7 +802,7 @@ abstract class _$$FetchAllFromStateImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$FetchAllFromStateImplCopyWithImpl<$Res>
-    extends _$ProductEventCopyWithImpl<$Res, _$FetchAllFromStateImpl>
+    extends _$CustomerEventCopyWithImpl<$Res, _$FetchAllFromStateImpl>
     implements _$$FetchAllFromStateImplCopyWith<$Res> {
   __$$FetchAllFromStateImplCopyWithImpl(_$FetchAllFromStateImpl _value,
       $Res Function(_$FetchAllFromStateImpl) _then)
@@ -1024,7 +816,7 @@ class _$FetchAllFromStateImpl implements _FetchAllFromState {
 
   @override
   String toString() {
-    return 'ProductEvent.fetchAllFromState()';
+    return 'CustomerEvent.fetchAllFromState()';
   }
 
   @override
@@ -1041,10 +833,9 @@ class _$FetchAllFromStateImpl implements _FetchAllFromState {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
-    required TResult Function(String category) fetchByCategory,
     required TResult Function() fetchLocal,
-    required TResult Function(Product product, XFile image) addProduct,
-    required TResult Function(String query) searchProduct,
+    required TResult Function(CustomerRequestModel customer) addCustomer,
+    required TResult Function(String query) searchCustomer,
     required TResult Function() fetchAllFromState,
   }) {
     return fetchAllFromState();
@@ -1055,10 +846,9 @@ class _$FetchAllFromStateImpl implements _FetchAllFromState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
-    TResult? Function(String category)? fetchByCategory,
     TResult? Function()? fetchLocal,
-    TResult? Function(Product product, XFile image)? addProduct,
-    TResult? Function(String query)? searchProduct,
+    TResult? Function(CustomerRequestModel customer)? addCustomer,
+    TResult? Function(String query)? searchCustomer,
     TResult? Function()? fetchAllFromState,
   }) {
     return fetchAllFromState?.call();
@@ -1069,10 +859,9 @@ class _$FetchAllFromStateImpl implements _FetchAllFromState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
-    TResult Function(String category)? fetchByCategory,
     TResult Function()? fetchLocal,
-    TResult Function(Product product, XFile image)? addProduct,
-    TResult Function(String query)? searchProduct,
+    TResult Function(CustomerRequestModel customer)? addCustomer,
+    TResult Function(String query)? searchCustomer,
     TResult Function()? fetchAllFromState,
     required TResult orElse(),
   }) {
@@ -1087,10 +876,9 @@ class _$FetchAllFromStateImpl implements _FetchAllFromState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_FetchByCategory value) fetchByCategory,
     required TResult Function(_FetchLocal value) fetchLocal,
-    required TResult Function(_AddProduct value) addProduct,
-    required TResult Function(_SearchProduct value) searchProduct,
+    required TResult Function(_AddCustomer value) addCustomer,
+    required TResult Function(_SearchCustomer value) searchCustomer,
     required TResult Function(_FetchAllFromState value) fetchAllFromState,
   }) {
     return fetchAllFromState(this);
@@ -1101,10 +889,9 @@ class _$FetchAllFromStateImpl implements _FetchAllFromState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_FetchByCategory value)? fetchByCategory,
     TResult? Function(_FetchLocal value)? fetchLocal,
-    TResult? Function(_AddProduct value)? addProduct,
-    TResult? Function(_SearchProduct value)? searchProduct,
+    TResult? Function(_AddCustomer value)? addCustomer,
+    TResult? Function(_SearchCustomer value)? searchCustomer,
     TResult? Function(_FetchAllFromState value)? fetchAllFromState,
   }) {
     return fetchAllFromState?.call(this);
@@ -1115,10 +902,9 @@ class _$FetchAllFromStateImpl implements _FetchAllFromState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_FetchByCategory value)? fetchByCategory,
     TResult Function(_FetchLocal value)? fetchLocal,
-    TResult Function(_AddProduct value)? addProduct,
-    TResult Function(_SearchProduct value)? searchProduct,
+    TResult Function(_AddCustomer value)? addCustomer,
+    TResult Function(_SearchCustomer value)? searchCustomer,
     TResult Function(_FetchAllFromState value)? fetchAllFromState,
     required TResult orElse(),
   }) {
@@ -1129,17 +915,17 @@ class _$FetchAllFromStateImpl implements _FetchAllFromState {
   }
 }
 
-abstract class _FetchAllFromState implements ProductEvent {
+abstract class _FetchAllFromState implements CustomerEvent {
   const factory _FetchAllFromState() = _$FetchAllFromStateImpl;
 }
 
 /// @nodoc
-mixin _$ProductState {
+mixin _$CustomerState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Product> products) success,
+    required TResult Function(List<Customer> products) success,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -1147,7 +933,7 @@ mixin _$ProductState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Product> products)? success,
+    TResult? Function(List<Customer> products)? success,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -1155,7 +941,7 @@ mixin _$ProductState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Product> products)? success,
+    TResult Function(List<Customer> products)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -1188,16 +974,16 @@ mixin _$ProductState {
 }
 
 /// @nodoc
-abstract class $ProductStateCopyWith<$Res> {
-  factory $ProductStateCopyWith(
-          ProductState value, $Res Function(ProductState) then) =
-      _$ProductStateCopyWithImpl<$Res, ProductState>;
+abstract class $CustomerStateCopyWith<$Res> {
+  factory $CustomerStateCopyWith(
+          CustomerState value, $Res Function(CustomerState) then) =
+      _$CustomerStateCopyWithImpl<$Res, CustomerState>;
 }
 
 /// @nodoc
-class _$ProductStateCopyWithImpl<$Res, $Val extends ProductState>
-    implements $ProductStateCopyWith<$Res> {
-  _$ProductStateCopyWithImpl(this._value, this._then);
+class _$CustomerStateCopyWithImpl<$Res, $Val extends CustomerState>
+    implements $CustomerStateCopyWith<$Res> {
+  _$CustomerStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -1214,7 +1000,7 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$ProductStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$CustomerStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -1228,7 +1014,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'ProductState.initial()';
+    return 'CustomerState.initial()';
   }
 
   @override
@@ -1245,7 +1031,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Product> products) success,
+    required TResult Function(List<Customer> products) success,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -1256,7 +1042,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Product> products)? success,
+    TResult? Function(List<Customer> products)? success,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -1267,7 +1053,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Product> products)? success,
+    TResult Function(List<Customer> products)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -1315,7 +1101,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements ProductState {
+abstract class _Initial implements CustomerState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -1328,7 +1114,7 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$ProductStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$CustomerStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
@@ -1342,7 +1128,7 @@ class _$LoadingImpl implements _Loading {
 
   @override
   String toString() {
-    return 'ProductState.loading()';
+    return 'CustomerState.loading()';
   }
 
   @override
@@ -1359,7 +1145,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Product> products) success,
+    required TResult Function(List<Customer> products) success,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -1370,7 +1156,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Product> products)? success,
+    TResult? Function(List<Customer> products)? success,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -1381,7 +1167,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Product> products)? success,
+    TResult Function(List<Customer> products)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -1429,7 +1215,7 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements ProductState {
+abstract class _Loading implements CustomerState {
   const factory _Loading() = _$LoadingImpl;
 }
 
@@ -1439,12 +1225,12 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Product> products});
+  $Res call({List<Customer> products});
 }
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$ProductStateCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$CustomerStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
@@ -1459,7 +1245,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
       null == products
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
-              as List<Product>,
+              as List<Customer>,
     ));
   }
 }
@@ -1467,11 +1253,11 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(final List<Product> products) : _products = products;
+  const _$SuccessImpl(final List<Customer> products) : _products = products;
 
-  final List<Product> _products;
+  final List<Customer> _products;
   @override
-  List<Product> get products {
+  List<Customer> get products {
     if (_products is EqualUnmodifiableListView) return _products;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_products);
@@ -1479,7 +1265,7 @@ class _$SuccessImpl implements _Success {
 
   @override
   String toString() {
-    return 'ProductState.success(products: $products)';
+    return 'CustomerState.success(products: $products)';
   }
 
   @override
@@ -1505,7 +1291,7 @@ class _$SuccessImpl implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Product> products) success,
+    required TResult Function(List<Customer> products) success,
     required TResult Function(String message) error,
   }) {
     return success(products);
@@ -1516,7 +1302,7 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Product> products)? success,
+    TResult? Function(List<Customer> products)? success,
     TResult? Function(String message)? error,
   }) {
     return success?.call(products);
@@ -1527,7 +1313,7 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Product> products)? success,
+    TResult Function(List<Customer> products)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -1575,10 +1361,10 @@ class _$SuccessImpl implements _Success {
   }
 }
 
-abstract class _Success implements ProductState {
-  const factory _Success(final List<Product> products) = _$SuccessImpl;
+abstract class _Success implements CustomerState {
+  const factory _Success(final List<Customer> products) = _$SuccessImpl;
 
-  List<Product> get products;
+  List<Customer> get products;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1595,7 +1381,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$ProductStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$CustomerStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
@@ -1625,7 +1411,7 @@ class _$ErrorImpl implements _Error {
 
   @override
   String toString() {
-    return 'ProductState.error(message: $message)';
+    return 'CustomerState.error(message: $message)';
   }
 
   @override
@@ -1650,7 +1436,7 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Product> products) success,
+    required TResult Function(List<Customer> products) success,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -1661,7 +1447,7 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Product> products)? success,
+    TResult? Function(List<Customer> products)? success,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -1672,7 +1458,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Product> products)? success,
+    TResult Function(List<Customer> products)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -1720,7 +1506,7 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements ProductState {
+abstract class _Error implements CustomerState {
   const factory _Error(final String message) = _$ErrorImpl;
 
   String get message;

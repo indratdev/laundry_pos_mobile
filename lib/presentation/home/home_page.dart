@@ -40,7 +40,7 @@ class HomePage extends StatelessWidget {
               child: Row(
                 children: [
                   Container(
-                      margin: EdgeInsets.all(12),
+                      margin: const EdgeInsets.all(12),
                       color: Colors.blue,
                       width: MediaQuery.sizeOf(context).width / 5,
                       child: Image.network(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:laundry_app/presentation/blocs/customer_bloc/customer_bloc.dart';
 import 'package:laundry_app/presentation/blocs/product_bloc/product_bloc.dart';
+import 'package:laundry_app/presentation/customers/customers_page.dart';
 import 'package:laundry_app/presentation/settings/pages/management_product/manage_product_page.dart';
 import 'package:laundry_app/presentation/settings/settings_page.dart';
 
@@ -15,7 +17,16 @@ class Menus {
   List<Widget> getServiceMenuList() {
     return [
       ServiceMenuWidget(title: "Layanan", iconName: Variables.serviceIcon),
-      ServiceMenuWidget(title: "Pelanggan", iconName: Variables.customersIcon),
+      ServiceMenuWidget(
+        title: "Pelanggan",
+        iconName: Variables.customersIcon,
+        onTap: () {
+          BlocProvider.of<CustomerBloc>(context)
+              .add(const CustomerEvent.fetchAllFromState());
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const CustomersPage()));
+        },
+      ),
       ServiceMenuWidget(title: "Riwayat", iconName: Variables.historyIcon),
       ServiceMenuWidget(title: "Laporan", iconName: Variables.reportsIcon),
       ServiceMenuWidget(
@@ -32,7 +43,9 @@ class Menus {
         title: "Kelola Produk",
         iconName: Variables.manageProductIcon,
         onTap: () {
-          context.read<ProductBloc>().add(const ProductEvent.fetchAllFromState());
+          context
+              .read<ProductBloc>()
+              .add(const ProductEvent.fetchAllFromState());
           Navigator.push(
               context,
               MaterialPageRoute(

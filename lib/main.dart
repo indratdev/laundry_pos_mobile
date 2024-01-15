@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:laundry_app/core/constants/colors.dart';
-import 'package:laundry_app/core/constants/variables.dart';
 import 'package:laundry_app/data/datasource/auth_remote_datasource.dart';
+import 'package:laundry_app/data/datasource/customer_remote_datasource.dart';
 import 'package:laundry_app/data/datasource/product_remote_datasource.dart';
 import 'package:laundry_app/presentation/auth/login/login_page.dart';
+import 'package:laundry_app/presentation/blocs/customer_bloc/customer_bloc.dart';
 import 'package:laundry_app/presentation/blocs/login_bloc/login_bloc.dart';
 import 'package:laundry_app/presentation/blocs/product_bloc/product_bloc.dart';
 
@@ -22,14 +23,17 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => LoginBloc(AuthRemoteDatasource()),
         ),
-         BlocProvider(
+        BlocProvider(
           create: (context) => ProductBloc(ProductRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => CustomerBloc(CustomerRemoteDatasource()),
         ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-           appBarTheme: AppBarTheme(
+          appBarTheme: AppBarTheme(
             backgroundColor: AppColors.yellow,
           ),
         ),

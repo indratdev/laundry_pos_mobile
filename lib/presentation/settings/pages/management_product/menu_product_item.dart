@@ -12,6 +12,8 @@ class MenuProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.sizeOf(context).width / 5;
+
     return Container(
       padding: const EdgeInsets.all(8.0),
       decoration: ShapeDecoration(
@@ -26,16 +28,17 @@ class MenuProductItem extends StatelessWidget {
           ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(10.0)),
             child: CachedNetworkImage(
+              fit: BoxFit.cover,
               imageUrl: '${Variables.imageBaseUrl}${data.image}',
               placeholder: (context, url) => const CircularProgressIndicator(),
-              errorWidget: (context, url, error) => const Icon(
+              errorWidget: (context, url, error) =>  Icon(
                 Icons.image_not_supported_outlined,
-                size: 80,
+                size: width,
               ),
-              width: 80,
+              width: width,
             ),
           ),
-          const SpaceWidth(22.0),
+          const SpaceWidth(15.0),
           Flexible(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,6 +59,7 @@ class MenuProductItem extends StatelessWidget {
                 ),
                 const SpaceHeight(10.0),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Flexible(
                       child: Button.outlined(
@@ -100,11 +104,11 @@ class MenuProductItem extends StatelessWidget {
                                                 const CircularProgressIndicator(),
                                             errorWidget:
                                                 (context, url, error) =>
-                                                    const Icon(
+                                                     Icon(
                                               Icons.food_bank_outlined,
-                                              size: 80,
+                                              size: width,
                                             ),
-                                            width: 80,
+                                            width: width,
                                           ),
                                         ),
                                         const SpaceHeight(10.0),
@@ -145,6 +149,7 @@ class MenuProductItem extends StatelessWidget {
                     ),
                     const SpaceWidth(6.0),
                     Flexible(
+                      // flex: 1,
                       child: Button.outlined(
                         onPressed: () {
                           // context.push(EditProductPage(data: data));

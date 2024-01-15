@@ -5,6 +5,7 @@ import 'package:laundry_app/presentation/blocs/product_bloc/product_bloc.dart';
 import 'package:laundry_app/presentation/customers/customers_page.dart';
 import 'package:laundry_app/presentation/settings/pages/management_product/manage_product_page.dart';
 import 'package:laundry_app/presentation/settings/settings_page.dart';
+import 'package:laundry_app/presentation/transaction/transaction_page.dart';
 
 import '../../core/constants/variables.dart';
 import '../../presentation/home/widgets/service_menu_widget.dart';
@@ -16,7 +17,17 @@ class Menus {
 
   List<Widget> getServiceMenuList() {
     return [
-      ServiceMenuWidget(title: "Layanan", iconName: Variables.serviceIcon),
+      ServiceMenuWidget(
+        title: "Transaksi",
+        iconName: Variables.serviceIcon,
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const TransactionPage(),
+              ));
+        },
+      ),
       ServiceMenuWidget(
         title: "Pelanggan",
         iconName: Variables.customersIcon,

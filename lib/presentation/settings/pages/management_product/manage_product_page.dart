@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:laundry_app/core/constants/colors.dart';
 import 'package:laundry_app/data/models/response/product_response_model.dart';
 import 'package:laundry_app/presentation/blocs/product_bloc/product_bloc.dart';
 import 'package:laundry_app/presentation/settings/pages/management_product/menu_product_item.dart';
@@ -75,7 +76,7 @@ class _ManageProductPageState extends State<ManageProductPage> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: products.length,
-                  separatorBuilder: (context, index) => const SpaceHeight(20.0),
+                  separatorBuilder: (context, index) => const SpaceHeight(15.0),
                   itemBuilder: (context, index) => MenuProductItem(
                     data: products[index],
                   ),
@@ -95,6 +96,7 @@ class _ManageProductPageState extends State<ManageProductPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.yellow,
         onPressed: () {},
         // onPressed: () {
         //   Navigator.push(context, MaterialPageRoute(builder: (context) {

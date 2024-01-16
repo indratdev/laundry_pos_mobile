@@ -6,6 +6,7 @@ import 'package:laundry_app/presentation/customers/customers_page.dart';
 import 'package:laundry_app/presentation/settings/pages/management_product/manage_product_page.dart';
 import 'package:laundry_app/presentation/settings/settings_page.dart';
 import 'package:laundry_app/presentation/transaction/transaction_page.dart';
+import 'package:laundry_app/presentation/transaction/transaction_page_old.dart';
 
 import '../../core/constants/variables.dart';
 import '../../presentation/home/widgets/service_menu_widget.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:laundry_app/core/constants/colors.dart';
 import 'package:laundry_app/data/models/response/customer_response_model.dart';
 import 'package:laundry_app/data/models/response/product_response_model.dart';
 import 'package:laundry_app/presentation/blocs/product_bloc/product_bloc.dart';
@@ -14,61 +15,11 @@ class TransactionPage extends StatefulWidget {
 }
 
 class _TransactionPageState extends State<TransactionPage> {
-  final _pageController = PageController(
-      // initialPage: 2,
-      // viewportFraction: 0.8,
-      );
+  final _pageController = PageController(viewportFraction: 1.0);
 
   int step = 1;
   List<dynamic> stepTransaction = ["Pelanggan", "Kategori", "Layanan"];
   Customer? selectedCustomer;
-
-  // void nextPage() {
-  //   print(">> page next :: ${_pageController.page!.toInt()}");
-  //   setState(() {
-  //     step = _pageController.page!.toInt() + 1;
-  //   });
-  //   _pageController.animateToPage(_pageController.page!.toInt() + 1,
-  //       duration: const Duration(milliseconds: 400), curve: Curves.easeIn);
-  // }
-
-  // void previousPage() {
-  //   print(">> page previous :: ${_pageController.page!.toInt()}");
-  //   setState(() {
-  //     step = _pageController.page!.toInt() - 1;
-  //   });
-
-  //   _pageController.animateToPage(_pageController.page!.toInt() - 1,
-  //       duration: const Duration(milliseconds: 400), curve: Curves.easeIn);
-  // }
-
-  // void nextPage() {
-  //   print(">> page next :: ${_pageController.page!.toInt()}");
-  //   // setState(() {
-  //   //   step = _pageController.page!.toInt() + 1;
-  //   // });
-  //   _pageController.animateToPage(
-  //     _pageController.page!.toInt() + 1,
-  //     duration: const Duration(milliseconds: 400),
-  //     curve: Curves.easeIn,
-  //   );
-  //   // setState(() {});
-  // }
-
-  // void previousPage() {
-  //   print(">> page previous :: ${_pageController.page!.toInt()}");
-  //   // setState(() {
-  //   //   step = (_pageController.page!.toInt() - 1)
-  //   //       .clamp(0, stepTransaction.length - 1);
-  //   // });
-
-  //   _pageController.animateToPage(
-  //     (_pageController.page!.toInt() - 1).clamp(0, stepTransaction.length - 1),
-  //     duration: const Duration(milliseconds: 400),
-  //     curve: Curves.easeIn,
-  //   );
-  //   // setState(() {});
-  // }
 
   void nextPage() {
     print(">> page next :: ${_pageController.page?.toInt()}");
@@ -80,7 +31,9 @@ class _TransactionPageState extends State<TransactionPage> {
         curve: Curves.easeIn,
       );
     }
-    setState(() {});
+    setState(() {
+      step += 1;
+    });
   }
 
   void previousPage() {
@@ -94,21 +47,24 @@ class _TransactionPageState extends State<TransactionPage> {
         curve: Curves.easeIn,
       );
     }
-    setState(() {});
+    setState(() {
+      step -= 1;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     List<Widget> listTransactionStep = [
-      TransactionCustomerPage(
-        selectedCustomer: selectedCustomer,
-      ),
+      TransactionCustomerPage(selectedCustomer: selectedCustomer, onCustomerSelected: (value) {
+        setState(() {
+          selectedCustomer = value;
+        });
+      },),
       Container(
         child: BlocBuilder<ProductBloc, ProductState>(
           builder: (context, state) {
             return state.maybeWhen(
               orElse: () {
-                // return SizedBox();
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
@@ -157,86 +113,38 @@ class _TransactionPageState extends State<TransactionPage> {
           },
         ),
       ),
-      // Container(
-      //   color: Colors.blue,
-      //   child: const Center(
-      //     child: Text(
-      //       'BLUE PAGE',
-      //       style: TextStyle(
-      //         fontSize: 45,
-      //         color: Colors.white,
-      //       ),
-      //     ),
-      //   ),
-      // ),
-      // Container(
-      //   color: Colors.black,
-      //   child: const Center(
-      //     child: Text(
-      //       'BLACK PAGE',
-      //       style: TextStyle(
-      //         fontSize: 45,
-      //         color: Colors.white,
-      //       ),
-      //     ),
-      //   ),
-      // ),
-      // Container(
-      //   color: Colors.yellow,
-      //   child: const Center(
-      //     child: Text(
-      //       'YELLOW PAGE',
-      //       style: TextStyle(
-      //         fontSize: 45,
-      //         color: Colors.white,
-      //       ),
-      //     ),
-      //   ),
-      // ),
     ];
 
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            height: MediaQuery.sizeOf(context).height / 4.5,
-            margin: const EdgeInsets.only(top: 14),
-            color: Colors.amber,
-            child: Row(
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: Container(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: Column(
+          children: [
+            Container(
+              height: MediaQuery.sizeOf(context).height / 5,
+              margin: const EdgeInsets.only(top: 14),
+              color: Colors.amber,
+              child: Row(
+                children: [
+                  Container(
+                    width: MediaQuery.sizeOf(context).width / 4,
                     margin: const EdgeInsets.all(8.0),
                     child: CircularPercentIndicator(
                       radius: MediaQuery.sizeOf(context).width / 8,
                       lineWidth: MediaQuery.sizeOf(context).width / 30,
-                      // percent: ((_pageController.page?.toInt() ?? 0) +
-                      //         1 / stepTransaction.length)
-                      //     .abs(),
-                      percent: (_pageController.positions.isNotEmpty)
-                          ? ((_pageController.page?.toInt() ?? 0) +
-                                  1 / stepTransaction.length)
-                              .abs()
-                          : 0,
-                      center: (_pageController.positions.isNotEmpty)
-                          ? Text(
-                              // "$step of ${stepTransaction.length}",
-                              "${_pageController.page?.toInt()} of ${listTransactionStep.length}",
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w700,
-                              ),
-                            )
-                          : null,
+                      percent: step / stepTransaction.length,
+                      center: Text(
+                        "$step of ${stepTransaction.length}",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
                       progressColor: Colors.green,
                     ),
                   ),
-                ),
-                Flexible(
-                  flex: 2,
-                  child: Container(
+                  Container(
                     padding: const EdgeInsets.only(left: 10),
-                    width: double.infinity,
+                    width: MediaQuery.sizeOf(context).width / 1.55,
                     // color: Colors.blue,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -247,109 +155,60 @@ class _TransactionPageState extends State<TransactionPage> {
                           style: const TextStyle(fontWeight: FontWeight.w700),
                         ),
                         const SizedBox(height: 5),
-                        Text("Selanjutnya : ${stepTransaction[step]}")
+                        Text("Selanjutnya : ${stepTransaction[step]}"),
+                        Container(
+                          alignment: Alignment.centerRight,
+                          padding: const EdgeInsets.fromLTRB(0, 15, 10, 0),
+                          child: const Badge(
+                            label: Text("3"),
+                            child: Icon(Icons.shopping_cart_rounded),
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
-          ),
-          // TransactionCustomerPage(
-          //   selectedCustomer: selectedCustomer,
-          // ),
-          // Flexible(
-          //   flex: 7,
-          //   child: BlocBuilder<CustomerBloc, CustomerState>(
-          //     builder: (context, state) {
-          //       print(">>>> state ");
-          //       return state.maybeWhen(
-          //         orElse: () {
-          //           return const Center(
-          //             child: CircularProgressIndicator(),
-          //           );
-          //         },
-          //         success: (customers) {
-          //           return Container(
-          //             alignment: Alignment.topCenter,
-          //             // margin: const EdgeInsets.symmetric(horizontal: 14),
-          //             // color: Colors.blue,
-          //             child: ListView.builder(
-          //               itemCount: customers.length,
-          //               itemBuilder: (context, index) {
-          //                 Customer customer = customers[index];
-          //                 return InkWell(
-          //                   onTap: () {
-          //                     selectedCustomer = customer;
-          //                     setState(() {});
-          //                   },
-          //                   child: ListTile(
-          //                     title: Text(customer.name),
-          //                     subtitle: Text(customer.address ?? ""),
-          //                     trailing: (selectedCustomer == customer)
-          //                         ? const Icon(Icons.check)
-          //                         : null,
-          //                     tileColor: (selectedCustomer == customer)
-          //                         ? AppColors.yellow.withOpacity(.2)
-          //                         : null,
-          //                   ),
-          //                 );
-          //               },
-          //             ),
-          //           );
-          //         },
-          //       );
-          //     },
-          //   ),
-          // ),
-          // content 2
-          Expanded(
-            // flex: 1,
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 14),
-              // height: double.infinity,
+            Divider(color: AppColors.disabled),
+            Container(
+              // margin: const EdgeInsets.symmetric(horizontal: 14),
+              height: MediaQuery.sizeOf(context).height / 1.5,
+              margin: EdgeInsets.zero,
               // color: Colors.blue,
               child: PageView(
                 controller: _pageController,
+                padEnds: false,
+                pageSnapping: true,
                 physics: const NeverScrollableScrollPhysics(),
                 children: listTransactionStep,
               ),
             ),
-          ),
-          //end content 2
-          // Flexible(
-          //   flex: 1,
-          //   child: Container(
-          //     color: Colors.red,
-          //     child: Row(
-          //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //       children: [
-          //         ElevatedButton(
-          //           onPressed: () {
-          //             Navigator.pop(context);
-          //           },
-          //           child: const Text("Kembali"),
-          //         ),
-          //         ElevatedButton(
-          //           onPressed: () {},
-          //           child: const Text("Lanjut"),
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
-        ],
+          ],
+        ),
       ),
       bottomNavigationBar: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        // crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           ElevatedButton(
-            onPressed: previousPage,
-            child: Text('Previous'),
+            onPressed: (step == 1)
+                ? () {
+                    Navigator.pop(context);
+                  }
+                : () {
+                    previousPage();
+                  },
+            child: (step == 1) ? const Text("Kembali") : const Text('Previous'),
           ),
           ElevatedButton(
-            onPressed: nextPage,
-            child: Text('Next'),
+            onPressed: (step <= stepTransaction.length)
+                ? () {
+                    nextPage();
+                    // print(">>> selected user : ${selectedCustomer?.name ?? ""}");
+                  }
+                : null,
+            child: Text('Lanjut'),
           )
         ],
       ),

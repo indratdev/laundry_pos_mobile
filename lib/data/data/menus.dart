@@ -21,6 +21,12 @@ class Menus {
         title: "Transaksi",
         iconName: Variables.serviceIcon,
         onTap: () {
+          context
+              .read<CustomerBloc>()
+              .add(const CustomerEvent.fetchAllFromState());
+          context
+              .read<ProductBloc>()
+              .add(const ProductEvent.fetchAllFromState());
           Navigator.push(
               context,
               MaterialPageRoute(

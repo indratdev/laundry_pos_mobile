@@ -6,6 +6,7 @@ import 'package:laundry_app/data/models/request/order_request_model.dart';
 import 'package:laundry_app/data/models/response/customer_response_model.dart';
 import 'package:laundry_app/data/models/response/product_response_model.dart';
 import 'package:laundry_app/presentation/blocs/product_bloc/product_bloc.dart';
+import 'package:laundry_app/presentation/transaction/transaction_confirmation_page.dart';
 import 'package:laundry_app/presentation/transaction/transaction_customer_page.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -20,22 +21,20 @@ class _TransactionPageState extends State<TransactionPage> {
   final _pageController = PageController(viewportFraction: 1.0);
 
   int step = 1;
-  List<dynamic> stepTransaction = ["Pelanggan", "Kategori", "Pesanan"];
+  List<dynamic> stepTransaction = [
+    "Pelanggan",
+    "Layanan",
+    "Konfirmasi Layanan"
+  ];
+
   Customer? selectedCustomer;
-  OrderRequestModel? orderUser;
-  // OrderRequestModel? orderUser =
-  //     OrderRequestModel(customer: Customer(name: "name"), orderItems: [
-  //   OrderItem(
-  //       product: Product(
-  //           id: 9,
-  //           name: "Boneka",
-  //           price: 35000,
-  //           working_time: 3,
-  //           category: "satuan",
-  //           image: ""),
-  //       quantity: 1,
-  //       price: 35000)
-  // ]);
+  OrderRequestModel? orderUser = OrderRequestModel(
+      customer: Customer(name: ""),
+      orderItems: [],
+      nameCashier: "",
+      paymentMethod: "");
+
+  List<OrderItem>? orderItem = [];
 
   void nextPage() {
     print(">> page next :: ${_pageController.page?.toInt()}");
@@ -47,6 +46,15 @@ class _TransactionPageState extends State<TransactionPage> {
         curve: Curves.easeIn,
       );
     }
+
+    print(">>> orderUser?.orderItems : ${orderUser?.orderItems.length}");
+    print(">>> orderItems : ${orderItem?.length}");
+
+    if (orderItem != null || (orderItem?.length ?? 0) > 0) {
+      print(">>>> jalan dong");
+      orderUser?.orderItems = orderItem!;
+    }
+
     setState(() {
       if (step != stepTransaction.length) {
         step += 1;
@@ -70,28 +78,88 @@ class _TransactionPageState extends State<TransactionPage> {
     });
   }
 
-  addOrRemoveOrder(int productId, Product product, bool isIncrement) {
-    OrderItem? foundOrderItem = orderUser?.orderItems.firstWhere(
-      (orderItem) => orderItem.product.id == productId,
-      // orElse: () => null,
-    );
+  // addOrRemoveOrder(int productId, Product product, bool isIncrement) {
+  //   OrderItem? foundOrderItem = orderUser?.orderItems.firstWhere(
+  //     (orderItem) => orderItem.product.id == productId,
+  //     // orElse: () => null,
+  //   );
 
-    if (foundOrderItem != null) {
-      // OrderItem ditemukan, Anda dapat mengakses atau melakukan sesuatu dengan objek ini
-      print(
-          "Found OrderItem: ${foundOrderItem.product.name}, Quantity: ${foundOrderItem.quantity}");
-    } else {
-      // OrderItem tidak ditemukan
-      print("OrderItem not found for product ID $productId");
-      if (isIncrement) {
-        print(">>> ini jalan");
-        orderUser?.orderItems.add(OrderItem(
-            product: product, quantity: 1, price: product.price.toDouble()));
+  //   // OrderItem? foundOrderItem = orderItem?.firstWhere(
+  //   //   (element) => element.product.id == productId,
+  //   //   orElse: () => null,
+  //   // );
+
+  //   if (foundOrderItem != null) {
+  //     // OrderItem ditemukan, Anda dapat mengakses atau melakukan sesuatu dengan objek ini
+  //     print(
+  //         "Found OrderItem: ${foundOrderItem.product.name}, Quantity: ${foundOrderItem.quantity}");
+  //   } else {
+  //     // OrderItem tidak ditemukan
+  //     print("OrderItem not found for product ID $productId");
+  //     if (isIncrement) {
+  //       print(">>> ini jalan");
+  //       // orderUser?.orderItems.add(OrderItem(
+  //       //     product: product, quantity: 1, price: product.price.toDouble()));
+  //     }
+  //     print(">>> data baru");
+  //     print(">>> ${orderUser?.orderItems.length}");
+  //     print(">>> ${orderUser?.orderItems.first.product}");
+  //   }
+  // }
+
+  // int checkQuantity(Product product) {
+  //   OrderItem? result =
+  //       orderItem?.where((element) => element.product.id == product.id).first;
+  //   return result?.quantity ?? 0;
+  // }
+  // int checkQuantity(Product product) {
+  //   OrderItem? result;
+  //   print(">>> orderItem : ${orderItem?.length}");
+  //   if (orderItem?.length != 0) {
+  //     result = orderItem?.firstWhere(
+  //       (value) => value.product.id == product.id,
+  //       // orElse: () => null,
+  //     );
+  //   }
+
+  //   return result?.quantity ?? 0;
+  // }
+
+  // OLD
+  // int checkQuantity(Product product) {
+  //   print("M=== ${product.name}  ============");
+  //   int count = 0;
+
+  //   if (orderItem != null) {
+  //     for (var item in orderItem!) {
+  //       if (item.product.id == product.id) {
+  //         count += 1;
+  //       }
+  //     }
+  //   }
+  //   print("end===============");
+  //   return count;
+  // }
+
+  int checkQuantity(Product product) {
+    print("M=== ${product.name}  ============");
+    int count = 0;
+
+    if (orderUser?.orderItems != null) {
+      for (var item in orderItem!) {
+        if (item.product.id == product.id) {
+          count += 1;
+        }
       }
-      print(">>> data baru");
-      print(">>> ${orderUser?.orderItems.length}");
-      print(">>> ${orderUser?.orderItems.first.product}");
     }
+    print("end===============");
+    return count;
+  }
+
+  addItem(Product product) {
+    print(">>> addItem runingg...");
+
+    orderUser?.orderItems.add(OrderItem(product: product));
   }
 
   @override
@@ -122,6 +190,7 @@ class _TransactionPageState extends State<TransactionPage> {
                   itemCount: products.length,
                   itemBuilder: (context, index) {
                     Product product = products[index];
+                    int quantity = checkQuantity(product);
                     return Row(
                       children: [
                         Expanded(
@@ -139,41 +208,87 @@ class _TransactionPageState extends State<TransactionPage> {
                                 onPressed: () {
                                   print(">>> kurangin ${product.id} ");
 
-                                  // Assuming the product is part of the orderItems list in the OrderRequestModel
-                                  int index = orderUser?.orderItems.indexWhere(
-                                          (item) =>
-                                              item.product.id == product.id) ??
-                                      -1;
-                                  if (index != -1 &&
-                                      orderUser!.orderItems[index].quantity >
-                                          0) {
-                                    setState(() {
-                                      orderUser!.orderItems[index].quantity -=
-                                          1;
-                                    });
+                                  // OLD FUNCTION ------------------
+                                  // if (orderItem != null) {
+                                  //   // Menentukan indeks elemen yang ingin dihapus (misalnya, indeks pertama)
+                                  //   int indexToRemove = orderItem!.indexWhere(
+                                  //       (element) =>
+                                  //           element.product.id == product.id);
+                                  //   // Menghapus elemen pada indeks yang ditemukan
+                                  //   if (indexToRemove != -1) {
+                                  //     orderItem!.removeAt(indexToRemove);
+                                  //   }
+                                  // }
+
+                                  // setState(() {
+                                  //   if (orderItem != null) {
+                                  //     for (var element in orderItem!) {
+                                  //       print(element.product.toMap());
+                                  //     }
+                                  //   }
+                                  // });
+
+                                  // NEW FUNCTION
+                                  if (orderUser?.orderItems != null) {
+                                    // Menentukan indeks elemen yang ingin dihapus (misalnya, indeks pertama)
+                                    int indexToRemove = orderUser!.orderItems
+                                        .indexWhere((element) =>
+                                            element.product.id == product.id);
+                                    // Menghapus elemen pada indeks yang ditemukan
+                                    if (indexToRemove != -1) {
+                                      orderUser!.orderItems
+                                          .removeAt(indexToRemove);
+                                    }
                                   }
+
+                                  setState(() {
+                                    // if (orderUser?.orderItems != null) {
+                                    //   for (var element in orderItem!) {
+                                    //     print(element.product.toMap());
+                                    //   }
+                                    // }
+                                  });
                                 },
                                 icon: Icon(Icons.remove_circle_outline_rounded),
                               ),
                               Text(
-                                  "${orderUser?.orderItems[index].quantity ?? 0} ${(product.category == 'satuan') ? "pcs" : "Kg"}"),
+                                  // "${orderItem?.firstWhere((element) => element.product.id == product.id)}  ${(product.category == 'satuan') ? "pcs" : "Kg"}"),
+                                  "$quantity  ${(product.category == 'satuan') ? "pcs" : "Kg"}"),
+                              // "00"),
+
                               IconButton(
                                 onPressed: () {
                                   print(">>> tambahin ");
-                                  print(product.toMap());
-                                  addOrRemoveOrder(
-                                      product.id!.toInt(), product, true);
-                                  // Assuming the product is part of the orderItems list in the OrderRequestModel
-                                  int index = orderUser?.orderItems.indexWhere(
-                                          (item) =>
-                                              item.product.id == product.id) ??
-                                      -1;
-                                  if (index != -1) {
-                                    setState(() {
-                                      orderUser!.orderItems[index].quantity +=
-                                          1;
-                                    });
-                                  }
+                                  // print(product.toMap());
+                                  // addOrRemoveOrder(
+                                  //     product.id!.toInt(), product, true);
+                                  // // Assuming the product is part of the orderItems list in the OrderRequestModel
+                                  // int index = orderUser?.orderItems.indexWhere(
+                                  //         (item) =>
+                                  //             item.product.id == product.id) ??
+                                  //     -1;
+                                  // if (index != -1) {
+                                  //   setState(() {
+                                  //     orderUser!.orderItems[index].quantity +=
+                                  //         1;
+                                  //   });
+                                  // }
+
+                                  // orderItem!.add(OrderItem(product: product));
+
+                                  // print(">>> prodcut ::: ${product.toMap()}");
+
+                                  addItem(product);
+
+                                  setState(() {
+                                    print(
+                                        ">>> orderUser?.orderItems ::: ${orderUser?.orderItems.length}");
+                                    if (orderUser?.orderItems != null) {
+                                      for (var element in orderItem!) {
+                                        print(element.product.toMap());
+                                      }
+                                    }
+                                  });
                                 },
                                 icon: Icon(Icons.add_circle_outline_rounded),
                               )
@@ -220,110 +335,90 @@ class _TransactionPageState extends State<TransactionPage> {
           },
         ),
       ),
-      Container(
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                // physics: AlwaysScrollableScrollPhysics(),
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                itemCount: 7,
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: MediaQuery.sizeOf(context).height / 10,
-                    margin: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(),
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          // color: Colors.blue,
-                          width: MediaQuery.sizeOf(context).width / 4,
-                          child: CircleAvatar(
-                            child: Icon(Icons.abc),
-                          ),
-                        ),
-                        Container(
-                          // color: Colors.amber,
-                          width: MediaQuery.sizeOf(context).width / 2.5,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("data"),
-                              Text("Total : "),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            // color: Colors.amber,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Rp. 100.000"),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //   children: [
-            //     ElevatedButton(
-            //       onPressed: () {},
-            //       child: Text("TUNAI"),
-            //     ),
-            //     SizedBox(width: 10),
-            //     ElevatedButton(
-            //       onPressed: () {},
-            //       child: Text("QRIS"),
-            //     ),
-            //   ],
-            // ),
-            // Container(
-            //   height: MediaQuery.sizeOf(context).height / 15,
-            //   color: Colors.amber,
-            //   alignment: Alignment.centerLeft,
-            //   child: FittedBox(
-            //     fit: BoxFit.contain,
-            //     child: Text(
-            //       "Total : Rp. 545.000,00",
-            //       style: TextStyle(
-            //         fontWeight: FontWeight.w700,
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            Container(
-              // alignment: Alignment.centerLeft,
-              color: Colors.amber,
-              width: double.infinity,
-              height: MediaQuery.sizeOf(context).height / 25,
-              child: FittedBox(
-                fit: BoxFit.fitHeight,
-                child: Text(
-                  "Total : Rp. 545.000,00",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w600,
-                      fontStyle: FontStyle.normal),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      // Container(
+      //   child: Column(
+      //     children: [
+      //       Expanded(
+      //         child: ListView.builder(
+      //           // physics: AlwaysScrollableScrollPhysics(),
+      //           padding: EdgeInsets.zero,
+      //           shrinkWrap: true,
+      //           itemCount: orderUser?.orderItems.length ?? 0,
+      //           // itemCount: orderItem?.length ?? 0,
+      //           itemBuilder: (context, index) {
+      //             OrderItem? item = orderUser?.orderItems[index];
+      //             // OrderItem? item = orderItem?[index];
+      //             return Container(
+      //               height: MediaQuery.sizeOf(context).height / 10,
+      //               margin: const EdgeInsets.all(8),
+      //               decoration: BoxDecoration(
+      //                 borderRadius: BorderRadius.circular(8),
+      //                 border: Border.all(),
+      //               ),
+      //               child: Row(
+      //                 children: [
+      //                   Container(
+      //                     // color: Colors.blue,
+      //                     width: MediaQuery.sizeOf(context).width / 4,
+      //                     child: CircleAvatar(
+      //                       child: Icon(Icons.abc),
+      //                     ),
+      //                   ),
+      //                   Container(
+      //                     // color: Colors.amber,
+      //                     width: MediaQuery.sizeOf(context).width / 2.5,
+      //                     child: Column(
+      //                       mainAxisAlignment: MainAxisAlignment.center,
+      //                       crossAxisAlignment: CrossAxisAlignment.start,
+      //                       children: [
+      //                         Text(item?.product.name ?? ""),
+      //                         Text("Total : ${item?.quantity ?? 0}"),
+      //                       ],
+      //                     ),
+      //                   ),
+      //                   Expanded(
+      //                     child: Container(
+      //                       // color: Colors.amber,
+      //                       child: Column(
+      //                         mainAxisAlignment: MainAxisAlignment.center,
+      //                         crossAxisAlignment: CrossAxisAlignment.start,
+      //                         children: [
+      //                           Text("Rp. 100.000"),
+      //                         ],
+      //                       ),
+      //                     ),
+      //                   ),
+      //                 ],
+      //               ),
+      //             );
+      //           },
+      //         ),
+      //       ),
+
+      //       /// OLD ------------------------------
+
+      //       Container(
+      //         // alignment: Alignment.centerLeft,
+      //         color: Colors.amber,
+      //         width: double.infinity,
+      //         height: MediaQuery.sizeOf(context).height / 25,
+      //         child: FittedBox(
+      //           fit: BoxFit.fitHeight,
+      //           child: Text(
+      //             "Total : Rp. 545.000,00",
+      //             textAlign: TextAlign.left,
+      //             style: TextStyle(
+      //                 color: Colors.black,
+      //                 fontWeight: FontWeight.w600,
+      //                 fontStyle: FontStyle.normal),
+      //           ),
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
+      TransactionConfirmationPage(
+          selectedCustomer: selectedCustomer, orderUser: orderUser),
     ];
 
     return Scaffold(
@@ -412,10 +507,10 @@ class _TransactionPageState extends State<TransactionPage> {
                       onPressed: () {
                         previousPage();
                       },
-                      child: Text("Kembali"),
+                      child: const Text("Kembali"),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Container(
                       color: AppColors.yellow,
@@ -449,7 +544,7 @@ class _TransactionPageState extends State<TransactionPage> {
                     nextPage();
                     // print(">>> selected user : ${selectedCustomer?.name ?? ""}");
                   },
-                  child: Text('Lanjut'),
+                  child: const Text('Lanjut'),
                 )
               ],
             ),

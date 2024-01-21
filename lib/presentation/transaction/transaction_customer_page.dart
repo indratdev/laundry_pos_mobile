@@ -6,7 +6,7 @@ import 'package:laundry_app/presentation/blocs/customer_bloc/customer_bloc.dart'
 
 class TransactionCustomerPage extends StatefulWidget {
   Customer? selectedCustomer;
-   final Function(Customer) onCustomerSelected;
+  final Function(Customer) onCustomerSelected;
 
   TransactionCustomerPage({
     super.key,
@@ -19,13 +19,11 @@ class TransactionCustomerPage extends StatefulWidget {
       _TransactionCustomerPageState();
 }
 
-
 class _TransactionCustomerPageState extends State<TransactionCustomerPage> {
-
   void _selectCustomer(Customer selectedCustomer) {
     widget.onCustomerSelected(selectedCustomer);
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CustomerBloc, CustomerState>(
@@ -46,7 +44,6 @@ class _TransactionCustomerPageState extends State<TransactionCustomerPage> {
                 Customer customer = customers[index];
                 return InkWell(
                   onTap: () {
-                    
                     setState(() {
                       widget.selectedCustomer = customer;
                       _selectCustomer(customer);

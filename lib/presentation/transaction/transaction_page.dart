@@ -8,6 +8,7 @@ import 'package:laundry_app/data/models/response/product_response_model.dart';
 import 'package:laundry_app/presentation/blocs/product_bloc/product_bloc.dart';
 import 'package:laundry_app/presentation/transaction/transaction_confirmation_page.dart';
 import 'package:laundry_app/presentation/transaction/transaction_customer_page.dart';
+import 'package:laundry_app/presentation/transaction/widgets/dialog_payment_method_widget.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class TransactionPage extends StatefulWidget {
@@ -158,8 +159,55 @@ class _TransactionPageState extends State<TransactionPage> {
 
   addItem(Product product) {
     print(">>> addItem runingg...");
-
     orderUser?.orderItems.add(OrderItem(product: product));
+  }
+
+  Future<void> _showSimpleDialog() async {
+    print(">>> _showSimpleDialog");
+    await showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        print(">>> _showSimpleDialog BuildContext : ${orderUser?.paymentMethod}");
+        return SimpleDialog(
+          title: const Text('Pilihan Pembayaran'),
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: (orderUser?.paymentMethod == "cash")
+                        ? AppColors.yellow
+                        : null,
+                  ),
+                  child: Text("Tunai"),
+                  onPressed: () {
+                    setState(() {
+                      orderUser?.paymentMethod = "cash";
+                      print(">>> paymentMethod : ${orderUser?.paymentMethod}");
+                    });
+                  },
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: (orderUser?.paymentMethod == "qris")
+                        ? AppColors.yellow
+                        : null,
+                  ),
+                  child: Text("QRIS"),
+                  onPressed: () {
+                    setState(() {
+                      orderUser?.paymentMethod = "qris";
+                      print(">>> paymentMethod : ${orderUser?.paymentMethod}");
+                    });
+                  },
+                ),
+              ],
+            )
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -418,7 +466,12 @@ class _TransactionPageState extends State<TransactionPage> {
       //   ),
       // ),
       TransactionConfirmationPage(
-          selectedCustomer: selectedCustomer, orderUser: orderUser),
+        selectedCustomer: selectedCustomer,
+        orderUser: orderUser,
+        onConfirmationOrder: (value) {
+          orderUser = value;
+        },
+      ),
     ];
 
     return Scaffold(
@@ -431,9 +484,11 @@ class _TransactionPageState extends State<TransactionPage> {
               margin: const EdgeInsets.only(top: 14),
               color: Colors.amber,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    width: MediaQuery.sizeOf(context).width / 4.5,
+                    width: MediaQuery.sizeOf(context).width / 5,
                     margin: const EdgeInsets.all(4.0),
                     child: CircularPercentIndicator(
                       radius: MediaQuery.sizeOf(context).width / 9.5,
@@ -463,32 +518,38 @@ class _TransactionPageState extends State<TransactionPage> {
                         (step == stepTransaction.length)
                             ? const SizedBox()
                             : Text("Selanjutnya : ${stepTransaction[step]}"),
-                        Container(
-                          alignment: Alignment.centerRight,
-                          // padding: const EdgeInsets.fromLTRB(0, 15, 5, 0),
-                          child: const Badge(
-                            label: Text("3"),
-                            child: Icon(Icons.shopping_cart_rounded),
-                          ),
-                        ),
                       ],
                     ),
-                  )
+                  ),
+                  Expanded(
+                    child: Container(
+                      // color: Colors.red,
+                      alignment: Alignment.centerLeft,
+                      // padding: const EdgeInsets.fromLTRB(0, 15, 5, 0),
+                      child: const Badge(
+                        label: Text("3"),
+                        child: Icon(Icons.shopping_cart_rounded),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
             // Divider(color: AppColors.disabled),
-            Container(
-              // margin: const EdgeInsets.symmetric(horizontal: 14),
-              height: MediaQuery.sizeOf(context).height / 1.3,
-              margin: EdgeInsets.zero,
-              // color: Colors.blue,
-              child: PageView(
-                controller: _pageController,
-                padEnds: false,
-                pageSnapping: true,
-                physics: const NeverScrollableScrollPhysics(),
-                children: listTransactionStep,
+            Expanded(
+              flex: 1,
+              child: Container(
+                // margin: const EdgeInsets.symmetric(horizontal: 14),
+                // height: MediaQuery.sizeOf(context).height / 1.3,
+                margin: EdgeInsets.zero,
+                // color: Colors.blue,
+                child: PageView(
+                  controller: _pageController,
+                  padEnds: false,
+                  pageSnapping: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: listTransactionStep,
+                ),
               ),
             ),
           ],
@@ -515,8 +576,16 @@ class _TransactionPageState extends State<TransactionPage> {
                     child: Container(
                       color: AppColors.yellow,
                       child: TextButton(
-                        onPressed: () {},
-                        child: Text("Proses"),
+                        child: const Text("Proses"),
+                        onPressed: () async {
+                          // print("${orderUser?.toMap()}");
+                          // _showSimpleDialog();
+                          showDialog(context: context, builder: (context)  {
+                           return  DialogPaymentMethodWidget(orderUser: orderUser!);
+                          },);
+                          // DialogPaymentMethodWidget(orderUser:  orderUser!);
+                          
+                        },
                       ),
                     ),
                   ),

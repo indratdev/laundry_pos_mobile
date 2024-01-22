@@ -12,6 +12,7 @@ import 'package:laundry_app/presentation/blocs/product_bloc/product_bloc.dart';
 import 'package:laundry_app/presentation/transaction/transaction_confirmation_page.dart';
 import 'package:laundry_app/presentation/transaction/transaction_customer_page.dart';
 import 'package:laundry_app/presentation/transaction/widgets/dialog_payment_method_widget.dart';
+import 'package:laundry_app/presentation/transaction/widgets/payment_success_dialog.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class TransactionPage extends StatefulWidget {
@@ -502,7 +503,8 @@ class _TransactionPageState extends State<TransactionPage> {
               },
               success: (orderResponseModel) {
                 print(
-                    ">>> blocbuilder sukses : ${orderResponseModel.toJson()}");
+                    ">>> blocbuilder sukses : ${orderResponseModel.toMap()}");
+                  return  PaymentSuccessDialog();
               },
             );
 
@@ -616,6 +618,10 @@ class _TransactionPageState extends State<TransactionPage> {
                           showDialog(
                             context: context,
                             builder: (context) {
+                              // for (var element in orderUser!.orderItems.toList()) {
+                              //   log(">>> a : ${element.product.toMap()}");
+                              // }
+                              // log(">>> proses: ${orderUser?.orderItems.toList()}");
                               return DialogPaymentMethodWidget(
                                   orderUser: orderUser!);
                             },

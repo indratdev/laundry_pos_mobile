@@ -1,7 +1,8 @@
 class Variables {
   // static const String baseUrl = 'http://127.0.0.1:8000';
   // static const String baseUrl = 'http://192.168.59.225';
-  static const String baseUrl = 'http://192.168.137.1';
+  // static const String baseUrl = 'http://192.168.137.1';
+  static const String baseUrl = 'http://192.168.1.7';
 
   static const String imageBaseUrl = '$baseUrl/storage/products/';
   static const String appName = 'Laundry App';
@@ -13,6 +14,7 @@ class Variables {
   static const customersIcon = "assets/icons/customersIcon.png";
   static const managePrinterIcon = "assets/icons/managePrinter.png";
   static const manageProductIcon = "assets/icons/manageProduct.png";
+  static const doneIcon = "assets/icons/doneIcon.png";
 }
 
 
@@ -21,3 +23,4 @@ class Variables {
 // <a href="https://www.flaticon.com/free-icons/settings" title="settings icons">Settings icons created by Gregor Cresnar Premium - Flaticon</a>
 // <a href="https://www.flaticon.com/free-icons/dashboard" title="dashboard icons">Dashboard icons created by Eucalyp - Flaticon</a>
 // <a href="https://www.flaticon.com/free-icons/client" title="client icons">Client icons created by Freepik - Flaticon</a>
+// <a href="https://www.flaticon.com/free-icons/done" title="done icons">Done icons created by Octopocto - Flaticon</a>

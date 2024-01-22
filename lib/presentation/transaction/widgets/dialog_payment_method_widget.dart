@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:laundry_app/core/componets/buttons.dart';
@@ -6,6 +8,7 @@ import 'package:laundry_app/core/extensions/double_ext.dart';
 import 'package:laundry_app/core/extensions/int_ext.dart';
 import 'package:laundry_app/core/extensions/string_ext.dart';
 import 'package:laundry_app/data/models/request/order_request_model.dart';
+import 'package:laundry_app/data/models/response/product_response_model.dart';
 import 'package:laundry_app/presentation/blocs/order_bloc/order_bloc.dart';
 
 class DialogPaymentMethodWidget extends StatefulWidget {
@@ -29,8 +32,41 @@ class _DialogPaymentMethodWidgetState extends State<DialogPaymentMethodWidget> {
   @override
   void initState() {
     // amountPaymentController.text = widget.orderUser.totalPrice.toString();
+
+    // mergeOrderItem(widget.orderUser.orderItems);
+
+    for (var element in widget.orderUser.orderItems.toList()) {
+      log(">>> element : ${element.toMap()}");
+    }
+    filterOutZeroQuantity();
+
     super.initState();
   }
+
+  filterOutZeroQuantity() {
+    List<OrderItem> filteredOrderItems =
+        widget.orderUser.orderItems.where((item) => item.quantity > 0).toList();
+
+    widget.orderUser.orderItems = [];
+    widget.orderUser.orderItems.addAll(filteredOrderItems);
+  }
+
+  // mergeOrderItem(List<OrderItem> data) {
+  //   Set<OrderItem> uniqueProducts = data.map((item) {
+  //     return OrderItem(
+  //       product: Product(
+  //         name: item.product.name,
+  //         price: item.product.price,
+  //         working_time: item.product.working_time,
+  //         category: item.product.category,
+  //         image: item.product.image,
+  //       ),
+  //     );
+  //   }).toSet();
+
+  //   widget.orderUser.orderItems = [];
+  //   widget.orderUser.orderItems.addAll(uniqueProducts);
+  // }
 
   @override
   void dispose() {
@@ -132,7 +168,7 @@ class _DialogPaymentMethodWidgetState extends State<DialogPaymentMethodWidget> {
                 // print(">> oooo : ${amountPaymentController.text}");
                 // widget.orderUser.amountPayment =
                 //     amountPaymentController.text.toDoubleFromText;
-                // print(">>> : result : ${widget.orderUser.toMap()}");
+                // log(">>> : result : ${widget.orderUser.toMap()}");
                 BlocProvider.of<OrderBloc>(context)
                     .add(OrderEvent.addOrder(widget.orderUser));
                 Navigator.pop(context);

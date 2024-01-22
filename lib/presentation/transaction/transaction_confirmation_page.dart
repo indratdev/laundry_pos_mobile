@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:laundry_app/core/constants/colors.dart';
 import 'package:laundry_app/core/extensions/double_ext.dart';
@@ -56,13 +58,14 @@ class _TransactionConfirmationPageState
     // Hasil akhir
     List<OrderItem> result = mergedData.values.toList();
     displayedOrderItem = result;
+    log(">>> displayedOrderItem : ${displayedOrderItem.toList()}");
 
     // set grand total
     widget.orderUser?.totalPrice = grandTotal(widget.orderUser!.orderItems);
     widget.orderUser?.totalQuantity = widget.orderUser?.orderItems.length ?? 0;
 
-    _finalOrder();
     fillCashierName();
+    _finalOrder();
   }
 
   fillCashierName() async {

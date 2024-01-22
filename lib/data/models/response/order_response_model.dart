@@ -3,7 +3,7 @@ import 'dart:convert';
 class OrderResponseModel {
   final bool success;
   final String message;
-  final List<OrderResponseItem> data;
+  final OrderResponseItem data;
 
   OrderResponseModel({
     required this.success,
@@ -11,24 +11,40 @@ class OrderResponseModel {
     required this.data,
   });
 
-  factory OrderResponseModel.fromJson(String str) =>
-      OrderResponseModel.fromMap(json.decode(str));
+  factory OrderResponseModel.fromJson(Map<String, dynamic> json) {
+    return OrderResponseModel(
+      success: json['success'],
+      message: json['message'],
+      data: OrderResponseItem.fromJson(json['data']),
+    );
+  }
 
-  String toJson() => json.encode(toMap());
+  Map<String, dynamic> toMap() {
+    return {
+      'success': success,
+      'message': message,
+      'data': data.toMap(),
+    };
+  }
 
-  factory OrderResponseModel.fromMap(Map<String, dynamic> json) =>
-      OrderResponseModel(
-        success: json["success"],
-        message: json["message"],
-        data: List<OrderResponseItem>.from(
-            json["data"].map((x) => OrderResponseItem.fromMap(x))),
-      );
+  // factory OrderResponseModel.fromJson(String str) =>
+  //     OrderResponseModel.fromMap(json.decode(str));
 
-  Map<String, dynamic> toMap() => {
-        "success": success,
-        "message": message,
-        "data": List<dynamic>.from(data.map((x) => x.toMap())),
-      };
+  // String toJson() => json.encode(toMap());
+
+  // factory OrderResponseModel.fromMap(Map<String, dynamic> json) =>
+  //     OrderResponseModel(
+  //       success: json["success"],
+  //       message: json["message"],
+  //       data: List<OrderResponseItem>.from(
+  //           json["data"].map((x) => OrderResponseItem.fromMap(x))),
+  //     );
+
+  // Map<String, dynamic> toMap() => {
+  //       "success": success,
+  //       "message": message,
+  //       "data": List<dynamic>.from(data.map((x) => x.toMap())),
+  //     };
 }
 
 class OrderResponseItem {
@@ -60,8 +76,29 @@ class OrderResponseItem {
     this.updated_at = "",
   });
 
-  factory OrderResponseItem.fromJson(String str) =>
-      OrderResponseItem.fromMap(json.decode(str));
+  // factory OrderResponseItem.fromJson(String str) =>
+  //     OrderResponseItem.fromMap(json.decode(str));
+
+  factory OrderResponseItem.fromJson(Map<String, dynamic> json) {
+    return OrderResponseItem(
+      id: json["id"],
+      amount_payment: json["amount_payment"].toDouble(),
+      cashier_id: json["cashier_id"],
+      cashier_name: json["cashier_name"],
+      customer_id: json["customer_id"],
+      is_sync: json["is_sync"] == 1 ? 1 : 0, // Convert to integer,
+      payment_method: json["payment_method"],
+      total_price: json["total_price"].toDouble(),
+      total_quantity: json["total_quantity"],
+      transaction_time: json["transaction_time"],
+      created_at: json["created_at"],
+      updated_at: json["updated_at"],
+
+      // success: json['success'],
+      // message: json['message'],
+      // data: OrderResponseItem.fromJson(json['data']),
+    );
+  }
 
   String toJson() => json.encode(toMap());
 

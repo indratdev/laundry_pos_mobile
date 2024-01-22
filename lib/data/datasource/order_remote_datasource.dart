@@ -157,7 +157,7 @@ class OrderRemoteDataSource {
     Map<String, dynamic> json = jsonDecode(response.body);
 
     if (response.statusCode >= 200 && response.statusCode <= 299) {
-      OrderResponseModel result = OrderResponseModel.fromMap(json);
+      OrderResponseModel result = OrderResponseModel.fromJson(json);
       return Right(result);
     } else {
       return Left("Error : ${json["error"]["message"]}");

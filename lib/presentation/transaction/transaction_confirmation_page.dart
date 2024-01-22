@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:laundry_app/core/constants/colors.dart';
 import 'package:laundry_app/core/extensions/double_ext.dart';
+import 'package:laundry_app/data/datasource/auth_local_datasource.dart';
 import 'package:laundry_app/data/models/request/order_request_model.dart';
+import 'package:laundry_app/data/models/response/auth_response_model.dart';
 import 'package:laundry_app/data/models/response/customer_response_model.dart';
 
 class TransactionConfirmationPage extends StatefulWidget {
@@ -60,6 +62,13 @@ class _TransactionConfirmationPageState
     widget.orderUser?.totalQuantity = widget.orderUser?.orderItems.length ?? 0;
 
     _finalOrder();
+    fillCashierName();
+  }
+
+  fillCashierName() async {
+    AuthResponseModel autData = await AuthLocalDatasource().getAuthData();
+    widget.orderUser?.cashierName = autData.user.name;
+    widget.orderUser?.idCashier = autData.user.id;
   }
 
   double priceProduct(int total, double price) {
@@ -186,7 +195,7 @@ class _TransactionConfirmationPageState
                     child: Text(
                       "Total :  ${grandTotal(widget.orderUser!.orderItems).currencyFormatRp}",
                       textAlign: TextAlign.left,
-                      style: TextStyle(fontWeight: FontWeight.w700),
+                      style: const TextStyle(fontWeight: FontWeight.w700),
                     ),
                   )
                 ],

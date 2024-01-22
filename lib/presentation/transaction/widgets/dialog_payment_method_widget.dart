@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:laundry_app/core/componets/buttons.dart';
 import 'package:laundry_app/core/constants/colors.dart';
 import 'package:laundry_app/core/extensions/double_ext.dart';
 import 'package:laundry_app/core/extensions/int_ext.dart';
 import 'package:laundry_app/core/extensions/string_ext.dart';
 import 'package:laundry_app/data/models/request/order_request_model.dart';
+import 'package:laundry_app/presentation/blocs/order_bloc/order_bloc.dart';
 
 class DialogPaymentMethodWidget extends StatefulWidget {
   OrderRequestModel orderUser;
@@ -77,7 +79,6 @@ class _DialogPaymentMethodWidgetState extends State<DialogPaymentMethodWidget> {
                     label: "QRIS",
                   ),
                 ),
-                
               ],
             ),
           ),
@@ -126,10 +127,15 @@ class _DialogPaymentMethodWidgetState extends State<DialogPaymentMethodWidget> {
             child: Button.filled(
               label: "Proses",
               onPressed: () {
-                print(">> oooo : ${amountPaymentController.text}");
-                widget.orderUser.amountPayment =
-                    amountPaymentController.text.toDoubleFromText;
-                print(">>> : result : ${widget.orderUser.toMap()}");
+                DateTime transactionTime = DateTime.now();
+                widget.orderUser.transactionTime = transactionTime.toString();
+                // print(">> oooo : ${amountPaymentController.text}");
+                // widget.orderUser.amountPayment =
+                //     amountPaymentController.text.toDoubleFromText;
+                // print(">>> : result : ${widget.orderUser.toMap()}");
+                BlocProvider.of<OrderBloc>(context)
+                    .add(OrderEvent.addOrder(widget.orderUser));
+                Navigator.pop(context);
               },
             ),
           )

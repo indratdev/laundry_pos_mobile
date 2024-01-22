@@ -1,56 +1,99 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:laundry_app/data/models/response/customer_response_model.dart';
 import 'package:laundry_app/data/models/response/product_response_model.dart';
 
 class OrderRequestModel {
   Customer customer;
+  int customerID;
   List<OrderItem> orderItems;
-
+  String? transactionTime;
+  String cashierName;
   String paymentMethod;
   double amountPayment;
   int totalQuantity;
   double totalPrice;
   int idCashier;
-  String nameCashier;
   bool isSync;
 
   OrderRequestModel({
     required this.customer,
+    this.customerID = 0,
     required this.orderItems,
     this.amountPayment = 0.0,
     this.idCashier = 0,
     this.isSync = false,
-    required this.nameCashier,
     required this.paymentMethod,
     this.totalPrice = 0.0,
     this.totalQuantity = 0,
+    this.transactionTime,
+    required this.cashierName,
   });
 
   Map<String, dynamic> toMap() => {
-        "customer": customer.toMap(),
-        // "orderItems": orderItems,
-        "orderItems": orderItems.map((item) => item.toMap()).toList(),
-        "amountPayment": amountPayment,
-        "idCashier": idCashier,
-        "isSync": isSync,
-        "nameCashier": nameCashier,
-        "paymentMethod": paymentMethod,
-        "totalPrice": totalPrice,
-        "totalQuantity": totalQuantity,
+        "transaction_time": transactionTime,
+        "total_price": totalPrice,
+        "total_quantity": totalQuantity,
+        "payment_method": paymentMethod,
+        "customer_id": customerID,
+        "amount_payment": amountPayment,
+        "cashier_id": idCashier,
+        "is_sync": isSync,
+        "cashier_name": cashierName,
+        // "customer": customer.toMap(),
+        "order_items": orderItems.map((item) => item.toMap()).toList(),
       };
 }
 
 class OrderItem {
   Product product;
   int quantity;
+  int productID;
 
   OrderItem({
     required this.product,
     this.quantity = 0,
+    this.productID = 0,
   });
 
   Map<String, dynamic> toMap() => {
         "product": product.toMap(),
         "quantity": quantity,
+        "product_id": productID,
       };
 }
+
+
+// {
+//     "transaction_time": "2024-01-23 10:30:00",
+//     "total_price": 235000.0,
+//     "total_quantity": 3,
+//     "payment_method": "cash",
+//     "customer_id": 1,
+//     "amount_payment": 250000.0,
+//     "cashier_id": 1,
+//     "is_sync": 0,
+//     "cashier_name": "John Doe",
+//     "order_items": [
+//         {
+//             "product_id": 1,
+//             "quantity": 1,
+//             "product": {
+//                 "name": "Boneka",
+//                 "price": 35000,
+//                 "working_time": 3,
+//                 "category": "satuan",
+//                 "image": null
+//             }
+//         },
+//         {
+//             "product_id": 2,
+//             "quantity": 2,
+//             "product": {
+//                 "name": "Jaket Kulit",
+//                 "price": 100000,
+//                 "working_time": 0,
+//                 "category": "satuan",
+//                 "image": "202401121705028304.jpg"
+//             }
+//         }
+//     ]
+// }

@@ -32,7 +32,6 @@ class CustomerResponseModel {
 
 class Customer {
   final int? id;
-  final int? customer_id;
   final String name;
   final String? email;
   final String? phone;
@@ -43,7 +42,6 @@ class Customer {
 
   Customer({
     this.id,
-    this.customer_id,
     required this.name,
     this.email = "",
     this.phone = "",
@@ -59,7 +57,6 @@ class Customer {
 
   factory Customer.fromMap(Map<String, dynamic> json) => Customer(
         id: json["id"],
-        customer_id: json["customer_id"],
         name: json["name"],
         email: json["email"] ?? '',
         phone: json["phone"] ?? '',
@@ -70,16 +67,16 @@ class Customer {
       );
 
   Map<String, dynamic> toMap() => {
+        "id": id,
         "name": name,
-        "customer_id": customer_id,
         "email": email,
         "phone": phone,
         "address": address,
         "project_id": project_id,
       };
   Map<String, dynamic> toLocalMap() => {
+        "id": id,
         "name": name,
-        "customer_id": customer_id,
         "email": email,
         "phone": phone,
         "address": address,
@@ -88,7 +85,6 @@ class Customer {
 
   Customer copyWith({
     int? id,
-    int? customer_id,
     String? name,
     String? email,
     String? phone,
@@ -99,7 +95,6 @@ class Customer {
   }) {
     return Customer(
       id: id ?? this.id,
-      customer_id: customer_id ?? this.customer_id,
       name: name ?? this.name,
       email: email ?? this.email,
       phone: phone ?? this.phone,
@@ -116,7 +111,6 @@ class Customer {
     return other is Customer &&
         other.id == id &&
         other.name == name &&
-        other.customer_id == customer_id &&
         other.email == email &&
         other.phone == phone &&
         other.address == address &&
@@ -129,7 +123,6 @@ class Customer {
   int get hashCode {
     return id.hashCode ^
         name.hashCode ^
-        customer_id.hashCode ^
         email.hashCode ^
         phone.hashCode ^
         address.hashCode ^

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 class ProductResponseModel {
   final bool success;
   final String message;

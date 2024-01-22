@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:laundry_app/core/constants/colors.dart';
@@ -5,6 +7,7 @@ import 'package:laundry_app/core/constants/colors.dart';
 import 'package:laundry_app/data/models/request/order_request_model.dart';
 import 'package:laundry_app/data/models/response/customer_response_model.dart';
 import 'package:laundry_app/data/models/response/product_response_model.dart';
+import 'package:laundry_app/presentation/blocs/order_bloc/order_bloc.dart';
 import 'package:laundry_app/presentation/blocs/product_bloc/product_bloc.dart';
 import 'package:laundry_app/presentation/transaction/transaction_confirmation_page.dart';
 import 'package:laundry_app/presentation/transaction/transaction_customer_page.dart';
@@ -30,10 +33,11 @@ class _TransactionPageState extends State<TransactionPage> {
 
   Customer? selectedCustomer;
   OrderRequestModel? orderUser = OrderRequestModel(
-      customer: Customer(name: ""),
-      orderItems: [],
-      nameCashier: "",
-      paymentMethod: "");
+    customer: Customer(name: ""),
+    orderItems: [],
+    cashierName: "",
+    paymentMethod: "",
+  );
 
   List<OrderItem>? orderItem = [];
 
@@ -159,7 +163,8 @@ class _TransactionPageState extends State<TransactionPage> {
 
   addItem(Product product) {
     print(">>> addItem runingg...");
-    orderUser?.orderItems.add(OrderItem(product: product));
+    orderUser?.orderItems
+        .add(OrderItem(product: product, productID: product.id!));
   }
 
   Future<void> _showSimpleDialog() async {
@@ -167,7 +172,8 @@ class _TransactionPageState extends State<TransactionPage> {
     await showDialog<void>(
       context: context,
       builder: (BuildContext context) {
-        print(">>> _showSimpleDialog BuildContext : ${orderUser?.paymentMethod}");
+        print(
+            ">>> _showSimpleDialog BuildContext : ${orderUser?.paymentMethod}");
         return SimpleDialog(
           title: const Text('Pilihan Pembayaran'),
           children: <Widget>[
@@ -219,6 +225,7 @@ class _TransactionPageState extends State<TransactionPage> {
           setState(() {
             selectedCustomer = value;
             orderUser?.customer = value;
+            orderUser?.customerID = value.id ?? 0;
           });
         },
       ),
@@ -477,82 +484,108 @@ class _TransactionPageState extends State<TransactionPage> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Column(
-          children: [
-            Container(
-              height: MediaQuery.sizeOf(context).height / 7,
-              margin: const EdgeInsets.only(top: 14),
-              color: Colors.amber,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    width: MediaQuery.sizeOf(context).width / 5,
-                    margin: const EdgeInsets.all(4.0),
-                    child: CircularPercentIndicator(
-                      radius: MediaQuery.sizeOf(context).width / 9.5,
-                      lineWidth: MediaQuery.sizeOf(context).width / 42,
-                      percent: step / stepTransaction.length,
-                      center: Text(
-                        "$step of ${stepTransaction.length}",
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w700,
+        child: BlocBuilder<OrderBloc, OrderState>(
+          builder: (context, state) {
+            state.maybeWhen(
+              orElse: () {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+              loading: () {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+              error: (message) {
+                log(">>> blocbuilder error : $message");
+              },
+              success: (orderResponseModel) {
+                print(
+                    ">>> blocbuilder sukses : ${orderResponseModel.toJson()}");
+              },
+            );
+
+            return Column(
+              children: [
+                Container(
+                  height: MediaQuery.sizeOf(context).height / 7,
+                  margin: const EdgeInsets.only(top: 14),
+                  color: Colors.amber,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: MediaQuery.sizeOf(context).width / 5,
+                        margin: const EdgeInsets.all(4.0),
+                        child: CircularPercentIndicator(
+                          radius: MediaQuery.sizeOf(context).width / 9.5,
+                          lineWidth: MediaQuery.sizeOf(context).width / 42,
+                          percent: step / stepTransaction.length,
+                          center: Text(
+                            "$step of ${stepTransaction.length}",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          progressColor: Colors.green,
                         ),
                       ),
-                      progressColor: Colors.green,
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(left: 20, top: 20),
-                    width: MediaQuery.sizeOf(context).width / 1.55,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Pilih ${stepTransaction[step - 1]}",
-                          style: const TextStyle(fontWeight: FontWeight.w700),
+                      Container(
+                        padding: const EdgeInsets.only(left: 20, top: 20),
+                        width: MediaQuery.sizeOf(context).width / 1.55,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Pilih ${stepTransaction[step - 1]}",
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w700),
+                            ),
+                            const SizedBox(height: 5),
+                            (step == stepTransaction.length)
+                                ? const SizedBox()
+                                : Text(
+                                    "Selanjutnya : ${stepTransaction[step]}"),
+                          ],
                         ),
-                        const SizedBox(height: 5),
-                        (step == stepTransaction.length)
-                            ? const SizedBox()
-                            : Text("Selanjutnya : ${stepTransaction[step]}"),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      // color: Colors.red,
-                      alignment: Alignment.centerLeft,
-                      // padding: const EdgeInsets.fromLTRB(0, 15, 5, 0),
-                      child: const Badge(
-                        label: Text("3"),
-                        child: Icon(Icons.shopping_cart_rounded),
                       ),
-                    ),
+                      Expanded(
+                        child: Container(
+                          // color: Colors.red,
+                          alignment: Alignment.centerLeft,
+                          // padding: const EdgeInsets.fromLTRB(0, 15, 5, 0),
+                          child: const Badge(
+                            label: Text("3"),
+                            child: Icon(Icons.shopping_cart_rounded),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            // Divider(color: AppColors.disabled),
-            Expanded(
-              flex: 1,
-              child: Container(
-                // margin: const EdgeInsets.symmetric(horizontal: 14),
-                // height: MediaQuery.sizeOf(context).height / 1.3,
-                margin: EdgeInsets.zero,
-                // color: Colors.blue,
-                child: PageView(
-                  controller: _pageController,
-                  padEnds: false,
-                  pageSnapping: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: listTransactionStep,
                 ),
-              ),
-            ),
-          ],
+                // Divider(color: AppColors.disabled),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    // margin: const EdgeInsets.symmetric(horizontal: 14),
+                    // height: MediaQuery.sizeOf(context).height / 1.3,
+                    margin: EdgeInsets.zero,
+                    // color: Colors.blue,
+                    child: PageView(
+                      controller: _pageController,
+                      padEnds: false,
+                      pageSnapping: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: listTransactionStep,
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
       bottomNavigationBar: (step == stepTransaction.length)
@@ -580,11 +613,14 @@ class _TransactionPageState extends State<TransactionPage> {
                         onPressed: () async {
                           // print("${orderUser?.toMap()}");
                           // _showSimpleDialog();
-                          showDialog(context: context, builder: (context)  {
-                           return  DialogPaymentMethodWidget(orderUser: orderUser!);
-                          },);
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return DialogPaymentMethodWidget(
+                                  orderUser: orderUser!);
+                            },
+                          );
                           // DialogPaymentMethodWidget(orderUser:  orderUser!);
-                          
                         },
                       ),
                     ),

@@ -504,7 +504,7 @@ class _TransactionPageState extends State<TransactionPage> {
               success: (orderResponseModel) {
                 print(
                     ">>> blocbuilder sukses : ${orderResponseModel.toMap()}");
-                  return  PaymentSuccessDialog();
+                    PaymentSuccessDialog();
               },
             );
 

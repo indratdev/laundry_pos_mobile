@@ -5,6 +5,7 @@ import 'package:laundry_app/core/constants/variables.dart';
 import 'package:laundry_app/core/extensions/date_time_ext.dart';
 import 'package:laundry_app/core/extensions/double_ext.dart';
 import 'package:laundry_app/data/data/cwb_print.dart';
+import 'package:laundry_app/data/models/response/order_response_model.dart';
 import 'package:laundry_app/presentation/blocs/order_bloc/order_bloc.dart';
 import 'package:laundry_app/presentation/home/home_page.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
@@ -45,6 +46,8 @@ class PaymentSuccessDialog extends StatelessWidget {
                 // (data, qty, total, paymentType, nominal, idKasir, nameKasir)
                 {
               // context.read<CheckoutBloc>().add(const CheckoutEvent.started());
+              OrderResponseItem headerValue = orderResponseModel.data.order;
+              List<OrderItem> detailValue = orderResponseModel.data.orderItems;
 
               return Column(
                 mainAxisSize: MainAxisSize.min,
@@ -53,26 +56,25 @@ class PaymentSuccessDialog extends StatelessWidget {
                   const SizedBox(height: 12),
                   _LabelValue(
                     label: 'METODE PEMBAYARAN',
-                    value: orderResponseModel.data.payment_method.toUpperCase(),
+                    value: headerValue.payment_method.toUpperCase(),
                   ),
                   const Divider(height: 36.0),
                   _LabelValue(
                     label: 'TOTAL TAGIHAN',
-                    value: orderResponseModel.data.total_price.currencyFormatRp,
+                    value: headerValue.total_price.currencyFormatRp,
                   ),
                   const Divider(height: 36.0),
                   _LabelValue(
                     label: 'NOMINAL BAYAR',
-                    value: orderResponseModel.data.payment_method
-                                .toUpperCase() ==
-                            'QRIS'
-                        ? orderResponseModel.data.total_price.currencyFormatRp
-                        : orderResponseModel.data.total_price.currencyFormatRp,
+                    value: headerValue.payment_method.toUpperCase() == 'QRIS'
+                        ? headerValue.amount_payment.currencyFormatRp
+                        : headerValue.amount_payment.currencyFormatRp,
                   ),
                   const Divider(height: 36.0),
                   _LabelValue(
                     label: 'WAKTU PEMBAYARAN',
-                    value: DateTime.now().toFormattedTime(),
+                    // value: DateTime.now().toFormattedTime(),
+                    value: headerValue.transaction_time,
                   ),
                   const SizedBox(height: 12),
                   Row(
@@ -101,12 +103,12 @@ class PaymentSuccessDialog extends StatelessWidget {
                           onPressed: () async {
                             final printValue =
                                 await CwbPrint.instance.printOrder(
-                              [],
-                              orderResponseModel.data.total_quantity,
-                              orderResponseModel.data.total_price,
-                              orderResponseModel.data.payment_method,
-                              orderResponseModel.data.amount_payment,
-                              orderResponseModel.data.cashier_name,
+                              detailValue,
+                              headerValue.total_quantity,
+                              headerValue.total_price,
+                              headerValue.payment_method,
+                              headerValue.amount_payment,
+                              headerValue.cashier_name,
                             );
                             await PrintBluetoothThermal.writeBytes(printValue);
                             // final result =

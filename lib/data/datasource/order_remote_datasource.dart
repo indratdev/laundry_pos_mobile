@@ -134,12 +134,6 @@ class OrderRemoteDataSource {
   // create categoryRoom
   Future<Either<String, OrderResponseModel>> addOrder(
       String token, OrderRequestModel model) async {
-    // final data = {
-    //   model.toMap(),
-    // };
-
-    log(">>> datas : ${model.toMap()}");
-
     final response = await http.post(
       Uri.parse(urlOrder),
       headers: {
@@ -147,7 +141,6 @@ class OrderRemoteDataSource {
         'Accept': 'application/json',
         'authorization': "Bearer $token"
       },
-      // body: jsonEncode(data),
       body: jsonEncode(model.toMap()),
     );
 

@@ -1,7 +1,7 @@
 import 'package:esc_pos_utils_plus/esc_pos_utils_plus.dart';
 import 'package:intl/intl.dart';
 import 'package:laundry_app/core/extensions/double_ext.dart';
-import 'package:laundry_app/data/models/request/order_request_model.dart';
+import 'package:laundry_app/data/models/response/order_response_model.dart';
 
 class CwbPrint {
   CwbPrint._init();

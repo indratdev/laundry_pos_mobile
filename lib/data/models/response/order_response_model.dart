@@ -1,9 +1,12 @@
 import 'dart:convert';
 
+import 'package:laundry_app/data/models/response/product_response_model.dart';
+
 class OrderResponseModel {
   final bool success;
   final String message;
-  final OrderResponseItem data;
+  final OrderData data;
+  // final OrderResponseItem data;
 
   OrderResponseModel({
     required this.success,
@@ -15,7 +18,8 @@ class OrderResponseModel {
     return OrderResponseModel(
       success: json['success'],
       message: json['message'],
-      data: OrderResponseItem.fromJson(json['data']),
+      // data: OrderResponseItem.fromJson(json['data']),
+      data: OrderData.fromJson(json['data']),
     );
   }
 
@@ -23,7 +27,7 @@ class OrderResponseModel {
     return {
       'success': success,
       'message': message,
-      'data': data.toMap(),
+      // 'data': data.toMap(),
     };
   }
 
@@ -45,6 +49,25 @@ class OrderResponseModel {
   //       "message": message,
   //       "data": List<dynamic>.from(data.map((x) => x.toMap())),
   //     };
+}
+
+class OrderData {
+  final OrderResponseItem order;
+  final List<OrderItem> orderItems;
+
+  OrderData({
+    required this.order,
+    required this.orderItems,
+  });
+
+  factory OrderData.fromJson(Map<String, dynamic> json) {
+    return OrderData(
+      order: OrderResponseItem.fromJson(json['order']),
+      orderItems: List<OrderItem>.from(
+        json['order_items'].map((item) => OrderItem.fromJson(item)),
+      ),
+    );
+  }
 }
 
 class OrderResponseItem {
@@ -76,9 +99,6 @@ class OrderResponseItem {
     this.updated_at = "",
   });
 
-  // factory OrderResponseItem.fromJson(String str) =>
-  //     OrderResponseItem.fromMap(json.decode(str));
-
   factory OrderResponseItem.fromJson(Map<String, dynamic> json) {
     return OrderResponseItem(
       id: json["id"],
@@ -93,10 +113,6 @@ class OrderResponseItem {
       transaction_time: json["transaction_time"],
       created_at: json["created_at"],
       updated_at: json["updated_at"],
-
-      // success: json['success'],
-      // message: json['message'],
-      // data: OrderResponseItem.fromJson(json['data']),
     );
   }
 
@@ -116,14 +132,6 @@ class OrderResponseItem {
         transaction_time: json["transaction_time"],
         created_at: json["created_at"],
         updated_at: json["updated_at"],
-
-        // name: json["name"],
-        // email: json["email"] ?? '',
-        // phone: json["phone"] ?? '',
-        // address: json["address"] ?? '',
-        // project_id: json["project_id"] ?? '',
-        // createdAt: DateTime.parse(json["created_at"]),
-        // updatedAt: DateTime.parse(json["updated_at"]),
       );
 
   Map<String, dynamic> toMap() => {
@@ -140,14 +148,26 @@ class OrderResponseItem {
         "created_at": created_at,
         "updated_at": updated_at,
       };
-  // Map<String, dynamic> toLocalMap() => {
-  //       "id": id,
-  //       "name": name,
-  //       "email": email,
-  //       "phone": phone,
-  //       "address": address,
-  //       "project_id": project_id,
-  //     };
+}
+
+class OrderItem {
+  final int productId;
+  final int quantity;
+  final Product product;
+
+  OrderItem({
+    required this.productId,
+    required this.quantity,
+    required this.product,
+  });
+
+  factory OrderItem.fromJson(Map<String, dynamic> json) {
+    return OrderItem(
+        productId: json['product_id'],
+        quantity: json['quantity'],
+        // product: Product.fromJson(json['product']),
+        product: Product.fromMap(json['product']));
+  }
 }
 
 // {

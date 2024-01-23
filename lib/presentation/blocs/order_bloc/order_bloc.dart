@@ -35,5 +35,10 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         emit(OrderState.error(e.toString()));
       }
     });
+
+    //started
+    on<_Started>((event, emit) {
+      emit(const _Initial());
+    });
   }
 }

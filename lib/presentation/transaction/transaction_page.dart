@@ -502,9 +502,13 @@ class _TransactionPageState extends State<TransactionPage> {
                 log(">>> blocbuilder error : $message");
               },
               success: (orderResponseModel) {
-                print(
-                    ">>> blocbuilder sukses : ${orderResponseModel.toMap()}");
-                    PaymentSuccessDialog();
+                print(">>> blocbuilder sukses : ${orderResponseModel.toMap()}");
+                Future.delayed(Duration.zero, () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => const PaymentSuccessDialog(),
+                  );
+                });
               },
             );
 

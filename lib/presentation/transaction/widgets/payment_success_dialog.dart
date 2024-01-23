@@ -4,8 +4,10 @@ import 'package:laundry_app/core/componets/buttons.dart';
 import 'package:laundry_app/core/constants/variables.dart';
 import 'package:laundry_app/core/extensions/date_time_ext.dart';
 import 'package:laundry_app/core/extensions/double_ext.dart';
+import 'package:laundry_app/data/data/cwb_print.dart';
 import 'package:laundry_app/presentation/blocs/order_bloc/order_bloc.dart';
 import 'package:laundry_app/presentation/home/home_page.dart';
+import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 
 class PaymentSuccessDialog extends StatelessWidget {
   const PaymentSuccessDialog({super.key});
@@ -17,8 +19,14 @@ class PaymentSuccessDialog extends StatelessWidget {
       title: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Center(child: Image.asset(Variables.doneIcon)),
-          const SizedBox(height: 24),
+          Center(
+            child: SizedBox(
+              width: MediaQuery.sizeOf(context).width / 2,
+              height: MediaQuery.sizeOf(context).height / 7,
+              child: Image.asset(Variables.doneIcon),
+            ),
+          ),
+          SizedBox(height: MediaQuery.sizeOf(context).height / 60),
           const Text(
             'Pembayaran telah sukses dilakukan',
             textAlign: TextAlign.center,
@@ -49,7 +57,7 @@ class PaymentSuccessDialog extends StatelessWidget {
                   ),
                   const Divider(height: 36.0),
                   _LabelValue(
-                    label: 'TOTAL PEMBELIAN',
+                    label: 'TOTAL TAGIHAN',
                     value: orderResponseModel.data.total_price.currencyFormatRp,
                   ),
                   const Divider(height: 36.0),
@@ -73,11 +81,15 @@ class PaymentSuccessDialog extends StatelessWidget {
                       Flexible(
                         child: Button.filled(
                           onPressed: () {
-                            // context
-                            //     .read<OrderBloc>()
-                            //     .add(const OrderEvent.started());
+                            context
+                                .read<OrderBloc>()
+                                .add(const OrderEvent.started());
                             // context.pushReplacement(const DashboardPage());
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage() ,));
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const HomePage(),
+                                ));
                           },
                           label: 'Selesai',
                           fontSize: 13,
@@ -87,7 +99,16 @@ class PaymentSuccessDialog extends StatelessWidget {
                       Flexible(
                         child: Button.outlined(
                           onPressed: () async {
-                            // final ticket = await CwbPrint.instance.bluetoothStart();
+                            final printValue =
+                                await CwbPrint.instance.printOrder(
+                              [],
+                              orderResponseModel.data.total_quantity,
+                              orderResponseModel.data.total_price,
+                              orderResponseModel.data.payment_method,
+                              orderResponseModel.data.amount_payment,
+                              orderResponseModel.data.cashier_name,
+                            );
+                            await PrintBluetoothThermal.writeBytes(printValue);
                             // final result =
                             //     await PrintBluetoothThermal.writeBytes(ticket);
                           },
@@ -127,7 +148,7 @@ class _LabelValue extends StatelessWidget {
           label,
           style: const TextStyle(),
         ),
-       const SizedBox(height: 5),
+        const SizedBox(height: 5),
         Text(
           value,
           style: const TextStyle(

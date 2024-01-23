@@ -10,6 +10,8 @@ import 'package:laundry_app/core/extensions/string_ext.dart';
 import 'package:laundry_app/data/models/request/order_request_model.dart';
 import 'package:laundry_app/data/models/response/product_response_model.dart';
 import 'package:laundry_app/presentation/blocs/order_bloc/order_bloc.dart';
+import 'package:laundry_app/presentation/blocs/qris_bloc/qris_bloc.dart';
+import 'package:laundry_app/presentation/transaction/widgets/payment_qris_dialog.dart';
 
 class DialogPaymentMethodWidget extends StatefulWidget {
   OrderRequestModel orderUser;
@@ -25,19 +27,10 @@ class DialogPaymentMethodWidget extends StatefulWidget {
 }
 
 class _DialogPaymentMethodWidgetState extends State<DialogPaymentMethodWidget> {
-  // double _amountPayment = 0.0;
-
   TextEditingController amountPaymentController = TextEditingController();
 
   @override
   void initState() {
-    // amountPaymentController.text = widget.orderUser.totalPrice.toString();
-
-    // mergeOrderItem(widget.orderUser.orderItems);
-
-    for (var element in widget.orderUser.orderItems.toList()) {
-      log(">>> element : ${element.toMap()}");
-    }
     filterOutZeroQuantity();
 
     super.initState();
@@ -50,23 +43,6 @@ class _DialogPaymentMethodWidgetState extends State<DialogPaymentMethodWidget> {
     widget.orderUser.orderItems = [];
     widget.orderUser.orderItems.addAll(filteredOrderItems);
   }
-
-  // mergeOrderItem(List<OrderItem> data) {
-  //   Set<OrderItem> uniqueProducts = data.map((item) {
-  //     return OrderItem(
-  //       product: Product(
-  //         name: item.product.name,
-  //         price: item.product.price,
-  //         working_time: item.product.working_time,
-  //         category: item.product.category,
-  //         image: item.product.image,
-  //       ),
-  //     );
-  //   }).toSet();
-
-  //   widget.orderUser.orderItems = [];
-  //   widget.orderUser.orderItems.addAll(uniqueProducts);
-  // }
 
   @override
   void dispose() {
@@ -104,15 +80,30 @@ class _DialogPaymentMethodWidgetState extends State<DialogPaymentMethodWidget> {
                 Flexible(
                   flex: 1,
                   child: Button.filled(
+                    label: "QRIS",
                     color: (widget.orderUser.paymentMethod == "qris")
                         ? AppColors.yellow.withOpacity(.8)
                         : Colors.transparent,
                     onPressed: () {
                       setState(() {
+                        // String orderId =
+                        //     DateTime.now().millisecondsSinceEpoch.toString();
+                        // context.read<QrisBloc>().add(QrisEvent.generateQRCode(
+                        //       orderId,
+                        //       10000,
+                        //     ));
+
                         widget.orderUser.paymentMethod = "qris";
+                        Future.delayed(Duration.zero, () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => PaymentQrisDialog(
+                              price: 10000,
+                            ),
+                          );
+                        });
                       });
                     },
-                    label: "QRIS",
                   ),
                 ),
               ],
@@ -165,10 +156,6 @@ class _DialogPaymentMethodWidgetState extends State<DialogPaymentMethodWidget> {
               onPressed: () {
                 DateTime transactionTime = DateTime.now();
                 widget.orderUser.transactionTime = transactionTime.toString();
-                // print(">> oooo : ${amountPaymentController.text}");
-                // widget.orderUser.amountPayment =
-                //     amountPaymentController.text.toDoubleFromText;
-                // log(">>> : result : ${widget.orderUser.toMap()}");
                 BlocProvider.of<OrderBloc>(context)
                     .add(OrderEvent.addOrder(widget.orderUser));
                 Navigator.pop(context);

@@ -617,15 +617,9 @@ class _TransactionPageState extends State<TransactionPage> {
                       child: TextButton(
                         child: const Text("Proses"),
                         onPressed: () async {
-                          // print("${orderUser?.toMap()}");
-                          // _showSimpleDialog();
                           showDialog(
                             context: context,
                             builder: (context) {
-                              // for (var element in orderUser!.orderItems.toList()) {
-                              //   log(">>> a : ${element.product.toMap()}");
-                              // }
-                              // log(">>> proses: ${orderUser?.orderItems.toList()}");
                               return DialogPaymentMethodWidget(
                                   orderUser: orderUser!);
                             },

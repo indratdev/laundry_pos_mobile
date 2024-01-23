@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:laundry_app/presentation/blocs/customer_bloc/customer_bloc.dart';
 import 'package:laundry_app/presentation/blocs/product_bloc/product_bloc.dart';
 import 'package:laundry_app/presentation/customers/customers_page.dart';
+import 'package:laundry_app/presentation/settings/pages/management_printer/manage_printer_page.dart';
 import 'package:laundry_app/presentation/settings/pages/management_product/manage_product_page.dart';
 import 'package:laundry_app/presentation/settings/settings_page.dart';
 import 'package:laundry_app/presentation/transaction/transaction_page.dart';
@@ -76,7 +77,8 @@ class Menus {
           onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const ManageProductPage()))),
+                  builder: (context) => const ManagePrinterPage()))),
+                  
     ];
   }
 }

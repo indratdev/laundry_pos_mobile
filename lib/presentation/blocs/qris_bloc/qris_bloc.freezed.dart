@@ -19,21 +19,22 @@ mixin _$QrisEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String orderId, int grossAmount) generateQRCode,
+    required TResult Function(String orderId, double grossAmount)
+        generateQRCode,
     required TResult Function(String orderId) checkPaymentStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String orderId, int grossAmount)? generateQRCode,
+    TResult? Function(String orderId, double grossAmount)? generateQRCode,
     TResult? Function(String orderId)? checkPaymentStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String orderId, int grossAmount)? generateQRCode,
+    TResult Function(String orderId, double grossAmount)? generateQRCode,
     TResult Function(String orderId)? checkPaymentStatus,
     required TResult orElse(),
   }) =>
@@ -118,7 +119,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String orderId, int grossAmount) generateQRCode,
+    required TResult Function(String orderId, double grossAmount)
+        generateQRCode,
     required TResult Function(String orderId) checkPaymentStatus,
   }) {
     return started();
@@ -128,7 +130,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String orderId, int grossAmount)? generateQRCode,
+    TResult? Function(String orderId, double grossAmount)? generateQRCode,
     TResult? Function(String orderId)? checkPaymentStatus,
   }) {
     return started?.call();
@@ -138,7 +140,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String orderId, int grossAmount)? generateQRCode,
+    TResult Function(String orderId, double grossAmount)? generateQRCode,
     TResult Function(String orderId)? checkPaymentStatus,
     required TResult orElse(),
   }) {
@@ -193,7 +195,7 @@ abstract class _$$GenerateQRCodeImplCopyWith<$Res> {
           $Res Function(_$GenerateQRCodeImpl) then) =
       __$$GenerateQRCodeImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String orderId, int grossAmount});
+  $Res call({String orderId, double grossAmount});
 }
 
 /// @nodoc
@@ -218,7 +220,7 @@ class __$$GenerateQRCodeImplCopyWithImpl<$Res>
       null == grossAmount
           ? _value.grossAmount
           : grossAmount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ));
   }
 }
@@ -231,7 +233,7 @@ class _$GenerateQRCodeImpl implements _GenerateQRCode {
   @override
   final String orderId;
   @override
-  final int grossAmount;
+  final double grossAmount;
 
   @override
   String toString() {
@@ -262,7 +264,8 @@ class _$GenerateQRCodeImpl implements _GenerateQRCode {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String orderId, int grossAmount) generateQRCode,
+    required TResult Function(String orderId, double grossAmount)
+        generateQRCode,
     required TResult Function(String orderId) checkPaymentStatus,
   }) {
     return generateQRCode(orderId, grossAmount);
@@ -272,7 +275,7 @@ class _$GenerateQRCodeImpl implements _GenerateQRCode {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String orderId, int grossAmount)? generateQRCode,
+    TResult? Function(String orderId, double grossAmount)? generateQRCode,
     TResult? Function(String orderId)? checkPaymentStatus,
   }) {
     return generateQRCode?.call(orderId, grossAmount);
@@ -282,7 +285,7 @@ class _$GenerateQRCodeImpl implements _GenerateQRCode {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String orderId, int grossAmount)? generateQRCode,
+    TResult Function(String orderId, double grossAmount)? generateQRCode,
     TResult Function(String orderId)? checkPaymentStatus,
     required TResult orElse(),
   }) {
@@ -328,11 +331,11 @@ class _$GenerateQRCodeImpl implements _GenerateQRCode {
 }
 
 abstract class _GenerateQRCode implements QrisEvent {
-  const factory _GenerateQRCode(final String orderId, final int grossAmount) =
-      _$GenerateQRCodeImpl;
+  const factory _GenerateQRCode(
+      final String orderId, final double grossAmount) = _$GenerateQRCodeImpl;
 
   String get orderId;
-  int get grossAmount;
+  double get grossAmount;
   @JsonKey(ignore: true)
   _$$GenerateQRCodeImplCopyWith<_$GenerateQRCodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -404,7 +407,8 @@ class _$CheckPaymentStatusImpl implements _CheckPaymentStatus {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String orderId, int grossAmount) generateQRCode,
+    required TResult Function(String orderId, double grossAmount)
+        generateQRCode,
     required TResult Function(String orderId) checkPaymentStatus,
   }) {
     return checkPaymentStatus(orderId);
@@ -414,7 +418,7 @@ class _$CheckPaymentStatusImpl implements _CheckPaymentStatus {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String orderId, int grossAmount)? generateQRCode,
+    TResult? Function(String orderId, double grossAmount)? generateQRCode,
     TResult? Function(String orderId)? checkPaymentStatus,
   }) {
     return checkPaymentStatus?.call(orderId);
@@ -424,7 +428,7 @@ class _$CheckPaymentStatusImpl implements _CheckPaymentStatus {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String orderId, int grossAmount)? generateQRCode,
+    TResult Function(String orderId, double grossAmount)? generateQRCode,
     TResult Function(String orderId)? checkPaymentStatus,
     required TResult orElse(),
   }) {

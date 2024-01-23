@@ -12,7 +12,7 @@ import 'package:laundry_app/presentation/blocs/qris_bloc/qris_bloc.dart';
 import 'package:laundry_app/presentation/transaction/widgets/payment_success_dialog.dart';
 
 class PaymentQrisDialog extends StatefulWidget {
-  final int price;
+  final double price;
   const PaymentQrisDialog({
     Key? key,
     required this.price,
@@ -59,154 +59,95 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
             ),
           ),
           const SpaceHeight(6.0),
-          // BlocBuilder<OrderBloc, OrderState>(
-          //   builder: (context, state) {
-          //     print(">> OrderBloc : ${state}");
-          //     return state.maybeWhen(orElse: () {
-          //       return const Center(
-          //         child: CircularProgressIndicator(),
-          //       );
-          //     }, success: (orderResponseModel) {
-          //       return Container(
-          //         width: context.deviceWidth,
-          //         padding: const EdgeInsets.all(14.0),
-          //         decoration: const BoxDecoration(
-          //           borderRadius: BorderRadius.all(Radius.circular(20.0)),
-          //           color: AppColors.white,
-          //         ),
-          //         child: Column(
-          //           mainAxisSize: MainAxisSize.min,
-          //           children: [
-          //             BlocListener<QrisBloc, QrisState>(
-          //               listener: (context, state) {
-          //                 print(">> QrisBloc : ${state}");
-          //                 state.maybeWhen(orElse: () {
-          //                   return;
-          //                 }, qrisResponse: (data) {
-          //                   const onSec = Duration(seconds: 5);
-          //                   timer = Timer.periodic(onSec, (timer) {
-          //                     context
-          //                         .read<QrisBloc>()
-          //                         .add(QrisEvent.checkPaymentStatus(
-          //                           orderId,
-          //                         ));
-          //                   });
-          //                 }, success: (message) {
-          //                   timer?.cancel();
-          //                   // final orderModel = OrderModel(
-          //                   //     paymentMethod: paymentMethod,
-          //                   //     nominalBayar: total,
-          //                   //     orders: data,
-          //                   //     totalQuantity: qty,
-          //                   //     totalPrice: total,
-          //                   //     idKasir: idKasir,
-          //                   //     namaKasir: namaKasir,
-          //                   //     transactionTime:
-          //                   //         DateFormat('yyyy-MM-ddTHH:mm:ss')
-          //                   //             .format(DateTime.now()),
-          //                   //     isSync: false);
-
-          //                   // ProductLocalDatasource.instance
-          //                   //     .saveOrder(orderModel);
-          //                   context.pop();
-          //                   showDialog(
-          //                     context: context,
-          //                     builder: (context) =>
-          //                         const PaymentSuccessDialog(),
-          //                   );
-          //                 });
-          //               },
-          BlocListener<OrderBloc, OrderState>(
-            listener: (context, state) {
-              // TODO: implement listener
-            },
-            child: Container(
-              width: context.deviceWidth,
-              padding: const EdgeInsets.all(14.0),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                color: AppColors.white,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  BlocConsumer<QrisBloc, QrisState>(
-                    listener: (context, state) {
-                      state.maybeWhen(
-                        orElse: () {
-                          return;
-                        },
-                        qrisResponse: (qrisResponseModel) {
-                          const onSec = Duration(seconds: 5);
-                          timer = Timer.periodic(onSec, (timer) {
-                            context
-                                .read<QrisBloc>()
-                                .add(QrisEvent.checkPaymentStatus(
-                                  orderId,
-                                ));
-                          });
-                        },
-                        success: (result) {
-                          // ini belum
-                          // Future.delayed(Duration.zero, () {
-                          //   showDialog(
-                          //     context: context,
-                          //     builder: (context) => PaymentSuccessDialog(
-
-                          //     ),
-                          //   );
-                          // });
-                        },
-                      );
-                    },
-                    builder: (context, state) {
-                      print(">>> state QrisBloc : $state");
-                      return state.maybeWhen(
-                        orElse: () {
-                          return const SizedBox();
-                        },
-                        qrisResponse: (data) {
-                          print(">> view : ${data.actions!.first.url}");
-                          return Container(
-                            width: 256.0,
-                            height: 256.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20.0),
-                              color: Colors.white,
-                            ),
-                            child: Center(
-                              child: Image.network(
-                                data.actions!.first.url!,
-                              ),
+          Container(
+            width: context.deviceWidth,
+            padding: const EdgeInsets.all(14.0),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              color: AppColors.white,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                BlocConsumer<QrisBloc, QrisState>(
+                  listener: (context, state) {
+                    print(">>> state listener QrisBloc : $state ");
+                    state.maybeWhen(
+                      orElse: () {
+                        return;
+                      },
+                      qrisResponse: (qrisResponseModel) {
+                        const onSec = Duration(seconds: 5);
+                        timer = Timer.periodic(onSec, (timer) {
+                          context
+                              .read<QrisBloc>()
+                              .add(QrisEvent.checkPaymentStatus(
+                                orderId,
+                              ));
+                        });
+                      },
+                      success: (result) {
+                        timer?.cancel();
+                       
+                        Future.delayed(Duration.zero, () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => PaymentSuccessDialog(
+                              paymentMethod: PaymentMethod.qris,
+                              qrisResult: result,
                             ),
                           );
-                        },
-                        loading: () {
-                          return Container(
-                            width: 256.0,
-                            height: 256.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20.0),
-                              color: Colors.white,
+                        });
+                      },
+                    );
+                  },
+                  builder: (context, state) {
+                    print(">>> state QrisBloc : $state");
+                    return state.maybeWhen(
+                      orElse: () {
+                        return const SizedBox();
+                      },
+                      qrisResponse: (data) {
+                        print(">> view : ${data.actions!.first.url}");
+                        return Container(
+                          width: 256.0,
+                          height: 256.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            color: Colors.white,
+                          ),
+                          child: Center(
+                            child: Image.network(
+                              data.actions!.first.url!,
                             ),
-                            child: const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          );
-                        },
-                      );
-                    },
+                          ),
+                        );
+                      },
+                      loading: () {
+                        return Container(
+                          width: 256.0,
+                          height: 256.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            color: Colors.white,
+                          ),
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+                const SpaceHeight(5.0),
+                const Text(
+                  'Scan QRIS untuk melakukan pembayaran',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
                   ),
-                  const SpaceHeight(5.0),
-                  const Text(
-                    'Scan QRIS untuk melakukan pembayaran',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],

@@ -148,61 +148,56 @@ class _TransactionConfirmationPageState
               ),
             ),
             // detail order
-            Container(
-              // color: Colors.blue,
-              // height: MediaQuery.sizeOf(context).height / 2,
-              // margin: EdgeInsets.symmetric(horizontal: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ListView.builder(
-                    padding: EdgeInsets.zero,
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: displayedOrderItem.length,
-                    itemBuilder: (context, index) {
-                      OrderItem item = displayedOrderItem[index];
-
-                      return Row(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 8),
-                            // color: Colors.red,
-                            width: MediaQuery.sizeOf(context).width / 2,
-                            child: Text(item.product.name),
-                          ),
-                          SizedBox(
-                            // color: Colors.yellow,
-                            width: MediaQuery.sizeOf(context).width / 8,
-                            child: Text("x ${item.quantity}"),
-                          ),
-                          // const Spacer(),
-                          Expanded(
-                            child: Container(
-                                alignment: Alignment.centerRight,
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                // color: Colors.yellow,
-                                // width: MediaQuery.sizeOf(context).width / 4,
-                                child: Text(priceProduct(item.quantity,
-                                        item.product.price.toDouble())
-                                    .currencyFormatRp)),
-                          )
-                        ],
-                      );
-                    },
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListView.builder(
+                  padding: EdgeInsets.zero,
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: displayedOrderItem.length,
+                  itemBuilder: (context, index) {
+                    OrderItem item = displayedOrderItem[index];
+            
+                    return Row(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 8),
+                          // color: Colors.red,
+                          width: MediaQuery.sizeOf(context).width / 2,
+                          child: Text(item.product.name),
+                        ),
+                        SizedBox(
+                          // color: Colors.yellow,
+                          width: MediaQuery.sizeOf(context).width / 8,
+                          child: Text("x ${item.quantity}"),
+                        ),
+                        // const Spacer(),
+                        Expanded(
+                          child: Container(
+                              alignment: Alignment.centerRight,
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              // color: Colors.yellow,
+                              // width: MediaQuery.sizeOf(context).width / 4,
+                              child: Text(priceProduct(item.quantity,
+                                      item.product.price.toDouble())
+                                  .currencyFormatRp)),
+                        )
+                      ],
+                    );
+                  },
+                ),
+                const Divider(color: AppColors.disabled),
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text(
+                    "Total :  ${grandTotal(widget.orderUser!.orderItems).currencyFormatRp}",
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(fontWeight: FontWeight.w700),
                   ),
-                  const Divider(color: AppColors.disabled),
-                  Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Text(
-                      "Total :  ${grandTotal(widget.orderUser!.orderItems).currencyFormatRp}",
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(fontWeight: FontWeight.w700),
-                    ),
-                  )
-                ],
-              ),
+                )
+              ],
             )
           ],
         ),

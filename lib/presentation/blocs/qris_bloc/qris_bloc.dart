@@ -16,8 +16,9 @@ class QrisBloc extends Bloc<QrisEvent, QrisState> {
   QrisBloc(this.midtransRemoteDatasource) : super(_Initial()) {
     on<_GenerateQRCode>((event, emit) async {
       emit(const QrisState.loading());
-      final response = await midtransRemoteDatasource.generateQRCode(
-          event.orderId, event.grossAmount);
+      // final response = await midtransRemoteDatasource.generateQRCode(
+      //     event.orderId, event.grossAmount);
+       final response = await midtransRemoteDatasource.generateQRCode(event.orderId, event.grossAmount);
 
       log(">>> data qris  : ${response.actions?.first.url}");
 

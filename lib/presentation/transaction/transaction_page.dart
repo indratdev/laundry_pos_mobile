@@ -506,7 +506,7 @@ class _TransactionPageState extends State<TransactionPage> {
                 Future.delayed(Duration.zero, () {
                   showDialog(
                     context: context,
-                    builder: (context) => const PaymentSuccessDialog(),
+                    builder: (context) =>  PaymentSuccessDialog(paymentMethod: PaymentMethod.cash),
                   );
                 });
               },

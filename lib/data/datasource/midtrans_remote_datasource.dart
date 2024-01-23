@@ -19,7 +19,7 @@ class MidtransRemoteDatasource {
   }
 
   Future<QrisResponseModel> generateQRCode(
-      String orderId, int grossAmount) async {
+      String orderId, double grossAmount) async {
     final serverKey = await AuthLocalDatasource().getMitransServerKey();
     final headers = {
       'Accept': 'application/json',

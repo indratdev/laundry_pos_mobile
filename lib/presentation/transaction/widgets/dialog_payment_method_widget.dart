@@ -50,120 +50,134 @@ class _DialogPaymentMethodWidgetState extends State<DialogPaymentMethodWidget> {
     super.dispose();
   }
 
+  double removeCurrency(String value) {
+    return value.replaceAll('Rp. ', '').replaceAll('.', '').toDoubleFromText;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //  margin: const EdgeInsets.symmetric(horizontal: 25),
-      child: SimpleDialog(
-        title: const Text('Metode Pembayaran'),
-        children: <Widget>[
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 25),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: Button.filled(
-                    color: (widget.orderUser.paymentMethod == "cash")
-                        ? AppColors.yellow.withOpacity(.8)
-                        : Colors.transparent,
-                    onPressed: () {
-                      setState(() {
-                        widget.orderUser.paymentMethod = "cash";
-                      });
-                    },
-                    label: "Tunai",
-                  ),
+    return SimpleDialog(
+      title: const Text('Metode Pembayaran'),
+      children: <Widget>[
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 25),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Flexible(
+                flex: 1,
+                child: Button.filled(
+                  color: (widget.orderUser.paymentMethod == "cash")
+                      ? AppColors.yellow.withOpacity(.8)
+                      : Colors.transparent,
+                  onPressed: () {
+                    setState(() {
+                      widget.orderUser.paymentMethod = "cash";
+                    });
+                  },
+                  label: "Tunai",
                 ),
-                const SizedBox(width: 15),
-                Flexible(
-                  flex: 1,
-                  child: Button.filled(
-                    label: "QRIS",
-                    color: (widget.orderUser.paymentMethod == "qris")
-                        ? AppColors.yellow.withOpacity(.8)
-                        : Colors.transparent,
-                    onPressed: () {
-                      setState(() {
-                        // String orderId =
-                        //     DateTime.now().millisecondsSinceEpoch.toString();
-                        // context.read<QrisBloc>().add(QrisEvent.generateQRCode(
-                        //       orderId,
-                        //       10000,
-                        //     ));
-
-                        widget.orderUser.paymentMethod = "qris";
-                        Future.delayed(Duration.zero, () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => PaymentQrisDialog(
-                              price: 10000,
-                            ),
-                          );
-                        });
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-          (widget.orderUser.paymentMethod == "cash")
-              ? Column(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(25, 12, 25, 10),
-                      child: TextField(
-                        controller: amountPaymentController,
-                        onChanged: (value) {
-                          final int priceValue = value.toIntegerFromText;
-                          amountPaymentController.text =
-                              priceValue.currencyFormatRp;
-                          amountPaymentController.selection =
-                              TextSelection.fromPosition(TextPosition(
-                                  offset: amountPaymentController.text.length));
-                        },
-                        decoration: InputDecoration(
-                          labelText:
-                              widget.orderUser.totalPrice.currencyFormatRp,
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(
-                              color: Colors.grey,
-                            ),
+              ),
+              const SizedBox(width: 15),
+              Flexible(
+                flex: 1,
+                child: Button.filled(
+                  label: "QRIS",
+                  color: (widget.orderUser.paymentMethod == "qris")
+                      ? AppColors.yellow.withOpacity(.8)
+                      : Colors.transparent,
+                  onPressed: () {
+                    setState(() {
+                      // String orderId =
+                      //     DateTime.now().millisecondsSinceEpoch.toString();
+                      // context.read<QrisBloc>().add(QrisEvent.generateQRCode(
+                      //       orderId,
+                      //       10000,
+                      //     ));
+    
+                      widget.orderUser.paymentMethod = "qris";
+                      Future.delayed(Duration.zero, () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => PaymentQrisDialog(
+                            price: widget.orderUser.totalPrice,
                           ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(
-                              color: Colors.grey,
-                            ),
+                        );
+                      });
+                    });
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+        (widget.orderUser.paymentMethod == "cash")
+            ? Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(25, 12, 25, 10),
+                    child: TextField(
+                      controller: amountPaymentController,
+                      // onSubmitted: (value) {
+                      //   print(">>> onSubmitted : ${value}");
+                      //    widget.orderUser.amountPayment = double.tryParse(value) ?? 0.0;
+                      // },
+    
+                      onChanged: (value) {
+                        print(">>> onChanged value : ${value}");
+                        final int priceValue = value.toIntegerFromText;
+                        amountPaymentController.text =
+                            priceValue.currencyFormatRp;
+                        amountPaymentController.selection =
+                            TextSelection.fromPosition(TextPosition(
+                                offset: amountPaymentController.text.length));
+                      },
+                      decoration: InputDecoration(
+                        labelText:
+                            widget.orderUser.totalPrice.currencyFormatRp,
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(
+                            color: Colors.grey,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(
+                            color: Colors.grey,
                           ),
                         ),
                       ),
-                    )
-                  ],
-                )
-              : const SizedBox(),
-          Container(
-            margin: const EdgeInsets.fromLTRB(25, 20, 25, 0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Button.filled(
-              label: "Proses",
-              onPressed: () {
-                DateTime transactionTime = DateTime.now();
-                widget.orderUser.transactionTime = transactionTime.toString();
-                BlocProvider.of<OrderBloc>(context)
-                    .add(OrderEvent.addOrder(widget.orderUser));
-                Navigator.pop(context);
-              },
-            ),
-          )
-        ],
-      ),
+                    ),
+                  )
+                ],
+              )
+            : const SizedBox(),
+        Container(
+          margin: const EdgeInsets.fromLTRB(25, 20, 25, 0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Button.filled(
+            label: "Proses",
+            onPressed: () {
+              DateTime transactionTime = DateTime.now();
+              widget.orderUser.transactionTime = transactionTime.toString();
+              widget.orderUser.amountPayment =
+                  removeCurrency(amountPaymentController.text);
+              BlocProvider.of<OrderBloc>(context)
+                  .add(OrderEvent.addOrder(widget.orderUser));
+              Navigator.pop(context);
+    
+              
+    
+              // print(widget.orderUser.amountPayment);
+              // print(removeCurrency(amountPaymentController.text));
+            },
+          ),
+        )
+      ],
     );
   }
 }

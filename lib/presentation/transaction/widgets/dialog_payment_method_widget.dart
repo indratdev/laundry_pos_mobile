@@ -216,6 +216,7 @@ class _DialogPaymentMethodWidgetState extends State<DialogPaymentMethodWidget> {
                           context: context,
                           builder: (context) => PaymentQrisDialog(
                             price: widget.orderUser.totalPrice,
+                            order: widget.orderUser,
                           ),
                         );
                       });

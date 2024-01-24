@@ -3,11 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:laundry_app/core/componets/buttons.dart';
 import 'package:laundry_app/core/constants/variables.dart';
 import 'package:laundry_app/core/extensions/double_ext.dart';
-import 'package:laundry_app/core/extensions/string_ext.dart';
+
 import 'package:laundry_app/data/data/cwb_print.dart';
+import 'package:laundry_app/data/models/request/order_request_model.dart'
+    as order_request;
 import 'package:laundry_app/data/models/response/order_response_model.dart';
 import 'package:laundry_app/data/models/response/qris_status_response_model.dart';
 import 'package:laundry_app/presentation/blocs/order_bloc/order_bloc.dart';
+import 'package:laundry_app/presentation/blocs/qris_bloc/qris_bloc.dart';
 import 'package:laundry_app/presentation/home/home_page.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 
@@ -19,11 +22,13 @@ enum PaymentMethod {
 class PaymentSuccessDialog extends StatelessWidget {
   PaymentMethod paymentMethod;
   QrisStatusResponseModel? qrisResult;
+  order_request.OrderRequestModel? order;
 
   PaymentSuccessDialog({
     super.key,
     required this.paymentMethod,
     this.qrisResult,
+    this.order,
   });
 
   @override
@@ -156,7 +161,8 @@ class PaymentSuccessDialog extends StatelessWidget {
                 Divider(height: heightDivider),
                 _LabelValue(
                   label: 'NOMINAL BAYAR',
-                  value: double.parse(qrisResult?.grossAmount ?? "0").currencyFormatRp,
+                  value: double.parse(qrisResult?.grossAmount ?? "0")
+                      .currencyFormatRp,
                 ),
                 Divider(height: heightDivider),
                 _LabelValue(
@@ -173,6 +179,9 @@ class PaymentSuccessDialog extends StatelessWidget {
                           context
                               .read<OrderBloc>()
                               .add(const OrderEvent.started());
+                          context
+                              .read<QrisBloc>()
+                              .add(const QrisEvent.started());
                           // context.pushReplacement(const DashboardPage());
                           Navigator.pushReplacement(
                               context,
@@ -188,9 +197,10 @@ class PaymentSuccessDialog extends StatelessWidget {
                     Flexible(
                       child: Button.outlined(
                         onPressed: () async {
-                          final printValue = await CwbPrint.instance.printOrder(
-                            [],
-                            1,
+                          final printValue =
+                              await CwbPrint.instance.printOrderQris(
+                            order?.orderItems ?? [],
+                            order?.totalQuantity ?? 0,
                             double.tryParse(qrisResult?.grossAmount ?? "0") ??
                                 0.0,
                             qrisResult?.paymentType?.toUpperCase() ?? "",
@@ -199,8 +209,6 @@ class PaymentSuccessDialog extends StatelessWidget {
                             "",
                           );
                           await PrintBluetoothThermal.writeBytes(printValue);
-                          // final result =
-                          //     await PrintBluetoothThermal.writeBytes(ticket);
                         },
                         label: 'Print',
                         // icon: Assets.icons.print.svg(),

@@ -7,15 +7,19 @@ import 'package:intl/intl.dart';
 import 'package:laundry_app/core/componets/spaces.dart';
 import 'package:laundry_app/core/constants/colors.dart';
 import 'package:laundry_app/core/extensions/build_context_ext.dart';
+import 'package:laundry_app/data/models/request/order_request_model.dart';
 import 'package:laundry_app/presentation/blocs/order_bloc/order_bloc.dart';
 import 'package:laundry_app/presentation/blocs/qris_bloc/qris_bloc.dart';
 import 'package:laundry_app/presentation/transaction/widgets/payment_success_dialog.dart';
 
 class PaymentQrisDialog extends StatefulWidget {
   final double price;
+  final OrderRequestModel? order;
+
   const PaymentQrisDialog({
     Key? key,
     required this.price,
+    this.order,
   }) : super(key: key);
 
   @override
@@ -36,6 +40,7 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
     super.initState();
   }
 
+  
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -95,6 +100,7 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
                             builder: (context) => PaymentSuccessDialog(
                               paymentMethod: PaymentMethod.qris,
                               qrisResult: result,
+                              order: widget.order,
                             ),
                           );
                         });

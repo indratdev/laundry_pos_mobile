@@ -122,7 +122,10 @@ class _HomePageState extends State<HomePage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      Text("Masuk"),
+                                      Text(
+                                        "Masuk",
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                       Text("1"),
                                     ],
                                   ),
@@ -160,7 +163,10 @@ class _HomePageState extends State<HomePage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      Text("Selesai"),
+                                      Text(
+                                        "Selesai",
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                       Text("3"),
                                     ],
                                   ),
@@ -197,7 +203,10 @@ class _HomePageState extends State<HomePage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      Text("Terlambat"),
+                                      Text(
+                                        "Terlambat",
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                       Text("2"),
                                     ],
                                   ),

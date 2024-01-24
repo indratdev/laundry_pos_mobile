@@ -1,11 +1,14 @@
 class Variables {
   // static const String baseUrl = 'http://127.0.0.1:8000';
-  static const String baseUrl = 'http://192.168.59.225';
+  // static const String baseUrl = 'http://192.168.59.225';
   // static const String baseUrl = 'http://192.168.137.1';
-  // static const String baseUrl = 'http://192.168.1.7';
+  static const String baseUrl = 'http://192.168.1.7';
 
   static const String imageBaseUrl = '$baseUrl/storage/products/';
   static const String appName = 'Laundry App';
+  static const String branchName = 'Putri Laundry';
+  static const String branchAddress = "Jalan Raya Condet No.15A";
+
 
   static const serviceIcon = "assets/icons/serviceIcon.png";
   static const historyIcon = "assets/icons/historyIcon.png";

@@ -1,14 +1,9 @@
 import 'package:esc_pos_utils_plus/esc_pos_utils_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:laundry_app/core/componets/spaces.dart';
-import 'package:laundry_app/core/constants/colors.dart';
-import 'package:laundry_app/core/extensions/build_context_ext.dart';
-import 'package:laundry_app/presentation/settings/pages/widgets/menu_printer_button.dart';
-import 'package:laundry_app/presentation/settings/pages/widgets/menu_printer_content.dart';
+import 'package:laundry_app/presentation/settings/pages/management_printer/widgets/menu_printer_button.dart';
+import 'package:laundry_app/presentation/settings/pages/management_printer/widgets/menu_printer_content.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
-
-
 
 
 class ManagePrinterPage extends StatefulWidget {
@@ -237,10 +232,10 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
         padding: const EdgeInsets.all(24.0),
         children: [
           Container(
-            width: context.deviceWidth / 2,
+            width: MediaQuery.sizeOf(context).width / 2,
             padding: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
-              color: AppColors.card,
+              color: Colors.amber,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -259,9 +254,8 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
                   label: 'Disconnect',
                   onPressed: () {
                     selectedIndex = 1;
-                    setState(() {
-                      disconnect();
-                    });
+                    disconnect();
+                    setState(() {});
                   },
                   isActive: selectedIndex == 1,
                 ),
@@ -269,16 +263,15 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
                   label: 'Test',
                   onPressed: () {
                     selectedIndex = 2;
-                    setState(() {
-                      testTicket();
-                    });
+                    printTest();
+                    setState(() {});
                   },
                   isActive: selectedIndex == 2,
                 ),
               ],
             ),
           ),
-          const SpaceHeight(34.0),
+          const SizedBox(height: 34),
           _Body(
             // selectedIndex: selectedIndex,
             macName: macName,
@@ -319,17 +312,16 @@ class _Body extends StatelessWidget {
         padding: const EdgeInsets.all(24.0),
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(color: AppColors.card, width: 2),
+          border: Border.all(color: Colors.amber, width: 2),
           borderRadius: BorderRadius.circular(6),
         ),
         child: ListView.separated(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: datas.length,
-          separatorBuilder: (context, index) => const SpaceHeight(16.0),
+          separatorBuilder: (context, index) => const SizedBox(height: 16),
           itemBuilder: (context, index) => InkWell(
             onTap: () {
-              print(">>> aaa : ${datas[index].macAdress}");
               clickHandler(datas[index].macAdress);
             },
             child: MenuPrinterContent(

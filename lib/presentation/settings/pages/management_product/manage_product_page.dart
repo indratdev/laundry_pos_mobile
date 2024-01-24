@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:laundry_app/core/constants/colors.dart';
 import 'package:laundry_app/presentation/blocs/product_bloc/product_bloc.dart';
+import 'package:laundry_app/presentation/settings/pages/management_product/add_product_page.dart';
 import 'package:laundry_app/presentation/settings/pages/management_product/menu_product_item.dart';
 
 import '../../../../core/componets/spaces.dart';
@@ -53,11 +54,11 @@ class _ManageProductPageState extends State<ManageProductPage> {
           ),
         ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   backgroundColor: AppColors.yellow,
-      //   onPressed: () {},
-      //   child: const Icon(Icons.add),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.yellow,
+        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => AddProductPage(),)),
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

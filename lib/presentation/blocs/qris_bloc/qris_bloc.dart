@@ -36,5 +36,10 @@ class QrisBloc extends Bloc<QrisEvent, QrisState> {
         emit(QrisState.success(response));
       }
     });
+
+    //started
+    on<_Started>((event, emit) {
+      emit(const _Initial());
+    });
   }
 }

@@ -5,9 +5,9 @@ import 'package:laundry_app/presentation/blocs/product_bloc/product_bloc.dart';
 import 'package:laundry_app/presentation/customers/customers_page.dart';
 import 'package:laundry_app/presentation/settings/pages/management_printer/manage_printer_page.dart';
 import 'package:laundry_app/presentation/settings/pages/management_product/manage_product_page.dart';
+import 'package:laundry_app/presentation/settings/pages/server_key/server_key_page.dart';
 import 'package:laundry_app/presentation/settings/settings_page.dart';
 import 'package:laundry_app/presentation/transaction/transaction_page.dart';
-import 'package:laundry_app/presentation/transaction/transaction_page_old.dart';
 
 import '../../core/constants/variables.dart';
 import '../../presentation/home/widgets/service_menu_widget.dart';
@@ -47,7 +47,7 @@ class Menus {
         },
       ),
       ServiceMenuWidget(title: "Riwayat", iconName: Variables.historyIcon),
-      ServiceMenuWidget(title: "Laporan", iconName: Variables.reportsIcon),
+      // ServiceMenuWidget(title: "Laporan", iconName: Variables.reportsIcon),
       ServiceMenuWidget(
           title: "Kelola",
           iconName: Variables.settingsIcon,
@@ -72,13 +72,25 @@ class Menus {
         },
       ),
       ServiceMenuWidget(
-          title: "Kelola Printer",
-          iconName: Variables.managePrinterIcon,
-          onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const ManagePrinterPage()))),
-                  
+        title: "Kelola Printer",
+        iconName: Variables.managePrinterIcon,
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ManagePrinterPage(),
+          ),
+        ),
+      ),
+      ServiceMenuWidget(
+        title: "Server Key",
+        iconName: Variables.serverKeyIcon,
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ServerKeyPage(),
+          ),
+        ),
+      ),
     ];
   }
 }

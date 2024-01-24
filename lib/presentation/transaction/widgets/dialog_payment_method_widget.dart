@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:laundry_app/core/componets/buttons.dart';
@@ -8,9 +6,9 @@ import 'package:laundry_app/core/extensions/double_ext.dart';
 import 'package:laundry_app/core/extensions/int_ext.dart';
 import 'package:laundry_app/core/extensions/string_ext.dart';
 import 'package:laundry_app/data/models/request/order_request_model.dart';
-import 'package:laundry_app/data/models/response/product_response_model.dart';
+
 import 'package:laundry_app/presentation/blocs/order_bloc/order_bloc.dart';
-import 'package:laundry_app/presentation/blocs/qris_bloc/qris_bloc.dart';
+
 import 'package:laundry_app/presentation/transaction/widgets/payment_qris_dialog.dart';
 
 class DialogPaymentMethodWidget extends StatefulWidget {
@@ -47,6 +45,7 @@ class _DialogPaymentMethodWidgetState extends State<DialogPaymentMethodWidget> {
   @override
   void dispose() {
     amountPaymentController.dispose();
+
     super.dispose();
   }
 
@@ -57,57 +56,59 @@ class _DialogPaymentMethodWidgetState extends State<DialogPaymentMethodWidget> {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      title: const Text('Metode Pembayaran'),
+      title: (widget.orderUser.paymentMethod == "cash")
+          ? const Text('Nominal Pembayaran')
+          : const Align(alignment: Alignment.center, child: Text('Scan QRIS')),
       children: <Widget>[
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 25),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Flexible(
-                flex: 1,
-                child: Button.filled(
-                  color: (widget.orderUser.paymentMethod == "cash")
-                      ? AppColors.yellow.withOpacity(.8)
-                      : Colors.transparent,
-                  onPressed: () {
-                    setState(() {
-                      widget.orderUser.paymentMethod = "cash";
-                    });
-                  },
-                  label: "Tunai",
-                ),
-              ),
-              const SizedBox(width: 15),
-              Flexible(
-                flex: 1,
-                child: Button.filled(
-                  label: "QRIS",
-                  color: (widget.orderUser.paymentMethod == "qris")
-                      ? AppColors.yellow.withOpacity(.8)
-                      : Colors.transparent,
-                  onPressed: () {
-                    setState(() {
-                      // String orderId =
-                      //     DateTime.now().millisecondsSinceEpoch.toString();
-                      // context.read<QrisBloc>().add(QrisEvent.generateQRCode(
-                      //       orderId,
-                      //       10000,
-                      //     ));
-    
-                      widget.orderUser.paymentMethod = "qris";
-                      Future.delayed(Duration.zero, () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => PaymentQrisDialog(
-                            price: widget.orderUser.totalPrice,
-                          ),
-                        );
-                      });
-                    });
-                  },
-                ),
-              ),
+              // Flexible(
+              //   flex: 1,
+              //   child: Button.filled(
+              //     color: (widget.orderUser.paymentMethod == "cash")
+              //         ? AppColors.yellow.withOpacity(.8)
+              //         : Colors.transparent,
+              //     onPressed: () {
+              //       setState(() {
+              //         widget.orderUser.paymentMethod = "cash";
+              //       });
+              //     },
+              //     label: "Tunai",
+              //   ),
+              // ),
+              // const SizedBox(width: 15),
+              // Flexible(
+              //   flex: 1,
+              //   child: Button.filled(
+              //     label: "QRIS",
+              //     color: (widget.orderUser.paymentMethod == "qris")
+              //         ? AppColors.yellow.withOpacity(.8)
+              //         : Colors.transparent,
+              //     onPressed: () {
+              //       setState(() {
+              //         // String orderId =
+              //         //     DateTime.now().millisecondsSinceEpoch.toString();
+              //         // context.read<QrisBloc>().add(QrisEvent.generateQRCode(
+              //         //       orderId,
+              //         //       10000,
+              //         //     ));
+
+              //         widget.orderUser.paymentMethod = "qris";
+              //         Future.delayed(Duration.zero, () {
+              //           showDialog(
+              //             context: context,
+              //             builder: (context) => PaymentQrisDialog(
+              //               price: widget.orderUser.totalPrice,
+              //             ),
+              //           );
+              //         });
+              //       });
+              //     },
+              //   ),
+              // ),
             ],
           ),
         ),
@@ -115,16 +116,10 @@ class _DialogPaymentMethodWidgetState extends State<DialogPaymentMethodWidget> {
             ? Column(
                 children: [
                   Container(
-                    margin: const EdgeInsets.fromLTRB(25, 12, 25, 10),
+                    margin: const EdgeInsets.fromLTRB(25, 4, 25, 10),
                     child: TextField(
                       controller: amountPaymentController,
-                      // onSubmitted: (value) {
-                      //   print(">>> onSubmitted : ${value}");
-                      //    widget.orderUser.amountPayment = double.tryParse(value) ?? 0.0;
-                      // },
-    
                       onChanged: (value) {
-                        print(">>> onChanged value : ${value}");
                         final int priceValue = value.toIntegerFromText;
                         amountPaymentController.text =
                             priceValue.currencyFormatRp;
@@ -133,8 +128,7 @@ class _DialogPaymentMethodWidgetState extends State<DialogPaymentMethodWidget> {
                                 offset: amountPaymentController.text.length));
                       },
                       decoration: InputDecoration(
-                        labelText:
-                            widget.orderUser.totalPrice.currencyFormatRp,
+                        labelText: widget.orderUser.totalPrice.currencyFormatRp,
                         floatingLabelBehavior: FloatingLabelBehavior.never,
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -153,29 +147,81 @@ class _DialogPaymentMethodWidgetState extends State<DialogPaymentMethodWidget> {
                   )
                 ],
               )
-            : const SizedBox(),
+            : SizedBox(),
+        // Container(
+        //     margin: const EdgeInsets.fromLTRB(25, 4, 25, 10),
+        //     child: Button.filled(
+        //       label: "QRIS",
+        //       color: (widget.orderUser.paymentMethod == "qris")
+        //           ? AppColors.yellow.withOpacity(.8)
+        //           : Colors.transparent,
+        //       onPressed: () {
+        //         setState(() {
+        //           // String orderId =
+        //           //     DateTime.now().millisecondsSinceEpoch.toString();
+        //           // context.read<QrisBloc>().add(QrisEvent.generateQRCode(
+        //           //       orderId,
+        //           //       10000,
+        //           //     ));
+
+        //           widget.orderUser.paymentMethod = "qris";
+        //           Future.delayed(Duration.zero, () {
+        //             showDialog(
+        //               context: context,
+        //               builder: (context) => PaymentQrisDialog(
+        //                 price: widget.orderUser.totalPrice,
+        //               ),
+        //             );
+        //           });
+        //         });
+        //       },
+        //     ),
+        //   ),
         Container(
           margin: const EdgeInsets.fromLTRB(25, 20, 25, 0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Button.filled(
-            label: "Proses",
-            onPressed: () {
-              DateTime transactionTime = DateTime.now();
-              widget.orderUser.transactionTime = transactionTime.toString();
-              widget.orderUser.amountPayment =
-                  removeCurrency(amountPaymentController.text);
-              BlocProvider.of<OrderBloc>(context)
-                  .add(OrderEvent.addOrder(widget.orderUser));
-              Navigator.pop(context);
-    
-              
-    
-              // print(widget.orderUser.amountPayment);
-              // print(removeCurrency(amountPaymentController.text));
-            },
-          ),
+          child: (widget.orderUser.paymentMethod == "cash")
+              ? Button.filled(
+                  label: "Proses",
+                  onPressed: () {
+                    DateTime transactionTime = DateTime.now();
+                    widget.orderUser.transactionTime =
+                        transactionTime.toString();
+                    widget.orderUser.amountPayment =
+                        removeCurrency(amountPaymentController.text);
+                    BlocProvider.of<OrderBloc>(context)
+                        .add(OrderEvent.addOrder(widget.orderUser));
+                    Navigator.pop(context);
+
+                    // print(widget.orderUser.amountPayment);
+                    // print(removeCurrency(amountPaymentController.text));
+                  },
+                )
+              : Button.filled(
+                  label: "Generate QRIS",
+                  onPressed: () {
+                    setState(() {
+                      // String orderId =
+                      //     DateTime.now().millisecondsSinceEpoch.toString();
+                      // context.read<QrisBloc>().add(QrisEvent.generateQRCode(
+                      //       orderId,
+                      //       10000,
+                      //     ));
+
+                      widget.orderUser.paymentMethod = "qris";
+                      Future.delayed(Duration.zero, () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => PaymentQrisDialog(
+                            price: widget.orderUser.totalPrice,
+                          ),
+                        );
+                      });
+                    });
+                  },
+                ),
         )
       ],
     );

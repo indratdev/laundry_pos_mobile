@@ -1,13 +1,17 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import 'package:laundry_app/core/constants/variables.dart';
-import 'package:laundry_app/data/datasource/add_product_response_model.dart';
-import 'package:laundry_app/data/models/request/product_request_model.dart';
+import 'package:laundry_app/data/datasource/add_customer_response_model.dart';
+import 'package:laundry_app/data/models/request/customer_request_model.dart';
 import 'package:laundry_app/data/models/response/customer_response_model.dart';
 
 import 'auth_local_datasource.dart';
 
 class CustomerRemoteDatasource {
+  final urlCustomer = "${Variables.baseUrl}/api/customers";
+
   Future<Either<String, CustomerResponseModel>> getAllCustomer() async {
     final authData = await AuthLocalDatasource().getAuthData();
     final response = await http.get(
@@ -24,27 +28,32 @@ class CustomerRemoteDatasource {
     }
   }
 
-  // Future<Either<String, AddProductResponseModel>> addProduct(
-  //     ProductRequestModel productRequestModel) async {
-  //   final authData = await AuthLocalDatasource().getAuthData();
-  //   final Map<String, String> headers = {
-  //     'Authorization': 'Bearer ${authData.token}',
-  //   };
-  //   var request = http.MultipartRequest(
-  //       'POST', Uri.parse('${Variables.baseUrl}/api/products'));
-  //   request.fields.addAll(productRequestModel.toMap());
-  //   request.files.add(await http.MultipartFile.fromPath(
-  //       'image', productRequestModel.image.path));
-  //   request.headers.addAll(headers);
+  Future<Either<String, AddCustomerResponseModel>> addCustomer(
+      CustomerRequestModel customerRequestModel) async {
+    final authData = await AuthLocalDatasource().getAuthData();
 
-  //   http.StreamedResponse response = await request.send();
+    final headers = {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+      'authorization': "Bearer ${authData.token}"
+    };
 
-  //   final String body = await response.stream.bytesToString();
+    print(">>> url ${urlCustomer}");
 
-  //   if (response.statusCode == 201) {
-  //     return right(AddProductResponseModel.fromJson(body));
-  //   } else {
-  //     return left(body);
-  //   }
-  // }
+    final response = await http.post(
+      Uri.parse(urlCustomer),
+      headers: headers,
+      body: jsonEncode(customerRequestModel.toMap()),
+    );
+
+    print(response.body);
+
+    if (response.statusCode >= 200 && response.statusCode <= 299) {
+      return right(AddCustomerResponseModel.fromJson(response.body));
+    } else {
+      print("Error");
+      print(response.body);
+      return throw left(Exception('Failed to add customer'));
+    }
+  }
 }

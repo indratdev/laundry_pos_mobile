@@ -43,11 +43,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          appBarTheme: AppBarTheme(
-            backgroundColor: AppColors.yellow,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: AppColors.middleBlueColor,
           ),
         ),
-        home: LoginPage(),
+        home: const LoginPage(),
       ),
     );
   }

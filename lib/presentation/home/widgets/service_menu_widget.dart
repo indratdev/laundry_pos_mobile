@@ -7,7 +7,7 @@ class ServiceMenuWidget extends StatelessWidget {
   final String iconName;
   final Function()? onTap;
 
-  ServiceMenuWidget({
+  const ServiceMenuWidget({
     super.key,
     required this.title,
     required this.iconName,

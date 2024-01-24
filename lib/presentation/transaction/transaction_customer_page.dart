@@ -28,7 +28,6 @@ class _TransactionCustomerPageState extends State<TransactionCustomerPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<CustomerBloc, CustomerState>(
       builder: (context, state) {
-        print(">>>> state ");
         return state.maybeWhen(
           orElse: () {
             return const Center(
@@ -36,32 +35,41 @@ class _TransactionCustomerPageState extends State<TransactionCustomerPage> {
             );
           },
           success: (customers) {
-            return ListView.builder(
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              itemCount: customers.length,
-              itemBuilder: (context, index) {
-                Customer customer = customers[index];
-                return InkWell(
-                  onTap: () {
-                    setState(() {
-                      widget.selectedCustomer = customer;
-                      _selectCustomer(customer);
-                    });
-                  },
-                  child: ListTile(
-                    dense: false,
-                    title: Text(customer.name),
-                    subtitle: Text(customer.address ?? ""),
-                    trailing: (widget.selectedCustomer == customer)
-                        ? const Icon(Icons.check)
-                        : null,
-                    tileColor: (widget.selectedCustomer == customer)
-                        ? AppColors.yellow.withOpacity(.2)
-                        : null,
-                  ),
-                );
-              },
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: ListView.separated(
+                separatorBuilder: (context, index) => const Divider(
+                  height: 1,
+                  thickness: 1,
+                  color: AppColors.grey,
+                ),
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                itemCount: customers.length,
+                itemBuilder: (context, index) {
+                  Customer customer = customers[index];
+                  return InkWell(
+                    onTap: () {
+                      setState(() {
+                        widget.selectedCustomer = customer;
+                        _selectCustomer(customer);
+                      });
+                    },
+                    child: ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      dense: false,
+                      title: Text(customer.name),
+                      subtitle: Text(customer.address ?? ""),
+                      trailing: (widget.selectedCustomer == customer)
+                          ? const Icon(Icons.check)
+                          : null,
+                      tileColor: (widget.selectedCustomer == customer)
+                          ? AppColors.yellow.withOpacity(.2)
+                          : null,
+                    ),
+                  );
+                },
+              ),
             );
           },
         );

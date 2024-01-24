@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:laundry_app/core/constants/colors.dart';
+import 'package:laundry_app/core/constants/variables.dart';
 import 'package:laundry_app/presentation/home/home_page.dart';
 
 import '../../../core/componets/buttons.dart';
@@ -26,128 +28,137 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  Future<String> loadImage() async {
+    await Future.delayed(Duration(seconds: 2));
+    return 'Image loaded successfully';
+  }
+
+  //
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        padding: const EdgeInsets.all(16.0),
-        children: [
-          const SpaceHeight(80.0),
-          // Padding(
-          //     padding: const EdgeInsets.symmetric(horizontal: 130.0),
-          //     child: Image.asset(
-          //       Assets.images.logo.path,
-          //       width: 100,
-          //       height: 100,
-          //     )),
-          const SpaceHeight(24.0),
-          const Center(
-            child: Text(
-              "Laundry POS APP",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                color: Colors.black,
-              ),
-            ),
-          ),
-          const SpaceHeight(8.0),
-          const Center(
-            child: Text(
-              "Masuk untuk kasir",
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                color: Colors.grey,
-              ),
-            ),
-          ),
-          const SpaceHeight(40.0),
-          CustomTextField(
-            controller: usernameController,
-            label: 'Username',
-          ),
-          const SpaceHeight(12.0),
-          CustomTextField(
-            controller: passwordController,
-            label: 'Password',
-            obscureText: true,
-          ),
-          const SpaceHeight(24.0),
-          // Button.filled(onPressed: (){}, label: 'Masuk',)
-          BlocListener<LoginBloc, LoginState>(
-            listener: (context, state) {
-              print(">>> state BlocListener : $state");
-              state.maybeWhen(
-                orElse: () {},
-                success: (authResponseModel) {
-                  AuthLocalDatasource().saveAuthData(authResponseModel);
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HomePage(),
-                    ),
-                  );
-                },
-                error: (message) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(message),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
-                },
-              );
-            },
-            child: BlocBuilder<LoginBloc, LoginState>(
-              builder: (context, state) {
-                print(">>> state BlocBuilder : $state");
-                state.maybeWhen(
-                  orElse: () {
-                    // return Button.filled(
-                    //   onPressed: () {
-                    //     print(">>> print");
-                    //     context.read<LoginBloc>().add(
-                    //           LoginEvent.login(
-                    //             email: usernameController.text,
-                    //             password: passwordController.text,
-                    //           ),
-                    //         );
-                    //   },
-                    //   label: 'Masuk',
-                    // );
-                  },
-                  loading: () {
-                    return const Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    );
-                  },
-                  error: (message) {
-                    return Center(child: Container(child: Text("Gagal")),);
-                  },
-                );
-                return Button.filled(
-                  onPressed: () {
-                    print(">>> print2");
-                    // context.read<LoginBloc>().add(
-                    //       LoginEvent.login(
-                    //         email: usernameController.text,
-                    //         password: passwordController.text,
-                    //       ),
-                    //     );
-                    context.read<LoginBloc>().add(
-                          const LoginEvent.login(
-                            email: 'indrat@mail.com',
-                            password: '123123',
+      body: FutureBuilder(
+        future: loadImage(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            // Display a loading indicator while the image is loading
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            // Display an error message if the image fails to load
+            return const Text('Error loading image');
+          } else {
+            return Column(
+              children: [
+                Image.asset(
+                  Variables.bannerImage,
+                  width: double.infinity,
+                  height: MediaQuery.sizeOf(context).height / 3,
+                  fit: BoxFit.cover,
+                ),
+                Expanded(
+                  child: ListView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.all(16.0),
+                    children: [
+                      const SpaceHeight(12.0),
+                      Center(
+                        child: Text(
+                          "Laundry POS APP",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: MediaQuery.sizeOf(context).width / 14,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black,
                           ),
-                        );
-                  },
-                  label: 'Masuk',
-                );
-              },
-            ),
-          ),
-        ],
+                        ),
+                      ),
+                      const SpaceHeight(8.0),
+                      Center(
+                        child: Text(
+                          "Masuk untuk kasir",
+                          style: TextStyle(
+                            fontSize: MediaQuery.sizeOf(context).width / 25,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                      const SpaceHeight(20.0),
+                      CustomTextField(
+                        controller: usernameController,
+                        label: 'Username',
+                      ),
+                      const SpaceHeight(12.0),
+                      CustomTextField(
+                        controller: passwordController,
+                        label: 'Password',
+                        obscureText: true,
+                      ),
+                      const SpaceHeight(24.0),
+                      BlocListener<LoginBloc, LoginState>(
+                        listener: (context, state) {
+                          state.maybeWhen(
+                            orElse: () {},
+                            success: (authResponseModel) {
+                              print(
+                                  ">>> authResponseModel : ${authResponseModel.user.toMap()}");
+                              AuthLocalDatasource()
+                                  .saveAuthData(authResponseModel);
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const HomePage(),
+                                ),
+                              );
+                            },
+                            error: (message) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(message),
+                                  backgroundColor: AppColors.red,
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        child: BlocBuilder<LoginBloc, LoginState>(
+                          builder: (context, state) {
+                            return state.maybeWhen(orElse: () {
+                              return Button.filled(
+                                color: AppColors.hardBlueColor,
+                                onPressed: () {
+                                  // context.read<LoginBloc>().add(
+                                  //       LoginEvent.login(
+                                  //         email: usernameController.text,
+                                  //         password: passwordController.text,
+                                  //       ),
+                                  //     );
+                                  context.read<LoginBloc>().add(
+                                        const LoginEvent.login(
+                                          email: 'indrat@mail.com',
+                                          password: '123123',
+                                        ),
+                                      );
+                                },
+                                label: 'Masuk',
+                              );
+                            }, loading: () {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          }
+        },
       ),
     );
   }

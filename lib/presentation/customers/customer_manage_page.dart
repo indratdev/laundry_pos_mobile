@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:laundry_app/core/constants/colors.dart';
+import 'package:laundry_app/data/models/request/customer_request_model.dart';
+import 'package:laundry_app/presentation/blocs/customer_bloc/customer_bloc.dart';
+import 'package:laundry_app/presentation/home/home_page.dart';
+import 'package:laundry_app/presentation/widgets/custom_dialogs.dart';
 
 class CustomerManagePage extends StatefulWidget {
   bool isNew;
@@ -48,113 +53,185 @@ class _CustomerManagePageState extends State<CustomerManagePage> {
       body: SingleChildScrollView(
         child: Form(
           key: _formKeyCustomer,
-          child: Container(
-            margin: EdgeInsets.all(24),
-            child: Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(bottom: 14),
-                  child: TextFormField(
-                    controller: nameController,
-                    decoration: const InputDecoration(
-                      hintText: "Ketikan nama anda",
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.blueLight),
-                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.black),
-                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                      ),
-                      contentPadding: EdgeInsets.all(10),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 14),
-                  child: TextFormField(
-                    controller: emailController,
-                    decoration: const InputDecoration(
-                      hintText: "Ketikan email anda",
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.blueLight),
-                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.black),
-                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                      ),
-                      contentPadding: EdgeInsets.all(10),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 14),
-                  child: TextFormField(
-                    controller: phoneController,
-                    decoration: const InputDecoration(
-                      hintText: "Ketikan telepon anda",
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.blueLight),
-                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.black),
-                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                      ),
-                      contentPadding: EdgeInsets.all(10),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 24),
-                  child: TextFormField(
-                    controller: addressController,
-                    // expands: true,
-                    maxLines: 8,
-                    decoration: const InputDecoration(
-                      hintText: "Ketikan alamat anda",
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.blueLight),
-                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.black),
-                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                      ),
-                      contentPadding: EdgeInsets.all(10),
-                    ),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+          child: BlocBuilder<CustomerBloc, CustomerState>(
+            builder: (context, state) {
+              state.maybeWhen(
+                  orElse: () => const CircularProgressIndicator.adaptive(),
+                  loading: () => const CircularProgressIndicator.adaptive(),
+                  successAddCustomer: (customer) {
+                    Future.delayed(Duration.zero, () {
+                      return CustomDialogs().showMessageAlert(
+                          context,
+                          "Data Pelanggan Berhasil ditambahkan",
+                          StatusImage.success,
+                          () => Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HomePage(),
+                              )));
+                    });
+                  });
+              return Container(
+                margin: const EdgeInsets.all(24),
+                child: Column(
                   children: [
-                    SizedBox(
-                      width: (MediaQuery.sizeOf(context).width / 2) - 50,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          clearData();
-                          Navigator.pop(context);
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 14),
+                      child: TextFormField(
+                        controller: nameController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Harap diisi !';
+                          }
+                          return null;
                         },
-                        child: const Text(
-                          "Batal",
-                          style: TextStyle(
-                            color: Colors.red,
+                        decoration: const InputDecoration(
+                          labelText: "Ketikan nama anda",
+                          // hintText: "Ketikan nama anda",
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.blueLight),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
                           ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.black),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
+                          ),
+                          contentPadding: EdgeInsets.all(10),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: (MediaQuery.sizeOf(context).width / 2) - 50,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: const Text("Simpan"),
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 14),
+                      child: TextFormField(
+                        controller: emailController,
+                        decoration: const InputDecoration(
+                          labelText: "Ketikan email anda",
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.blueLight),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.black),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
+                          ),
+                          contentPadding: EdgeInsets.all(10),
+                        ),
                       ),
                     ),
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 14),
+                      child: TextFormField(
+                        controller: phoneController,
+                        decoration: const InputDecoration(
+                          labelText: "Ketikan telepon anda",
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.blueLight),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.black),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
+                          ),
+                          contentPadding: EdgeInsets.all(10),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 24),
+                      child: TextFormField(
+                        controller: addressController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Harap diisi !';
+                          }
+                          return null;
+                        },
+                        // expands: true,
+                        maxLines: 8,
+                        decoration: const InputDecoration(
+                          labelText: "Ketikan alamat anda",
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.blueLight),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.black),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
+                          ),
+                          contentPadding: EdgeInsets.all(10),
+                        ),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SizedBox(
+                          width: (MediaQuery.sizeOf(context).width / 3),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              clearData();
+                              Navigator.pop(context);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            child: const Text(
+                              "Batal",
+                              style: TextStyle(
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              backgroundColor: AppColors.middleBlueColor,
+                            ),
+                            child: const Text(
+                              "Simpan",
+                              style: TextStyle(
+                                color: AppColors.white,
+                              ),
+                            ),
+                            onPressed: () {
+                              if (_formKeyCustomer.currentState!.validate()) {
+                                CustomerRequestModel data =
+                                    CustomerRequestModel(
+                                  name: nameController.text,
+                                  email: emailController.text,
+                                  phone: phoneController.text,
+                                  address: addressController.text,
+                                  project_id: "",
+                                );
+
+                                context
+                                    .read<CustomerBloc>()
+                                    .add(CustomerEvent.addCustomer(data));
+                              }
+                            },
+                          ),
+                        ),
+                      ],
+                    )
                   ],
-                )
-              ],
-            ),
+                ),
+              );
+            },
           ),
         ),
       ),

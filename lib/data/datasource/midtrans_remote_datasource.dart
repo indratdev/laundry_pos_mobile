@@ -9,7 +9,7 @@ class MidtransRemoteDatasource {
   String urlSandBox = "https://api.sandbox.midtrans.com/v2/charge";
   // String urlStatusSandBox =
   //     "https://api.sandbox.midtrans.com/v2/[ORDER_ID]/status";
-  String serverKeySandBox = "SB-Mid-server-eBEW4sxUMQjrWqrGfllsRqE9";
+  // String serverKeySandBox = "SB-Mid-server-eBEW4sxUMQjrWqrGfllsRqE9";
 
   String generateBasicAuthHeader(String serverKey) {
     final base64Credentials = base64Encode(utf8.encode('$serverKey:'));
@@ -24,8 +24,8 @@ class MidtransRemoteDatasource {
     final headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      // 'Authorization': generateBasicAuthHeader(serverKey),
-      'Authorization': generateBasicAuthHeader(serverKeySandBox),
+      'Authorization': generateBasicAuthHeader(serverKey),
+      // 'Authorization': generateBasicAuthHeader(serverKeySandBox),
     };
 
     final body = jsonEncode({
@@ -55,8 +55,8 @@ class MidtransRemoteDatasource {
     final headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': generateBasicAuthHeader(serverKeySandBox),
-      // 'Authorization': generateBasicAuthHeader(serverKey),
+      // 'Authorization': generateBasicAuthHeader(serverKeySandBox),
+      'Authorization': generateBasicAuthHeader(serverKey),
     };
 
     final response = await http.get(

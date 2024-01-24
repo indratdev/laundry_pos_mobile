@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:laundry_app/core/constants/colors.dart';
-import 'package:laundry_app/data/models/response/product_response_model.dart';
 import 'package:laundry_app/presentation/blocs/product_bloc/product_bloc.dart';
 import 'package:laundry_app/presentation/settings/pages/management_product/menu_product_item.dart';
 
 import '../../../../core/componets/spaces.dart';
-import '../../../../data/models/product_category.dart';
-import '../../../../data/models/product_model.dart';
 
 class ManageProductPage extends StatefulWidget {
   const ManageProductPage({super.key});
@@ -17,36 +14,6 @@ class ManageProductPage extends StatefulWidget {
 }
 
 class _ManageProductPageState extends State<ManageProductPage> {
-  // final List<Product> products = [
-  //   Product(
-  //     image: '',
-  //     name: 'Vanila Late Vanila itu',
-  //     category: ProductCategory.kiloan,
-  //     price: 200000,
-  //     working_time: 10,
-  //   ),
-  //   Product(
-  //     image: '',
-  //     name: 'V60',
-  //     category: ProductCategory.satuan,
-  //     price: 1200000,
-  //     stock: 10,
-  //   ),
-  //   Product(
-  //     image: '',
-  //     name: 'Americano',
-  //     category: ProductCategory.kiloan,
-  //     price: 2100000,
-  //     stock: 10,
-  //   ),
-  //   Product(
-  //     image: '',
-  //     name: 'Cappucino',
-  //     category: ProductCategory.kiloan,
-  //     price: 200000,
-  //     stock: 10,
-  //   ),
-  // ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,29 +49,15 @@ class _ManageProductPageState extends State<ManageProductPage> {
                   ),
                 );
               });
-              // return ListView.separated(
-              //   shrinkWrap: true,
-              //   physics: const NeverScrollableScrollPhysics(),
-              //   itemCount: products.length,
-              //   separatorBuilder: (context, index) => const SpaceHeight(20.0),
-              //   itemBuilder: (context, index) => MenuProductItem(
-              //     data: products[index],
-              //   ),
-              // );
             },
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.yellow,
-        onPressed: () {},
-        // onPressed: () {
-        //   Navigator.push(context, MaterialPageRoute(builder: (context) {
-        //     return const AddProductPage();
-        //   }));
-        // },
-        child: const Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: AppColors.yellow,
+      //   onPressed: () {},
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 }

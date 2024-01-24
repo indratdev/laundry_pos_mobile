@@ -60,15 +60,19 @@ class _CustomersPageState extends State<CustomersPage> {
                           children: [
                             ListTile(
                               title: Text(
-                                "CUSTOMER ID : ${customer.id}",
+                                // "CUSTOMER ID : ${customer.id}",
+                                "${customer.name} | ${customer.email} ",
                                 style: const TextStyle(
                                     fontWeight: FontWeight.w500),
                               ),
                               subtitle: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("${customer.name} | ${customer.email} "),
-                                  Text(customer.address ?? ""),
+                                  Text(
+                                    customer.address ?? "",
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Text(customer.phone ?? ""),
                                 ],
                               ),
                               trailing:

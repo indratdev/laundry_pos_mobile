@@ -925,7 +925,9 @@ mixin _$CustomerState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Customer> products) success,
+    required TResult Function(List<Customer> customer) success,
+    required TResult Function(AddCustomerResponseModel customer)
+        successAddCustomer,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -933,7 +935,8 @@ mixin _$CustomerState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Customer> products)? success,
+    TResult? Function(List<Customer> customer)? success,
+    TResult? Function(AddCustomerResponseModel customer)? successAddCustomer,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -941,7 +944,8 @@ mixin _$CustomerState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Customer> products)? success,
+    TResult Function(List<Customer> customer)? success,
+    TResult Function(AddCustomerResponseModel customer)? successAddCustomer,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -951,6 +955,7 @@ mixin _$CustomerState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessAddCustomer value) successAddCustomer,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -959,6 +964,7 @@ mixin _$CustomerState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_SuccessAddCustomer value)? successAddCustomer,
     TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -967,6 +973,7 @@ mixin _$CustomerState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessAddCustomer value)? successAddCustomer,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -1031,7 +1038,9 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Customer> products) success,
+    required TResult Function(List<Customer> customer) success,
+    required TResult Function(AddCustomerResponseModel customer)
+        successAddCustomer,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -1042,7 +1051,8 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Customer> products)? success,
+    TResult? Function(List<Customer> customer)? success,
+    TResult? Function(AddCustomerResponseModel customer)? successAddCustomer,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -1053,7 +1063,8 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Customer> products)? success,
+    TResult Function(List<Customer> customer)? success,
+    TResult Function(AddCustomerResponseModel customer)? successAddCustomer,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -1069,6 +1080,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessAddCustomer value) successAddCustomer,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -1080,6 +1092,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_SuccessAddCustomer value)? successAddCustomer,
     TResult? Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -1091,6 +1104,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessAddCustomer value)? successAddCustomer,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -1145,7 +1159,9 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Customer> products) success,
+    required TResult Function(List<Customer> customer) success,
+    required TResult Function(AddCustomerResponseModel customer)
+        successAddCustomer,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -1156,7 +1172,8 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Customer> products)? success,
+    TResult? Function(List<Customer> customer)? success,
+    TResult? Function(AddCustomerResponseModel customer)? successAddCustomer,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -1167,7 +1184,8 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Customer> products)? success,
+    TResult Function(List<Customer> customer)? success,
+    TResult Function(AddCustomerResponseModel customer)? successAddCustomer,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -1183,6 +1201,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessAddCustomer value) successAddCustomer,
     required TResult Function(_Error value) error,
   }) {
     return loading(this);
@@ -1194,6 +1213,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_SuccessAddCustomer value)? successAddCustomer,
     TResult? Function(_Error value)? error,
   }) {
     return loading?.call(this);
@@ -1205,6 +1225,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessAddCustomer value)? successAddCustomer,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -1225,7 +1246,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Customer> products});
+  $Res call({List<Customer> customer});
 }
 
 /// @nodoc
@@ -1239,12 +1260,12 @@ class __$$SuccessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? products = null,
+    Object? customer = null,
   }) {
     return _then(_$SuccessImpl(
-      null == products
-          ? _value._products
-          : products // ignore: cast_nullable_to_non_nullable
+      null == customer
+          ? _value._customer
+          : customer // ignore: cast_nullable_to_non_nullable
               as List<Customer>,
     ));
   }
@@ -1253,19 +1274,19 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(final List<Customer> products) : _products = products;
+  const _$SuccessImpl(final List<Customer> customer) : _customer = customer;
 
-  final List<Customer> _products;
+  final List<Customer> _customer;
   @override
-  List<Customer> get products {
-    if (_products is EqualUnmodifiableListView) return _products;
+  List<Customer> get customer {
+    if (_customer is EqualUnmodifiableListView) return _customer;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_products);
+    return EqualUnmodifiableListView(_customer);
   }
 
   @override
   String toString() {
-    return 'CustomerState.success(products: $products)';
+    return 'CustomerState.success(customer: $customer)';
   }
 
   @override
@@ -1273,12 +1294,12 @@ class _$SuccessImpl implements _Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            const DeepCollectionEquality().equals(other._products, _products));
+            const DeepCollectionEquality().equals(other._customer, _customer));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_products));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_customer));
 
   @JsonKey(ignore: true)
   @override
@@ -1291,10 +1312,12 @@ class _$SuccessImpl implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Customer> products) success,
+    required TResult Function(List<Customer> customer) success,
+    required TResult Function(AddCustomerResponseModel customer)
+        successAddCustomer,
     required TResult Function(String message) error,
   }) {
-    return success(products);
+    return success(customer);
   }
 
   @override
@@ -1302,10 +1325,11 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Customer> products)? success,
+    TResult? Function(List<Customer> customer)? success,
+    TResult? Function(AddCustomerResponseModel customer)? successAddCustomer,
     TResult? Function(String message)? error,
   }) {
-    return success?.call(products);
+    return success?.call(customer);
   }
 
   @override
@@ -1313,12 +1337,13 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Customer> products)? success,
+    TResult Function(List<Customer> customer)? success,
+    TResult Function(AddCustomerResponseModel customer)? successAddCustomer,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(products);
+      return success(customer);
     }
     return orElse();
   }
@@ -1329,6 +1354,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessAddCustomer value) successAddCustomer,
     required TResult Function(_Error value) error,
   }) {
     return success(this);
@@ -1340,6 +1366,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_SuccessAddCustomer value)? successAddCustomer,
     TResult? Function(_Error value)? error,
   }) {
     return success?.call(this);
@@ -1351,6 +1378,7 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessAddCustomer value)? successAddCustomer,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -1362,11 +1390,166 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements CustomerState {
-  const factory _Success(final List<Customer> products) = _$SuccessImpl;
+  const factory _Success(final List<Customer> customer) = _$SuccessImpl;
 
-  List<Customer> get products;
+  List<Customer> get customer;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SuccessAddCustomerImplCopyWith<$Res> {
+  factory _$$SuccessAddCustomerImplCopyWith(_$SuccessAddCustomerImpl value,
+          $Res Function(_$SuccessAddCustomerImpl) then) =
+      __$$SuccessAddCustomerImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({AddCustomerResponseModel customer});
+}
+
+/// @nodoc
+class __$$SuccessAddCustomerImplCopyWithImpl<$Res>
+    extends _$CustomerStateCopyWithImpl<$Res, _$SuccessAddCustomerImpl>
+    implements _$$SuccessAddCustomerImplCopyWith<$Res> {
+  __$$SuccessAddCustomerImplCopyWithImpl(_$SuccessAddCustomerImpl _value,
+      $Res Function(_$SuccessAddCustomerImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? customer = null,
+  }) {
+    return _then(_$SuccessAddCustomerImpl(
+      null == customer
+          ? _value.customer
+          : customer // ignore: cast_nullable_to_non_nullable
+              as AddCustomerResponseModel,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SuccessAddCustomerImpl implements _SuccessAddCustomer {
+  const _$SuccessAddCustomerImpl(this.customer);
+
+  @override
+  final AddCustomerResponseModel customer;
+
+  @override
+  String toString() {
+    return 'CustomerState.successAddCustomer(customer: $customer)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessAddCustomerImpl &&
+            (identical(other.customer, customer) ||
+                other.customer == customer));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, customer);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessAddCustomerImplCopyWith<_$SuccessAddCustomerImpl> get copyWith =>
+      __$$SuccessAddCustomerImplCopyWithImpl<_$SuccessAddCustomerImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<Customer> customer) success,
+    required TResult Function(AddCustomerResponseModel customer)
+        successAddCustomer,
+    required TResult Function(String message) error,
+  }) {
+    return successAddCustomer(customer);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<Customer> customer)? success,
+    TResult? Function(AddCustomerResponseModel customer)? successAddCustomer,
+    TResult? Function(String message)? error,
+  }) {
+    return successAddCustomer?.call(customer);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<Customer> customer)? success,
+    TResult Function(AddCustomerResponseModel customer)? successAddCustomer,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (successAddCustomer != null) {
+      return successAddCustomer(customer);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_SuccessAddCustomer value) successAddCustomer,
+    required TResult Function(_Error value) error,
+  }) {
+    return successAddCustomer(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_SuccessAddCustomer value)? successAddCustomer,
+    TResult? Function(_Error value)? error,
+  }) {
+    return successAddCustomer?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_SuccessAddCustomer value)? successAddCustomer,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (successAddCustomer != null) {
+      return successAddCustomer(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SuccessAddCustomer implements CustomerState {
+  const factory _SuccessAddCustomer(final AddCustomerResponseModel customer) =
+      _$SuccessAddCustomerImpl;
+
+  AddCustomerResponseModel get customer;
+  @JsonKey(ignore: true)
+  _$$SuccessAddCustomerImplCopyWith<_$SuccessAddCustomerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1436,7 +1619,9 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Customer> products) success,
+    required TResult Function(List<Customer> customer) success,
+    required TResult Function(AddCustomerResponseModel customer)
+        successAddCustomer,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -1447,7 +1632,8 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Customer> products)? success,
+    TResult? Function(List<Customer> customer)? success,
+    TResult? Function(AddCustomerResponseModel customer)? successAddCustomer,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -1458,7 +1644,8 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Customer> products)? success,
+    TResult Function(List<Customer> customer)? success,
+    TResult Function(AddCustomerResponseModel customer)? successAddCustomer,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -1474,6 +1661,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessAddCustomer value) successAddCustomer,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -1485,6 +1673,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_SuccessAddCustomer value)? successAddCustomer,
     TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -1496,6 +1685,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessAddCustomer value)? successAddCustomer,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

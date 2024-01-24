@@ -18,6 +18,7 @@ class _SettingPageState extends State<SettingPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Setting'),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(14.0),

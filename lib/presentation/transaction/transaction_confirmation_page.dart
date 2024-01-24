@@ -95,111 +95,116 @@ class _TransactionConfirmationPageState
     return Container(
       margin: const EdgeInsets.only(top: 12),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            // pelanggan
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: AppColors.card.withOpacity(1),
-              ),
-              margin: const EdgeInsets.only(bottom: 8),
-              padding: const EdgeInsets.all(14),
-              // color: Colors.amber,
-              // height: MediaQuery.sizeOf(context).height / 6.5,
-              child: ListView(
-                shrinkWrap: true,
-                physics: const AlwaysScrollableScrollPhysics(),
-                padding: EdgeInsets.zero,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Text("Nama Pelanggan"),
-                      Text(widget.selectedCustomer?.name ?? ""),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const Text("Alamat  "),
-                      Text(widget.selectedCustomer?.address ?? ""),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const Text("Telepon  "),
-                      Text(widget.selectedCustomer?.phone ?? ""),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const Text("Email  "),
-                      Text(widget.selectedCustomer?.email ?? ""),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            // detail order
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListView.builder(
-                  padding: EdgeInsets.zero,
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: displayedOrderItem.length,
-                  itemBuilder: (context, index) {
-                    OrderItem item = displayedOrderItem[index];
-            
-                    return Row(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 8),
-                          // color: Colors.red,
-                          width: MediaQuery.sizeOf(context).width / 2,
-                          child: Text(item.product.name),
-                        ),
-                        SizedBox(
-                          // color: Colors.yellow,
-                          width: MediaQuery.sizeOf(context).width / 8,
-                          child: Text("x ${item.quantity}"),
-                        ),
-                        // const Spacer(),
-                        Expanded(
-                          child: Container(
-                              alignment: Alignment.centerRight,
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 8),
-                              // color: Colors.yellow,
-                              // width: MediaQuery.sizeOf(context).width / 4,
-                              child: Text(priceProduct(item.quantity,
-                                      item.product.price.toDouble())
-                                  .currencyFormatRp)),
-                        )
-                      ],
-                    );
-                  },
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+          child: Column(
+            children: [
+              // pelanggan
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: AppColors.card.withOpacity(.8),
                 ),
-                const Divider(color: AppColors.disabled),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Text(
-                    "Total :  ${grandTotal(widget.orderUser!.orderItems).currencyFormatRp}",
-                    textAlign: TextAlign.left,
-                    style: const TextStyle(fontWeight: FontWeight.w700),
-                  ),
-                )
-              ],
-            )
-          ],
+                margin: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.all(14),
+                child: ListView(
+                  shrinkWrap: true,
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Text("Nama Pelanggan"),
+                        Text(widget.selectedCustomer?.name ?? ""),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const Text("Alamat  "),
+                        Text(widget.selectedCustomer?.address ?? ""),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const Text("Telepon  "),
+                        Text(widget.selectedCustomer?.phone ?? ""),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const Text("Email  "),
+                        Text(widget.selectedCustomer?.email ?? ""),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              // detail order
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ListView.builder(
+                      padding: EdgeInsets.zero,
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: displayedOrderItem.length,
+                      itemBuilder: (context, index) {
+                        OrderItem item = displayedOrderItem[index];
+                        String unit =
+                            (item.product.category == "kiloan") ? "Kg" : "pcs";
+
+                        return Row(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 8),
+                              // color: Colors.red,
+                              width: MediaQuery.sizeOf(context).width / 2,
+                              child: Text(item.product.name),
+                            ),
+                            SizedBox(
+                              // color: Colors.yellow,
+                              width: MediaQuery.sizeOf(context).width / 8,
+                              child: Text("x ${item.quantity} $unit"),
+                            ),
+                            // const Spacer(),
+                            Expanded(
+                              child: Container(
+                                  alignment: Alignment.centerRight,
+                                  margin:
+                                      const EdgeInsets.symmetric(horizontal: 8),
+                                  child: Text(priceProduct(
+                                    item.quantity,
+                                    item.product.price.toDouble(),
+                                  ).currencyFormatRp)),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                    const Divider(color: AppColors.disabled),
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text(
+                        "Total :  ${grandTotal(widget.orderUser!.orderItems).currencyFormatRp}",
+                        textAlign: TextAlign.left,
+                        style: const TextStyle(fontWeight: FontWeight.w700),
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

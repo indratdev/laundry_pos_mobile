@@ -1,5 +1,4 @@
-
-
+import 'package:laundry_app/data/models/response/order_response_model.dart';
 import 'package:laundry_app/data/models/response/product_response_model.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -93,12 +92,12 @@ class ProductLocalDatasource {
   //       where: 'id = ?', whereArgs: [id]);
   // }
 
-  //get all orders
-  // Future<List<OrderModel>> getAllOrder() async {
+  // get all orders
+  // Future<OrderResponseModel> getAllOrder() async {
   //   final db = await instance.database;
   //   final result = await db.query('orders', orderBy: 'id DESC');
 
-  //   return result.map((e) => OrderModel.fromLocalMap(e)).toList();
+  //   return result.map((e) => OrderResponseModel.fromJson(e)).toList();
   // }
 
   //get order item by id order

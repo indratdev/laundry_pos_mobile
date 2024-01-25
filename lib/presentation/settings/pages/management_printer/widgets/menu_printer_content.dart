@@ -18,8 +18,9 @@ class MenuPrinterContent extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           width: isSelected ? 3.0 : 1.0,
-          color:
-              isSelected ? AppColors.hardYellow.withOpacity(.8) : AppColors.white,
+          color: isSelected
+              ? AppColors.hardBlueColor.withOpacity(.8)
+              : AppColors.white,
         ),
       ),
       child: ListTile(

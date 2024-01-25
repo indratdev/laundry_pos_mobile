@@ -8,6 +8,7 @@ import 'package:laundry_app/data/datasource/order_remote_datasource.dart';
 import 'package:laundry_app/data/datasource/product_remote_datasource.dart';
 import 'package:laundry_app/presentation/auth/login/login_page.dart';
 import 'package:laundry_app/presentation/blocs/customer_bloc/customer_bloc.dart';
+import 'package:laundry_app/presentation/blocs/history_bloc/history_bloc.dart';
 import 'package:laundry_app/presentation/blocs/login_bloc/login_bloc.dart';
 import 'package:laundry_app/presentation/blocs/order_bloc/order_bloc.dart';
 import 'package:laundry_app/presentation/blocs/product_bloc/product_bloc.dart';
@@ -39,14 +40,19 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => QrisBloc(MidtransRemoteDatasource()),
         ),
+        BlocProvider(
+          create: (context) => HistoryBloc(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          appBarTheme: const AppBarTheme(
-            backgroundColor: AppColors.middleBlueColor,
-          ),
-        ),
+            appBarTheme: const AppBarTheme(
+              backgroundColor: AppColors.middleBlueColor,
+            ),
+            floatingActionButtonTheme: const FloatingActionButtonThemeData(
+              backgroundColor: AppColors.yellow,
+            )),
         home: const LoginPage(),
       ),
     );

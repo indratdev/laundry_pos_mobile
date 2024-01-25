@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:laundry_app/core/constants/colors.dart';
 import 'package:laundry_app/core/constants/variables.dart';
 import 'package:laundry_app/core/extensions/build_context_ext.dart';
 import 'package:laundry_app/data/datasource/auth_local_datasource.dart';
 import 'package:laundry_app/data/models/response/auth_response_model.dart';
+import 'package:laundry_app/presentation/widgets/custom_dialogs.dart';
 
 import '../../data/data/menus.dart';
 
@@ -27,6 +31,14 @@ class _HomePageState extends State<HomePage> {
     return await AuthLocalDatasource().getAuthData();
   }
 
+  signOut() {
+    if (Platform.isAndroid) {
+      SystemNavigator.pop();
+    } else if (Platform.isIOS) {
+      exit(0);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Menus menus = Menus(context: context);
@@ -39,7 +51,10 @@ class _HomePageState extends State<HomePage> {
         title: const Text(Variables.appName),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              CustomDialogs.showConfirmation(
+                  context, "Apakah Anda Yakin Keluar ?", () => signOut());
+            },
             icon: const Icon(
               Icons.logout_outlined,
             ),
@@ -116,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                                     child: const Icon(Icons.edit_note_rounded),
                                   ),
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
@@ -157,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
@@ -197,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                                         color: Colors.red),
                                   ),
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:

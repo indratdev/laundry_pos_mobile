@@ -284,7 +284,7 @@ mixin _$HistoryState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(OrderResponseModel histories) success,
+    required TResult Function(HistoryResponseModel histories) success,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -292,7 +292,7 @@ mixin _$HistoryState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(OrderResponseModel histories)? success,
+    TResult? Function(HistoryResponseModel histories)? success,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -300,7 +300,7 @@ mixin _$HistoryState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(OrderResponseModel histories)? success,
+    TResult Function(HistoryResponseModel histories)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -390,7 +390,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(OrderResponseModel histories) success,
+    required TResult Function(HistoryResponseModel histories) success,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -401,7 +401,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(OrderResponseModel histories)? success,
+    TResult? Function(HistoryResponseModel histories)? success,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -412,7 +412,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(OrderResponseModel histories)? success,
+    TResult Function(HistoryResponseModel histories)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -504,7 +504,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(OrderResponseModel histories) success,
+    required TResult Function(HistoryResponseModel histories) success,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -515,7 +515,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(OrderResponseModel histories)? success,
+    TResult? Function(HistoryResponseModel histories)? success,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -526,7 +526,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(OrderResponseModel histories)? success,
+    TResult Function(HistoryResponseModel histories)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -584,7 +584,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({OrderResponseModel histories});
+  $Res call({HistoryResponseModel histories});
 }
 
 /// @nodoc
@@ -604,7 +604,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
       null == histories
           ? _value.histories
           : histories // ignore: cast_nullable_to_non_nullable
-              as OrderResponseModel,
+              as HistoryResponseModel,
     ));
   }
 }
@@ -615,7 +615,7 @@ class _$SuccessImpl implements _Success {
   const _$SuccessImpl(this.histories);
 
   @override
-  final OrderResponseModel histories;
+  final HistoryResponseModel histories;
 
   @override
   String toString() {
@@ -645,7 +645,7 @@ class _$SuccessImpl implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(OrderResponseModel histories) success,
+    required TResult Function(HistoryResponseModel histories) success,
     required TResult Function(String message) error,
   }) {
     return success(histories);
@@ -656,7 +656,7 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(OrderResponseModel histories)? success,
+    TResult? Function(HistoryResponseModel histories)? success,
     TResult? Function(String message)? error,
   }) {
     return success?.call(histories);
@@ -667,7 +667,7 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(OrderResponseModel histories)? success,
+    TResult Function(HistoryResponseModel histories)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -716,9 +716,9 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements HistoryState {
-  const factory _Success(final OrderResponseModel histories) = _$SuccessImpl;
+  const factory _Success(final HistoryResponseModel histories) = _$SuccessImpl;
 
-  OrderResponseModel get histories;
+  HistoryResponseModel get histories;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -790,7 +790,7 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(OrderResponseModel histories) success,
+    required TResult Function(HistoryResponseModel histories) success,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -801,7 +801,7 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(OrderResponseModel histories)? success,
+    TResult? Function(HistoryResponseModel histories)? success,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -812,7 +812,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(OrderResponseModel histories)? success,
+    TResult Function(HistoryResponseModel histories)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {

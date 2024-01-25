@@ -1,10 +1,10 @@
 import 'package:esc_pos_utils_plus/esc_pos_utils_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:laundry_app/core/constants/colors.dart';
 import 'package:laundry_app/presentation/settings/pages/management_printer/widgets/menu_printer_button.dart';
 import 'package:laundry_app/presentation/settings/pages/management_printer/widgets/menu_printer_content.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
-
 
 class ManagePrinterPage extends StatefulWidget {
   const ManagePrinterPage({super.key});
@@ -15,20 +15,6 @@ class ManagePrinterPage extends StatefulWidget {
 
 class _ManagePrinterPageState extends State<ManagePrinterPage> {
   int selectedIndex = 0;
-  // final List<PrinterModel> datas = [
-  //   PrinterModel(
-  //     name: 'Galaxy A30',
-  //     address: 12324567412,
-  //   ),
-  //   PrinterModel(
-  //     name: 'Galaxy A30',
-  //     address: 12324567412,
-  //   ),
-  //   PrinterModel(
-  //     name: 'Galaxy A30',
-  //     address: 12324567412,
-  //   ),
-  // ];
 
   String macName = '';
 
@@ -235,7 +221,7 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
             width: MediaQuery.sizeOf(context).width / 2,
             padding: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
-              color: Colors.amber,
+              color: AppColors.hardBlueColor,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -312,7 +298,10 @@ class _Body extends StatelessWidget {
         padding: const EdgeInsets.all(24.0),
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(color: Colors.amber, width: 2),
+          border: Border.all(
+            color: AppColors.hardBlueColor,
+            width: 2,
+          ),
           borderRadius: BorderRadius.circular(6),
         ),
         child: ListView.separated(

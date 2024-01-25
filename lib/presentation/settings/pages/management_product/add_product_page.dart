@@ -1,13 +1,11 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:laundry_app/core/componets/buttons.dart';
-import 'package:laundry_app/core/componets/custom_dropdown.dart';
 import 'package:laundry_app/core/componets/custom_text_field.dart';
 import 'package:laundry_app/core/componets/image_picker_widget.dart';
 import 'package:laundry_app/core/componets/spaces.dart';
+import 'package:laundry_app/core/constants/colors.dart';
 import 'package:laundry_app/core/extensions/string_ext.dart';
 import 'package:laundry_app/data/models/response/product_response_model.dart';
 import 'package:laundry_app/presentation/blocs/product_bloc/product_bloc.dart';
@@ -24,9 +22,7 @@ class _AddProductPageState extends State<AddProductPage> {
   TextEditingController? priceController;
   TextEditingController? workingTimeController;
   TextEditingController? descriptionController;
-  String? selectedCategory;
-
-  String category = 'food';
+  String selectedCategory = 'kiloan';
 
   XFile? imageFile;
 
@@ -70,12 +66,14 @@ class _AddProductPageState extends State<AddProductPage> {
         children: [
           CustomTextField(
             controller: nameController!,
-            label: 'Nama Layanan',
+            label: 'Nama',
+            hintLabel: 'Nama Layanan',
           ),
           const SpaceHeight(20.0),
           CustomTextField(
             controller: priceController!,
-            label: 'Harga Layanan',
+            label: 'Harga',
+            hintLabel: 'Harga Layanan',
             keyboardType: TextInputType.number,
             onChanged: (value) {
               // final int priceValue = value.toIntegerFromText;
@@ -88,15 +86,15 @@ class _AddProductPageState extends State<AddProductPage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "Kategori Layanan",
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
                 ),
               ),
               RadioListTile(
-                title: Text("Kiloan"),
+                title: const Text("Kiloan"),
                 value: "kiloan",
                 groupValue: selectedCategory,
                 onChanged: (value) {
@@ -106,7 +104,7 @@ class _AddProductPageState extends State<AddProductPage> {
                 },
               ),
               RadioListTile(
-                title: Text("Satuan"),
+                title: const Text("Satuan"),
                 value: "satuan",
                 groupValue: selectedCategory,
                 onChanged: (value) {
@@ -117,7 +115,6 @@ class _AddProductPageState extends State<AddProductPage> {
               ),
             ],
           ),
-
           const SpaceHeight(12.0),
           ImagePickerWidget(
             label: 'Foto Layanan',
@@ -125,46 +122,38 @@ class _AddProductPageState extends State<AddProductPage> {
               if (file == null) {
                 return;
               }
-              imageFile = file as XFile?;
+              imageFile = file;
             },
           ),
           const SpaceHeight(20.0),
           CustomTextField(
             controller: workingTimeController!,
-            label: 'Waktu Pengerjaan',
+            label: 'Waktu',
+            hintLabel: 'Waktu Pengerjaan',
             keyboardType: TextInputType.number,
           ),
-          const SpaceHeight(20.0),
-          //isBestSeller
-          // Row(
-          //   children: [
-          //     Checkbox(
-          //       value: isBestSeller,
-          //       onChanged: (value) {
-          //         setState(() {
-          //           isBestSeller = value!;
-          //         });
-          //       },
-          //     ),
-          //     const Text('Produk Terlaris'),
-          //   ],
-          // ),
-          const SpaceHeight(20.0),
-          // CustomDropdown<CategoryModel>(
-          //   value: categories.first,
-          //   items: categories,
-          //   label: 'Kategori',
-          //   onChanged: (value) {
-          //     category = value!.value;
-          //   },
-          // ),
+          // const SpaceHeight(20.0),
+
           const SpaceHeight(24.0),
           BlocConsumer<ProductBloc, ProductState>(
             listener: (context, state) {
               state.maybeMap(
                 orElse: () {},
                 success: (_) {
-                  Navigator.pop(context);
+                  Navigator.of(context)
+                    ..pop()
+                    ..pop();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        "Layanan berhasil ditambahkan",
+                        style: TextStyle(
+                          color: AppColors.white,
+                        ),
+                      ),
+                      backgroundColor: AppColors.green,
+                    ),
+                  );
                 },
               );
             },
@@ -186,22 +175,23 @@ class _AddProductPageState extends State<AddProductPage> {
                         workingTimeController!.text.toIntegerFromText;
                     final String description = descriptionController!.text;
                     final Product product = Product(
-                        name: name,
-                        price: price,
-                        working_time: workingTime,
-                        description: description,
-                        category: category,
-                        image: imageFile!.path);
+                      name: name,
+                      price: price,
+                      working_time: workingTime,
+                      description: description,
+                      category: selectedCategory,
+                      image: imageFile!.path,
+                    );
                     context
                         .read<ProductBloc>()
-                        .add(ProductEvent.addProduct(product, imageFile!));
+                        .add(ProductEvent.addProduct(product, imageFile));
                   },
                   label: 'Simpan',
                 );
               });
             },
           ),
-          const SpaceHeight(30.0),
+          const SpaceHeight(20.0),
           Button.outlined(
             onPressed: () {
               Navigator.pop(context);

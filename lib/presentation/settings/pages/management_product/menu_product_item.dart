@@ -19,7 +19,7 @@ class MenuProductItem extends StatelessWidget {
       decoration: ShapeDecoration(
         color: AppColors.white,
         shape: RoundedRectangleBorder(
-          side:  BorderSide(width: 3, color: AppColors.black.withOpacity(.2)),
+          side: BorderSide(width: 3, color: AppColors.black.withOpacity(.2)),
           borderRadius: BorderRadius.circular(10),
         ),
       ),
@@ -31,7 +31,7 @@ class MenuProductItem extends StatelessWidget {
               fit: BoxFit.cover,
               imageUrl: '${Variables.imageBaseUrl}${data.image}',
               placeholder: (context, url) => const CircularProgressIndicator(),
-              errorWidget: (context, url, error) =>  Icon(
+              errorWidget: (context, url, error) => Icon(
                 Icons.image_not_supported_outlined,
                 size: width,
               ),
@@ -61,7 +61,8 @@ class MenuProductItem extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Flexible(
+                    SizedBox(
+                      width: MediaQuery.sizeOf(context).width / 2,
                       child: Button.outlined(
                         onPressed: () {
                           showDialog(
@@ -71,73 +72,70 @@ class MenuProductItem extends StatelessWidget {
                                 //container for product detail
                                 return AlertDialog(
                                   contentPadding: const EdgeInsets.all(16.0),
-                                  content: Container(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              data.name,
-                                              style: const TextStyle(
-                                                fontSize: 20,
-                                              ),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            data.name,
+                                            style: const TextStyle(
+                                              fontSize: 20,
                                             ),
-                                            IconButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              icon: const Icon(Icons.close),
-                                            ),
-                                          ],
-                                        ),
-                                        const SpaceHeight(10.0),
-                                        ClipRRect(
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(10.0)),
-                                          child: CachedNetworkImage(
-                                            imageUrl:
-                                                '${Variables.imageBaseUrl}${data.image}',
-                                            placeholder: (context, url) =>
-                                                const CircularProgressIndicator(),
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                     Icon(
-                                              Icons.food_bank_outlined,
-                                              size: width,
-                                            ),
-                                            width: width,
                                           ),
-                                        ),
-                                        const SpaceHeight(10.0),
-                                        Text(
-                                          data.category,
-                                          style: const TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.grey,
+                                          IconButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            icon: const Icon(Icons.close),
                                           ),
-                                        ),
-                                        const SpaceHeight(5),
-                                        Text(
-                                          data.price.toString(),
-                                          style: const TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.grey,
+                                        ],
+                                      ),
+                                      const SpaceHeight(10.0),
+                                      ClipRRect(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        child: CachedNetworkImage(
+                                          imageUrl:
+                                              '${Variables.imageBaseUrl}${data.image}',
+                                          placeholder: (context, url) =>
+                                              const CircularProgressIndicator(),
+                                          errorWidget: (context, url, error) =>
+                                              Icon(
+                                            Icons.food_bank_outlined,
+                                            size: width,
                                           ),
+                                          width: width,
                                         ),
-                                        const SpaceHeight(10.0),
-                                        Text(
-                                          data.working_time.toString(),
-                                          style: const TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.grey,
-                                          ),
+                                      ),
+                                      const SpaceHeight(10.0),
+                                      Text(
+                                        data.category,
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey,
                                         ),
-                                        const SpaceHeight(10.0),
-                                      ],
-                                    ),
+                                      ),
+                                      const SpaceHeight(5),
+                                      Text(
+                                        data.price.toString(),
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                      const SpaceHeight(10.0),
+                                      Text(
+                                        data.working_time.toString(),
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                      const SpaceHeight(10.0),
+                                    ],
                                   ),
                                 );
                               });
@@ -148,17 +146,17 @@ class MenuProductItem extends StatelessWidget {
                       ),
                     ),
                     const SpaceWidth(6.0),
-                    Flexible(
-                      // flex: 1,
-                      child: Button.outlined(
-                        onPressed: () {
-                          // context.push(EditProductPage(data: data));
-                        },
-                        label: 'Ubah Produk',
-                        fontSize: 8.0,
-                        height: 31,
-                      ),
-                    ),
+                    // Flexible(
+                    //   // flex: 1,
+                    //   child: Button.outlined(
+                    //     onPressed: () {
+                    //       // context.push(EditProductPage(data: data));
+                    //     },
+                    //     label: 'Ubah Produk',
+                    //     fontSize: 8.0,
+                    //     height: 31,
+                    //   ),
+                    // ),
                   ],
                 ),
               ],

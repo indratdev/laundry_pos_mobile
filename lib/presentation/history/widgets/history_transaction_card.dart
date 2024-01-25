@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:laundry_app/core/extensions/double_ext.dart';
-import 'package:laundry_app/data/models/response/order_response_model.dart';
+import 'package:laundry_app/core/extensions/string_ext.dart';
+import 'package:laundry_app/data/models/response/history_response_model.dart';
 
 import '../../../core/constants/colors.dart';
 
 class HistoryTransactionCard extends StatelessWidget {
-  final OrderResponseModel data;
+  // final OrderResponseModel data;
+  final HistoryData data;
   final EdgeInsetsGeometry? padding;
 
   const HistoryTransactionCard({
@@ -30,11 +32,11 @@ class HistoryTransactionCard extends StatelessWidget {
         ],
       ),
       child: ListTile(
-        leading: Icon(Icons.payment),
-        title: Text(data.data.order.payment_method),
-        subtitle: Text('${data.data.order.total_quantity} items'),
+        leading: const Icon(Icons.payment),
+        title: Text(data.paymentMethod.toUpperCase()),
+        subtitle: Text('${data.totalQuantity} items'),
         trailing: Text(
-          data.data.order.total_price.currencyFormatRp,
+          data.totalPrice.toDoubleFromText.currencyFormatRp,
           style: const TextStyle(
             color: AppColors.green,
             fontSize: 16,

@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<String> loadImage() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     return 'Image loaded successfully';
   }
 
@@ -89,11 +89,13 @@ class _LoginPageState extends State<LoginPage> {
                       CustomTextField(
                         controller: usernameController,
                         label: 'Username',
+                        hintLabel: 'Username',
                       ),
                       const SpaceHeight(12.0),
                       CustomTextField(
                         controller: passwordController,
                         label: 'Password',
+                        hintLabel: 'Password',
                         obscureText: true,
                       ),
                       const SpaceHeight(24.0),

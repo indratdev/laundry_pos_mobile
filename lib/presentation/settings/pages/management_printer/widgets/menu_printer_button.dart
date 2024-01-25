@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laundry_app/core/constants/colors.dart';
 
 class MenuPrinterButton extends StatelessWidget {
   final String label;
@@ -21,7 +22,7 @@ class MenuPrinterButton extends StatelessWidget {
           width: MediaQuery.sizeOf(context).width,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: isActive ? Colors.white : Colors.amber,
+            color: isActive ? Colors.white : AppColors.hardBlueColor,
             borderRadius: BorderRadius.circular(6),
             boxShadow: isActive
                 ? const [
@@ -38,7 +39,7 @@ class MenuPrinterButton extends StatelessWidget {
             label,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: isActive ? Colors.green : Colors.black,
+              color: isActive ? AppColors.hardBlueColor : AppColors.white,
             ),
           ),
         ),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:laundry_app/core/componets/buttons.dart';
+import 'package:laundry_app/core/constants/colors.dart';
 import 'package:laundry_app/core/constants/variables.dart';
 import 'package:laundry_app/core/extensions/double_ext.dart';
-
 import 'package:laundry_app/data/data/cwb_print.dart';
 import 'package:laundry_app/data/models/request/order_request_model.dart'
     as order_request;
@@ -102,6 +102,7 @@ class PaymentSuccessDialog extends StatelessWidget {
                           children: [
                             Flexible(
                               child: Button.filled(
+                                color: AppColors.hardBlueColor,
                                 onPressed: () {
                                   context
                                       .read<OrderBloc>()
@@ -209,6 +210,8 @@ class PaymentSuccessDialog extends StatelessWidget {
                             "",
                           );
                           await PrintBluetoothThermal.writeBytes(printValue);
+                          // final result =
+                          //     await PrintBluetoothThermal.writeBytes(ticket);
                         },
                         label: 'Print',
                         // icon: Assets.icons.print.svg(),

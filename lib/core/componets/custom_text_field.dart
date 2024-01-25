@@ -5,6 +5,7 @@ import 'spaces.dart';
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
+  final String hintLabel;
   final Function(String value)? onChanged;
   final bool obscureText;
   final TextInputType? keyboardType;
@@ -15,6 +16,7 @@ class CustomTextField extends StatelessWidget {
     super.key,
     required this.controller,
     required this.label,
+    required this.hintLabel,
     this.onChanged,
     this.obscureText = false,
     this.keyboardType,
@@ -52,7 +54,7 @@ class CustomTextField extends StatelessWidget {
               borderRadius: BorderRadius.circular(16.0),
               borderSide: const BorderSide(color: Colors.grey),
             ),
-            hintText: label,
+            hintText: hintLabel,
           ),
         ),
       ],

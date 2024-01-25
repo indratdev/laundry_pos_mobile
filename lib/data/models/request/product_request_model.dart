@@ -1,5 +1,3 @@
-
-
 import 'package:image_picker/image_picker.dart';
 
 class ProductRequestModel {
@@ -8,7 +6,7 @@ class ProductRequestModel {
   final int working_time;
   final String category;
   // final int isBestSeller;
-  final XFile image;
+  final XFile? image;
   ProductRequestModel({
     required this.name,
     required this.price,
@@ -24,6 +22,7 @@ class ProductRequestModel {
       'price': price.toString(),
       'working_time': working_time.toString(),
       'category': category,
+      if (image != null) 'image': image!.path,
       // 'isBestSeller': isBestSeller.toString(),
     };
   }

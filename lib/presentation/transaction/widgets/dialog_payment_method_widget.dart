@@ -185,6 +185,7 @@ class _DialogPaymentMethodWidgetState extends State<DialogPaymentMethodWidget> {
           child: (widget.orderUser.paymentMethod == "cash")
               ? Button.filled(
                   label: "Proses",
+                  color: AppColors.hardBlueColor,
                   onPressed: () {
                     DateTime transactionTime = DateTime.now();
                     widget.orderUser.transactionTime =
@@ -201,6 +202,7 @@ class _DialogPaymentMethodWidgetState extends State<DialogPaymentMethodWidget> {
                 )
               : Button.filled(
                   label: "Generate QRIS",
+                  color: AppColors.hardBlueColor,
                   onPressed: () {
                     setState(() {
                       // String orderId =

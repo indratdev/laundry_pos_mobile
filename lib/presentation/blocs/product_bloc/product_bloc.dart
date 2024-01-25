@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:laundry_app/data/datasource/product_local_datasource.dart';
 import 'package:laundry_app/data/datasource/product_remote_datasource.dart';
+import 'package:laundry_app/data/models/request/product_request_model.dart';
 import 'package:laundry_app/data/models/response/product_response_model.dart';
 
 part 'product_bloc.freezed.dart';
@@ -49,28 +50,31 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       emit(ProductState.success(newProducts));
     });
 
-    // on<_AddProduct>((event, emit) async {
-    //   emit(const ProductState.loading());
-    //   final requestData = ProductRequestModel(
-    //     name: event.product.name,
-    //     price: event.product.price,
-    //     stock: event.product.stock,
-    //     category: event.product.category,
-    //     isBestSeller: event.product.isBestSeller ? 1 : 0,
-    //     image: event.image,
-    //   );
-    //   final response = await _productRemoteDatasource.addProduct(requestData);
-    //   // products.add(newProduct);
-    //   response.fold(
-    //     (l) => emit(ProductState.error(l)),
-    //     (r) {
-    //       products.add(r.data);
-    //       emit(ProductState.success(products));
-    //     },
-    //   );
+    on<_AddProduct>((event, emit) async {
+      emit(const ProductState.loading());
+      final requestData = ProductRequestModel(
+        name: event.product.name,
+        price: event.product.price,
+        working_time: event.product.working_time,
+        category: event.product.category,
+        image: event.image,
+      );
 
-    //   emit(ProductState.success(products));
-    // });
+      print(">>> hasil ${requestData.toMap()}");
+      // return;
+
+      final response = await _productRemoteDatasource.addProduct(requestData);
+      // products.add(newProduct);
+      response.fold(
+        (l) => emit(ProductState.error(l)),
+        (r) {
+          products.add(r.data);
+          emit(ProductState.success(products));
+        },
+      );
+
+      // emit(ProductState.success(products));
+    });
 
     on<_SearchProduct>((event, emit) async {
       emit(const ProductState.loading());

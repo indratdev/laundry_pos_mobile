@@ -4,26 +4,34 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import 'package:laundry_app/core/constants/variables.dart';
+import 'package:laundry_app/data/datasource/auth_local_datasource.dart';
 import 'package:laundry_app/data/models/request/order_request_model.dart';
+import 'package:laundry_app/data/models/response/history_response_model.dart';
 import 'package:laundry_app/data/models/response/order_response_model.dart';
 
 class OrderRemoteDataSource {
   final urlOrder = "${Variables.baseUrl}/api/orders";
-  // Future<Either<String, ProductResponseModel>> getProducts() async {
-  //   final authData = await AuthLocalDatasource().getAuthData();
-  //   final response = await http.get(
-  //     Uri.parse('${Variables.baseUrl}/api/products'),
-  //     headers: {
-  //       'Authorization': 'Bearer ${authData.token}',
-  //     },
-  //   );
+  Future<Either<String, HistoryResponseModel>> getProducts() async {
+    final authData = await AuthLocalDatasource().getAuthData();
+    final response = await http.get(
+      Uri.parse('${Variables.baseUrl}/api/orders'),
+      headers: {
+        'Authorization': 'Bearer ${authData.token}',
+      },
+    );
 
-  //   if (response.statusCode == 200) {
-  //     return right(ProductResponseModel.fromJson(response.body));
-  //   } else {
-  //     return left(response.body);
-  //   }
-  // }
+    var aaa = HistoryResponseModel.fromJson(response.body);
+    var bbb = aaa.data.toList();
+    for (var element in bbb) {
+      print(element.toMap());
+    }
+
+    if (response.statusCode == 200) {
+      return right(HistoryResponseModel.fromJson(response.body));
+    } else {
+      return left(response.body);
+    }
+  }
 
   // Future<Either<String, AddProductResponseModel>> addOrder(
   //     OrderRequestModel orderRequestModel) async {

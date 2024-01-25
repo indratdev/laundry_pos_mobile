@@ -68,7 +68,7 @@ class _ServerKeyPageState extends State<ServerKeyPage> {
                 foregroundColor:
                     MaterialStateProperty.all<Color>(AppColors.white),
                 backgroundColor:
-                    MaterialStateProperty.all<Color>(AppColors.middleBlueColor),
+                    MaterialStateProperty.all<Color>(AppColors.hardBlueColor),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),

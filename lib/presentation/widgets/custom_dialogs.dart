@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:laundry_app/core/constants/colors.dart';
 import 'package:laundry_app/core/constants/variables.dart';
+import 'package:laundry_app/presentation/widgets/two_button.dart';
 
 enum StatusImage {
   success,
@@ -62,44 +63,44 @@ class CustomDialogs {
   //       });
   // }
 
-  // static showConfirmation(
-  //     BuildContext context, String content, void Function()? voidCallback) {
-  //   return showDialog(
-  //       context: context,
-  //       barrierDismissible: false,
-  //       builder: (BuildContext context) {
-  //         return Dialog(
-  //           shape: RoundedRectangleBorder(
-  //               borderRadius: BorderRadius.circular(12)), //this right here
-  //           child: SizedBox(
-  //             height: MediaQuery.of(context).size.height / 3,
-  //             child: Padding(
-  //               padding: const EdgeInsets.fromLTRB(10, 15, 10, 10),
-  //               child: Column(
-  //                 mainAxisAlignment: MainAxisAlignment.center,
-  //                 crossAxisAlignment: CrossAxisAlignment.center,
-  //                 children: [
-  //                   CircleAvatar(
-  //                     radius: MediaQuery.of(context).size.width / 8,
-  //                     foregroundColor: Colors.transparent,
-  //                     child: Image.asset(GlobalVariables.warningImage),
-  //                   ),
-  //                   const SizedBox(height: 12),
-  //                   Text(content, textAlign: TextAlign.center),
-  //                   const SizedBox(height: 24),
-  //                   TwoButton(
-  //                     heightDefault: 20,
-  //                     widthSecondDefault: 4,
-  //                     widthMainDefault: 3,
-  //                     mainButtonvoidCallback: voidCallback!,
-  //                   ),
-  //                 ],
-  //               ),
-  //             ),
-  //           ),
-  //         );
-  //       });
-  // }
+  static showConfirmation(
+      BuildContext context, String content, void Function()? voidCallback) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12)), //this right here
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height / 3,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 15, 10, 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius: MediaQuery.of(context).size.width / 8,
+                      foregroundColor: Colors.transparent,
+                      child: Image.asset(Variables.warningIcon),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(content, textAlign: TextAlign.center),
+                    const SizedBox(height: 32),
+                    TwoButton(
+                      heightDefault: 20,
+                      widthSecondDefault: 4,
+                      widthMainDefault: 3,
+                      mainButtonvoidCallback: voidCallback!,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
+  }
 
   // void showMessageAlert(
   //   BuildContext context,

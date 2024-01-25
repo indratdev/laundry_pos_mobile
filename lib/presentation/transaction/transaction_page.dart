@@ -403,7 +403,7 @@ class _TransactionPageState extends State<TransactionPage> {
             const SizedBox(width: 10),
             Expanded(
               child: Container(
-                color: AppColors.middleBlueColor,
+                color: AppColors.hardBlueColor,
                 child: TextButton(
                   onPressed: () async {
                     (step == stepTransaction.length)

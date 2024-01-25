@@ -56,7 +56,11 @@ class _ManageProductPageState extends State<ManageProductPage> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.yellow,
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => AddProductPage(),)),
+        onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddProductPage(),
+            )),
         child: const Icon(Icons.add),
       ),
     );

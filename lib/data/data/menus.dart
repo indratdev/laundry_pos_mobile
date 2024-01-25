@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:laundry_app/presentation/blocs/customer_bloc/customer_bloc.dart';
+import 'package:laundry_app/presentation/blocs/history_bloc/history_bloc.dart';
 import 'package:laundry_app/presentation/blocs/product_bloc/product_bloc.dart';
 import 'package:laundry_app/presentation/customers/customers_page.dart';
+import 'package:laundry_app/presentation/history/history_page.dart';
 import 'package:laundry_app/presentation/settings/pages/management_printer/manage_printer_page.dart';
 import 'package:laundry_app/presentation/settings/pages/management_product/manage_product_page.dart';
 import 'package:laundry_app/presentation/settings/pages/server_key/server_key_page.dart';
@@ -46,7 +48,15 @@ class Menus {
               MaterialPageRoute(builder: (context) => const CustomersPage()));
         },
       ),
-      ServiceMenuWidget(title: "Riwayat", iconName: Variables.historyIcon),
+      ServiceMenuWidget(
+        title: "Riwayat",
+        iconName: Variables.historyIcon,
+        onTap: () {
+          BlocProvider.of<HistoryBloc>(context).add(const HistoryEvent.fetch());
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const HistoryPage()));
+        },
+      ),
       // ServiceMenuWidget(title: "Laporan", iconName: Variables.reportsIcon),
       ServiceMenuWidget(
           title: "Kelola",

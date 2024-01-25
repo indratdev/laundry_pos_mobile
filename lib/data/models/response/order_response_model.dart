@@ -18,7 +18,6 @@ class OrderResponseModel {
     return OrderResponseModel(
       success: json['success'],
       message: json['message'],
-      // data: OrderResponseItem.fromJson(json['data']),
       data: OrderData.fromJson(json['data']),
     );
   }

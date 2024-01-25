@@ -22,7 +22,7 @@ mixin _$ProductEvent {
     required TResult Function() fetch,
     required TResult Function(String category) fetchByCategory,
     required TResult Function() fetchLocal,
-    required TResult Function(Product product, XFile image) addProduct,
+    required TResult Function(Product product, XFile? image) addProduct,
     required TResult Function(String query) searchProduct,
     required TResult Function() fetchAllFromState,
   }) =>
@@ -33,7 +33,7 @@ mixin _$ProductEvent {
     TResult? Function()? fetch,
     TResult? Function(String category)? fetchByCategory,
     TResult? Function()? fetchLocal,
-    TResult? Function(Product product, XFile image)? addProduct,
+    TResult? Function(Product product, XFile? image)? addProduct,
     TResult? Function(String query)? searchProduct,
     TResult? Function()? fetchAllFromState,
   }) =>
@@ -44,7 +44,7 @@ mixin _$ProductEvent {
     TResult Function()? fetch,
     TResult Function(String category)? fetchByCategory,
     TResult Function()? fetchLocal,
-    TResult Function(Product product, XFile image)? addProduct,
+    TResult Function(Product product, XFile? image)? addProduct,
     TResult Function(String query)? searchProduct,
     TResult Function()? fetchAllFromState,
     required TResult orElse(),
@@ -146,7 +146,7 @@ class _$StartedImpl implements _Started {
     required TResult Function() fetch,
     required TResult Function(String category) fetchByCategory,
     required TResult Function() fetchLocal,
-    required TResult Function(Product product, XFile image) addProduct,
+    required TResult Function(Product product, XFile? image) addProduct,
     required TResult Function(String query) searchProduct,
     required TResult Function() fetchAllFromState,
   }) {
@@ -160,7 +160,7 @@ class _$StartedImpl implements _Started {
     TResult? Function()? fetch,
     TResult? Function(String category)? fetchByCategory,
     TResult? Function()? fetchLocal,
-    TResult? Function(Product product, XFile image)? addProduct,
+    TResult? Function(Product product, XFile? image)? addProduct,
     TResult? Function(String query)? searchProduct,
     TResult? Function()? fetchAllFromState,
   }) {
@@ -174,7 +174,7 @@ class _$StartedImpl implements _Started {
     TResult Function()? fetch,
     TResult Function(String category)? fetchByCategory,
     TResult Function()? fetchLocal,
-    TResult Function(Product product, XFile image)? addProduct,
+    TResult Function(Product product, XFile? image)? addProduct,
     TResult Function(String query)? searchProduct,
     TResult Function()? fetchAllFromState,
     required TResult orElse(),
@@ -278,7 +278,7 @@ class _$FetchImpl implements _Fetch {
     required TResult Function() fetch,
     required TResult Function(String category) fetchByCategory,
     required TResult Function() fetchLocal,
-    required TResult Function(Product product, XFile image) addProduct,
+    required TResult Function(Product product, XFile? image) addProduct,
     required TResult Function(String query) searchProduct,
     required TResult Function() fetchAllFromState,
   }) {
@@ -292,7 +292,7 @@ class _$FetchImpl implements _Fetch {
     TResult? Function()? fetch,
     TResult? Function(String category)? fetchByCategory,
     TResult? Function()? fetchLocal,
-    TResult? Function(Product product, XFile image)? addProduct,
+    TResult? Function(Product product, XFile? image)? addProduct,
     TResult? Function(String query)? searchProduct,
     TResult? Function()? fetchAllFromState,
   }) {
@@ -306,7 +306,7 @@ class _$FetchImpl implements _Fetch {
     TResult Function()? fetch,
     TResult Function(String category)? fetchByCategory,
     TResult Function()? fetchLocal,
-    TResult Function(Product product, XFile image)? addProduct,
+    TResult Function(Product product, XFile? image)? addProduct,
     TResult Function(String query)? searchProduct,
     TResult Function()? fetchAllFromState,
     required TResult orElse(),
@@ -438,7 +438,7 @@ class _$FetchByCategoryImpl implements _FetchByCategory {
     required TResult Function() fetch,
     required TResult Function(String category) fetchByCategory,
     required TResult Function() fetchLocal,
-    required TResult Function(Product product, XFile image) addProduct,
+    required TResult Function(Product product, XFile? image) addProduct,
     required TResult Function(String query) searchProduct,
     required TResult Function() fetchAllFromState,
   }) {
@@ -452,7 +452,7 @@ class _$FetchByCategoryImpl implements _FetchByCategory {
     TResult? Function()? fetch,
     TResult? Function(String category)? fetchByCategory,
     TResult? Function()? fetchLocal,
-    TResult? Function(Product product, XFile image)? addProduct,
+    TResult? Function(Product product, XFile? image)? addProduct,
     TResult? Function(String query)? searchProduct,
     TResult? Function()? fetchAllFromState,
   }) {
@@ -466,7 +466,7 @@ class _$FetchByCategoryImpl implements _FetchByCategory {
     TResult Function()? fetch,
     TResult Function(String category)? fetchByCategory,
     TResult Function()? fetchLocal,
-    TResult Function(Product product, XFile image)? addProduct,
+    TResult Function(Product product, XFile? image)? addProduct,
     TResult Function(String query)? searchProduct,
     TResult Function()? fetchAllFromState,
     required TResult orElse(),
@@ -575,7 +575,7 @@ class _$FetchLocalImpl implements _FetchLocal {
     required TResult Function() fetch,
     required TResult Function(String category) fetchByCategory,
     required TResult Function() fetchLocal,
-    required TResult Function(Product product, XFile image) addProduct,
+    required TResult Function(Product product, XFile? image) addProduct,
     required TResult Function(String query) searchProduct,
     required TResult Function() fetchAllFromState,
   }) {
@@ -589,7 +589,7 @@ class _$FetchLocalImpl implements _FetchLocal {
     TResult? Function()? fetch,
     TResult? Function(String category)? fetchByCategory,
     TResult? Function()? fetchLocal,
-    TResult? Function(Product product, XFile image)? addProduct,
+    TResult? Function(Product product, XFile? image)? addProduct,
     TResult? Function(String query)? searchProduct,
     TResult? Function()? fetchAllFromState,
   }) {
@@ -603,7 +603,7 @@ class _$FetchLocalImpl implements _FetchLocal {
     TResult Function()? fetch,
     TResult Function(String category)? fetchByCategory,
     TResult Function()? fetchLocal,
-    TResult Function(Product product, XFile image)? addProduct,
+    TResult Function(Product product, XFile? image)? addProduct,
     TResult Function(String query)? searchProduct,
     TResult Function()? fetchAllFromState,
     required TResult orElse(),
@@ -671,7 +671,7 @@ abstract class _$$AddProductImplCopyWith<$Res> {
           _$AddProductImpl value, $Res Function(_$AddProductImpl) then) =
       __$$AddProductImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Product product, XFile image});
+  $Res call({Product product, XFile? image});
 }
 
 /// @nodoc
@@ -686,17 +686,17 @@ class __$$AddProductImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? product = null,
-    Object? image = null,
+    Object? image = freezed,
   }) {
     return _then(_$AddProductImpl(
       null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as Product,
-      null == image
+      freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as XFile,
+              as XFile?,
     ));
   }
 }
@@ -709,7 +709,7 @@ class _$AddProductImpl implements _AddProduct {
   @override
   final Product product;
   @override
-  final XFile image;
+  final XFile? image;
 
   @override
   String toString() {
@@ -741,7 +741,7 @@ class _$AddProductImpl implements _AddProduct {
     required TResult Function() fetch,
     required TResult Function(String category) fetchByCategory,
     required TResult Function() fetchLocal,
-    required TResult Function(Product product, XFile image) addProduct,
+    required TResult Function(Product product, XFile? image) addProduct,
     required TResult Function(String query) searchProduct,
     required TResult Function() fetchAllFromState,
   }) {
@@ -755,7 +755,7 @@ class _$AddProductImpl implements _AddProduct {
     TResult? Function()? fetch,
     TResult? Function(String category)? fetchByCategory,
     TResult? Function()? fetchLocal,
-    TResult? Function(Product product, XFile image)? addProduct,
+    TResult? Function(Product product, XFile? image)? addProduct,
     TResult? Function(String query)? searchProduct,
     TResult? Function()? fetchAllFromState,
   }) {
@@ -769,7 +769,7 @@ class _$AddProductImpl implements _AddProduct {
     TResult Function()? fetch,
     TResult Function(String category)? fetchByCategory,
     TResult Function()? fetchLocal,
-    TResult Function(Product product, XFile image)? addProduct,
+    TResult Function(Product product, XFile? image)? addProduct,
     TResult Function(String query)? searchProduct,
     TResult Function()? fetchAllFromState,
     required TResult orElse(),
@@ -828,11 +828,11 @@ class _$AddProductImpl implements _AddProduct {
 }
 
 abstract class _AddProduct implements ProductEvent {
-  const factory _AddProduct(final Product product, final XFile image) =
+  const factory _AddProduct(final Product product, final XFile? image) =
       _$AddProductImpl;
 
   Product get product;
-  XFile get image;
+  XFile? get image;
   @JsonKey(ignore: true)
   _$$AddProductImplCopyWith<_$AddProductImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -906,7 +906,7 @@ class _$SearchProductImpl implements _SearchProduct {
     required TResult Function() fetch,
     required TResult Function(String category) fetchByCategory,
     required TResult Function() fetchLocal,
-    required TResult Function(Product product, XFile image) addProduct,
+    required TResult Function(Product product, XFile? image) addProduct,
     required TResult Function(String query) searchProduct,
     required TResult Function() fetchAllFromState,
   }) {
@@ -920,7 +920,7 @@ class _$SearchProductImpl implements _SearchProduct {
     TResult? Function()? fetch,
     TResult? Function(String category)? fetchByCategory,
     TResult? Function()? fetchLocal,
-    TResult? Function(Product product, XFile image)? addProduct,
+    TResult? Function(Product product, XFile? image)? addProduct,
     TResult? Function(String query)? searchProduct,
     TResult? Function()? fetchAllFromState,
   }) {
@@ -934,7 +934,7 @@ class _$SearchProductImpl implements _SearchProduct {
     TResult Function()? fetch,
     TResult Function(String category)? fetchByCategory,
     TResult Function()? fetchLocal,
-    TResult Function(Product product, XFile image)? addProduct,
+    TResult Function(Product product, XFile? image)? addProduct,
     TResult Function(String query)? searchProduct,
     TResult Function()? fetchAllFromState,
     required TResult orElse(),
@@ -1043,7 +1043,7 @@ class _$FetchAllFromStateImpl implements _FetchAllFromState {
     required TResult Function() fetch,
     required TResult Function(String category) fetchByCategory,
     required TResult Function() fetchLocal,
-    required TResult Function(Product product, XFile image) addProduct,
+    required TResult Function(Product product, XFile? image) addProduct,
     required TResult Function(String query) searchProduct,
     required TResult Function() fetchAllFromState,
   }) {
@@ -1057,7 +1057,7 @@ class _$FetchAllFromStateImpl implements _FetchAllFromState {
     TResult? Function()? fetch,
     TResult? Function(String category)? fetchByCategory,
     TResult? Function()? fetchLocal,
-    TResult? Function(Product product, XFile image)? addProduct,
+    TResult? Function(Product product, XFile? image)? addProduct,
     TResult? Function(String query)? searchProduct,
     TResult? Function()? fetchAllFromState,
   }) {
@@ -1071,7 +1071,7 @@ class _$FetchAllFromStateImpl implements _FetchAllFromState {
     TResult Function()? fetch,
     TResult Function(String category)? fetchByCategory,
     TResult Function()? fetchLocal,
-    TResult Function(Product product, XFile image)? addProduct,
+    TResult Function(Product product, XFile? image)? addProduct,
     TResult Function(String query)? searchProduct,
     TResult Function()? fetchAllFromState,
     required TResult orElse(),

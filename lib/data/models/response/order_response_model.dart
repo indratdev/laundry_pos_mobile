@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:laundry_app/data/models/response/customer_response_model.dart';
 import 'package:laundry_app/data/models/response/product_response_model.dart';
 
 class OrderResponseModel {
@@ -82,6 +83,7 @@ class OrderResponseItem {
   final String updated_at;
   final String created_at;
   final int id;
+  final Customer? customers;
 
   OrderResponseItem({
     this.transaction_time = "",
@@ -96,6 +98,7 @@ class OrderResponseItem {
     this.total_price = 0.0,
     this.total_quantity = 0,
     this.updated_at = "",
+    this.customers,
   });
 
   factory OrderResponseItem.fromJson(Map<String, dynamic> json) {
@@ -112,6 +115,7 @@ class OrderResponseItem {
       transaction_time: json["transaction_time"],
       created_at: json["created_at"],
       updated_at: json["updated_at"],
+      customers: json["customers"],
     );
   }
 
@@ -131,6 +135,7 @@ class OrderResponseItem {
         transaction_time: json["transaction_time"],
         created_at: json["created_at"],
         updated_at: json["updated_at"],
+        customers: json["customers"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -146,9 +151,55 @@ class OrderResponseItem {
         "transaction_time": transaction_time,
         "created_at": created_at,
         "updated_at": updated_at,
+        "customers": customers,
       };
 }
 
+// class OrderItem {
+//   int id;
+//   int orderId;
+//   int productId;
+//   int quantity;
+//   DateTime createdAt;
+//   DateTime updatedAt;
+//   Product? product;
+
+//   OrderItem({
+//     required this.id,
+//     required this.orderId,
+//     required this.productId,
+//     required this.quantity,
+//     required this.createdAt,
+//     required this.updatedAt,
+//     this.product,
+//   });
+
+//   factory OrderItem.fromJson(String str) => OrderItem.fromMap(json.decode(str));
+
+//   String toJson() => json.encode(toMap());
+
+//   factory OrderItem.fromMap(Map<String, dynamic> json) => OrderItem(
+//         id: json["id"],
+//         orderId: json["order_id"],
+//         productId: json["product_id"],
+//         quantity: json["quantity"],
+//         product: Product.fromMap(json['product']),
+//         createdAt: DateTime.parse(json["created_at"]),
+//         updatedAt: DateTime.parse(json["updated_at"]),
+//       );
+
+//   Map<String, dynamic> toMap() => {
+//         "id": id,
+//         "order_id": orderId,
+//         "product_id": productId,
+//         "quantity": quantity,
+//         "created_at": createdAt.toIso8601String(),
+//         "updated_at": updatedAt.toIso8601String(),
+//       };
+// }
+
+
+// OLD
 class OrderItem {
   final int productId;
   final int quantity;
@@ -168,22 +219,3 @@ class OrderItem {
         product: Product.fromMap(json['product']));
   }
 }
-
-// {
-//     "success": true,
-//     "message": "Order Created",
-//     "data": {
-//         "transaction_time": "2024-01-23 10:30:00",
-//         "total_price": 235000,
-//         "total_quantity": 3,
-//         "payment_method": "cash",
-//         "customer_id": 1,
-//         "amount_payment": 250000,
-//         "cashier_id": 1,
-//         "is_sync": 0,
-//         "cashier_name": "John Doe",
-//         "updated_at": "2024-01-22T07:19:32.000000Z",
-//         "created_at": "2024-01-22T07:19:32.000000Z",
-//         "id": 3
-//     }
-// }

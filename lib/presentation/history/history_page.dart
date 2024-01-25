@@ -48,12 +48,16 @@ class _HistoryPageState extends State<HistoryPage> {
                 );
               }
               return ListView.separated(
+                shrinkWrap: true,
                 padding: const EdgeInsets.symmetric(vertical: 30.0),
                 itemCount: data.data.length,
                 separatorBuilder: (context, index) => const SpaceHeight(8.0),
                 itemBuilder: (context, index) {
                   HistoryData datas = data.data[index];
-                  return HistoryTransactionCard(data: datas);
+                  return HistoryTransactionCard(
+                    data: datas,
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                  );
                 },
               );
             });

@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:laundry_app/data/models/response/customer_response_model.dart';
+import 'package:laundry_app/data/models/response/order_response_model.dart';
+
 class HistoryResponseModel {
   bool success;
   String message;
@@ -44,7 +47,8 @@ class HistoryData {
   String cashierName;
   DateTime createdAt;
   DateTime updatedAt;
-  List<OrderItem> orderItems;
+  List<OrderItemHistory> orderItems;
+  Customer customers;
 
   HistoryData({
     required this.id,
@@ -60,6 +64,7 @@ class HistoryData {
     required this.createdAt,
     required this.updatedAt,
     required this.orderItems,
+    required this.customers,
   });
 
   factory HistoryData.fromJson(String str) =>
@@ -69,6 +74,7 @@ class HistoryData {
 
   factory HistoryData.fromMap(Map<String, dynamic> json) => HistoryData(
         id: json["id"],
+        //  transactionTime: json["transaction_time"],
         transactionTime: DateTime.parse(json["transaction_time"]),
         totalPrice: json["total_price"],
         totalQuantity: json["total_quantity"],
@@ -78,10 +84,26 @@ class HistoryData {
         amountPayment: json["amount_payment"],
         isSync: json["is_sync"],
         cashierName: json["cashier_name"],
+        // createdAt: json["created_at"],
+        // updatedAt: json["updated_at"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        orderItems: List<OrderItem>.from(
-            json["order_items"].map((x) => OrderItem.fromMap(x))),
+        // orderItems: List<OrderItemHistory>.from(
+        //   json["order_items"].map(
+        //     (x) => OrderItemHistory.fromJson(x),
+        //   ),
+        // ),
+        // customers: Customer.fromMap(json["customers"]),
+        // orderItems: (json["order_items"] as List<dynamic>?)
+        //         ?.map((x) => OrderItemHistory.fromJson(x))
+        //         .toList() ??
+        //     [],
+        orderItems: (json['order_items'] as List<dynamic>?)
+                ?.map((x) => OrderItemHistory.fromJson(x))
+                .toList() ??
+            [],
+
+        customers: Customer.fromMap(json["customers"] ?? {}),
       );
 
   Map<String, dynamic> toMap() => {
@@ -98,10 +120,11 @@ class HistoryData {
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
         "order_items": List<dynamic>.from(orderItems.map((x) => x.toMap())),
+        "customers": customers
       };
 }
 
-class OrderItem {
+class OrderItemHistory {
   int id;
   int orderId;
   int productId;
@@ -109,7 +132,7 @@ class OrderItem {
   DateTime createdAt;
   DateTime updatedAt;
 
-  OrderItem({
+  OrderItemHistory({
     required this.id,
     required this.orderId,
     required this.productId,
@@ -118,17 +141,34 @@ class OrderItem {
     required this.updatedAt,
   });
 
-  factory OrderItem.fromJson(String str) => OrderItem.fromMap(json.decode(str));
+  // factory OrderItemHistory.fromJson(String str) =>
+  //     OrderItemHistory.fromMap(json.decode(str));
+
+  factory OrderItemHistory.fromJson(Map<String, dynamic> json) {
+    return OrderItemHistory(
+      id: json['id'],
+      orderId: json['order_id'],
+      productId: json['product_id'],
+      quantity: json['quantity'],
+      createdAt: DateTime.parse(json["created_at"]),
+      updatedAt: DateTime.parse(json["updated_at"]),
+      // createdAt: json['created_at'],
+      // updatedAt: json['updated_at'],
+    );
+  }
 
   String toJson() => json.encode(toMap());
 
-  factory OrderItem.fromMap(Map<String, dynamic> json) => OrderItem(
+  factory OrderItemHistory.fromMap(Map<String, dynamic> json) =>
+      OrderItemHistory(
         id: json["id"],
         orderId: json["order_id"],
         productId: json["product_id"],
         quantity: json["quantity"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
+        // createdAt: json["created_at"],
+        // updatedAt: json["updated_at"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -140,23 +180,3 @@ class OrderItem {
         "updated_at": updatedAt.toIso8601String(),
       };
 }
-
-// enum PaymentMethod {
-//     CASH
-// }
-
-// final paymentMethodValues = EnumValues({
-//     "cash": PaymentMethod.CASH
-// });
-
-// class EnumValues<T> {
-//     Map<String, T> map;
-//     late Map<T, String> reverseMap;
-
-//     EnumValues(this.map);
-
-//     Map<T, String> get reverse {
-//         reverseMap = map.map((k, v) => MapEntry(v, k));
-//         return reverseMap;
-//     }
-// }

@@ -8,6 +8,8 @@ class Variables {
   static const String appName = 'Laundry App';
   static const String branchName = 'Putri Laundry';
   static const String branchAddress = "Jalan Raya Condet No.15A";
+  static const String noPicture =
+      "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg";
 
   static const serviceIcon = "assets/icons/serviceIcon.png";
   static const historyIcon = "assets/icons/historyIcon.png";

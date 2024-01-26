@@ -42,7 +42,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 child: CircularProgressIndicator(),
               );
             }, success: (data) {
-              if (data.data.first.orderItems.isEmpty) {
+              if (data.data.isEmpty) {
                 return const Center(
                   child: Text('No data'),
                 );

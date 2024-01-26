@@ -125,25 +125,24 @@ class _LoginPageState extends State<LoginPage> {
                             },
                           );
                         },
-                        
                         child: BlocBuilder<LoginBloc, LoginState>(
                           builder: (context, state) {
                             return state.maybeWhen(orElse: () {
                               return Button.filled(
                                 color: AppColors.hardBlueColor,
                                 onPressed: () {
-                                  context.read<LoginBloc>().add(
-                                        LoginEvent.login(
-                                          email: usernameController.text,
-                                          password: passwordController.text,
-                                        ),
-                                      );
                                   // context.read<LoginBloc>().add(
-                                  //       const LoginEvent.login(
-                                  //         email: 'indrat@mail.com',
-                                  //         password: '123123',
+                                  //       LoginEvent.login(
+                                  //         email: usernameController.text,
+                                  //         password: passwordController.text,
                                   //       ),
                                   //     );
+                                  context.read<LoginBloc>().add(
+                                        const LoginEvent.login(
+                                          email: 'indrat@mail.com',
+                                          password: '123123',
+                                        ),
+                                      );
                                 },
                                 label: 'Masuk',
                               );

@@ -41,7 +41,7 @@ class HistoryTransactionCard extends StatelessWidget {
           subtitle: Text(
               '${data.totalQuantity} items | ${data.paymentMethod.toUpperCase()}'),
           trailing: Text(
-            data.totalPrice.toDoubleFromText.currencyFormatRp,
+            data.totalPrice.currencyFormatRpFromString,
             style: const TextStyle(
               color: AppColors.green,
               fontSize: 16,

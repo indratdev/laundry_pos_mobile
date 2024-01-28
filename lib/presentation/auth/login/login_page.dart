@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:laundry_app/core/constants/colors.dart';
 import 'package:laundry_app/core/constants/variables.dart';
 import 'package:laundry_app/presentation/home/home_page.dart';
+import 'package:laundry_app/presentation/widgets/custom_dialogs.dart';
 
 import '../../../core/componets/buttons.dart';
 import '../../../core/componets/custom_text_field.dart';
@@ -127,30 +128,41 @@ class _LoginPageState extends State<LoginPage> {
                         },
                         child: BlocBuilder<LoginBloc, LoginState>(
                           builder: (context, state) {
-                            return state.maybeWhen(orElse: () {
-                              return Button.filled(
-                                color: AppColors.hardBlueColor,
-                                onPressed: () {
-                                  // context.read<LoginBloc>().add(
-                                  //       LoginEvent.login(
-                                  //         email: usernameController.text,
-                                  //         password: passwordController.text,
-                                  //       ),
-                                  //     );
-                                  context.read<LoginBloc>().add(
-                                        const LoginEvent.login(
-                                          email: 'indrat@mail.com',
-                                          password: '123123',
-                                        ),
-                                      );
-                                },
-                                label: 'Masuk',
-                              );
-                            }, loading: () {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            });
+                            return state.maybeWhen(
+                              orElse: () {
+                                return Button.filled(
+                                  color: AppColors.hardBlueColor,
+                                  onPressed: () {
+                                    // context.read<LoginBloc>().add(
+                                    //       LoginEvent.login(
+                                    //         email: usernameController.text,
+                                    //         password: passwordController.text,
+                                    //       ),
+                                    //     );
+                                    context.read<LoginBloc>().add(
+                                          const LoginEvent.login(
+                                            email: 'indrat@mail.com',
+                                            password: '123123',
+                                          ),
+                                        );
+                                  },
+                                  label: 'Masuk',
+                                );
+                              },
+                              loading: () {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              },
+                              // error: (message) {
+                              //   return CustomDialogs().showMessageAlert(
+                              //     context,
+                              //     message,
+                              //     StatusImage.failed,
+                              //     () => Navigator.pop(context),
+                              //   );
+                              // },
+                            );
                           },
                         ),
                       ),

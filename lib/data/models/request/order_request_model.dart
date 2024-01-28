@@ -13,6 +13,8 @@ class OrderRequestModel {
   double totalPrice;
   int idCashier;
   bool isSync;
+  String? status;
+  String? statusPayment;
 
   OrderRequestModel({
     required this.customer,
@@ -26,6 +28,8 @@ class OrderRequestModel {
     this.totalQuantity = 0,
     this.transactionTime,
     required this.cashierName,
+    this.status,
+    this.statusPayment,
   });
 
   Map<String, dynamic> toMap() => {
@@ -38,8 +42,9 @@ class OrderRequestModel {
         "cashier_id": idCashier,
         "is_sync": isSync,
         "cashier_name": cashierName,
-        // "customer": customer.toMap(),
         "order_items": orderItems.map((item) => item.toMap()).toList(),
+        "status": status,
+        "status_payment": statusPayment,
       };
 }
 

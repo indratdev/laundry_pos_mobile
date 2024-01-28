@@ -1,8 +1,9 @@
 class Variables {
   // static const String baseUrl = 'http://127.0.0.1:8000';
-  static const String baseUrl = 'http://192.168.59.225';
+  // static const String baseUrl = 'http://192.168.59.225';
   // static const String baseUrl = 'http://192.168.137.1';
   // static const String baseUrl = 'http://192.168.1.7';
+  static const String baseUrl = 'http://192.168.1.9';
 
   static const String imageBaseUrl = '$baseUrl/storage/products/';
   static const String appName = 'Laundry App';
@@ -17,6 +18,8 @@ class Variables {
   static const reportsIcon = "assets/icons/reportsIcon.png";
   static const personIcon = "assets/icons/personIcon.png";
   static const customersIcon = "assets/icons/customersIcon.png";
+  static const pickUpIcon = "assets/icons/pickUpIcon.png";
+  static const statusOrderIcon = "assets/icons/statusOrderIcon.png";
   static const managePrinterIcon = "assets/icons/managePrinter.png";
   static const manageProductIcon = "assets/icons/manageProduct.png";
   static const serverKeyIcon = "assets/icons/serverKey.png";
@@ -33,3 +36,5 @@ class Variables {
 // <a href="https://www.flaticon.com/free-icons/client" title="client icons">Client icons created by Freepik - Flaticon</a>
 // <a href="https://www.flaticon.com/free-icons/done" title="done icons">Done icons created by Octopocto - Flaticon</a>
 // <a href="https://www.flaticon.com/free-icons/permission" title="permission icons">Permission icons created by Freepik - Flaticon</a>
+// <a href="https://www.flaticon.com/free-icons/goods" title="goods icons">Goods icons created by Uniconlabs - Flaticon</a>
+// <a href="https://www.flaticon.com/free-icons/checklist" title="checklist icons">Checklist icons created by Freepik - Flaticon</a>

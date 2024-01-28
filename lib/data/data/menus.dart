@@ -9,6 +9,7 @@ import 'package:laundry_app/presentation/settings/pages/management_printer/manag
 import 'package:laundry_app/presentation/settings/pages/management_product/manage_product_page.dart';
 import 'package:laundry_app/presentation/settings/pages/server_key/server_key_page.dart';
 import 'package:laundry_app/presentation/settings/settings_page.dart';
+import 'package:laundry_app/presentation/status/status_page.dart';
 import 'package:laundry_app/presentation/transaction/transaction_page.dart';
 
 import '../../core/constants/variables.dart';
@@ -38,6 +39,15 @@ class Menus {
               ));
         },
       ),
+      ServiceMenuWidget(title: "Pengambilan", iconName: Variables.pickUpIcon),
+      ServiceMenuWidget(
+        title: "Status",
+        iconName: Variables.statusOrderIcon,
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const StatusPage()));
+        },
+      ),
       ServiceMenuWidget(
         title: "Pelanggan",
         iconName: Variables.customersIcon,
@@ -57,7 +67,7 @@ class Menus {
               MaterialPageRoute(builder: (context) => const HistoryPage()));
         },
       ),
-      // ServiceMenuWidget(title: "Laporan", iconName: Variables.reportsIcon),
+      ServiceMenuWidget(title: "Laporan", iconName: Variables.reportsIcon),
       ServiceMenuWidget(
           title: "Kelola",
           iconName: Variables.settingsIcon,

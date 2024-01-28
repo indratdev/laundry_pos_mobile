@@ -128,7 +128,7 @@ class _TransactionPageState extends State<TransactionPage> {
                         ? AppColors.yellow
                         : null,
                   ),
-                  child: Text("QRIS"),
+                  child: const Text("QRIS"),
                   onPressed: () {
                     setState(() {
                       orderUser?.paymentMethod = "qris";
@@ -254,7 +254,6 @@ class _TransactionPageState extends State<TransactionPage> {
                             iconSize: iconSize,
                             onPressed: () {
                               addItem(product);
-
                               setState(() {});
                             },
                             icon: const Icon(Icons.add_circle_outline_rounded),
@@ -394,9 +393,7 @@ class _TransactionPageState extends State<TransactionPage> {
                 onPressed: (step == 1)
                     ? () => Navigator.pop(context)
                     : () => previousPage(),
-                // child: (step == 1)
-                //     ? const Text("Kembali")
-                //     : const Text('Previous'),
+              
                 child: const Text("Kembali"),
               ),
             ),

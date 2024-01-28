@@ -72,7 +72,6 @@ class _HomePageState extends State<HomePage> {
               return const Center(child: Text('Error loading user data'));
             } else {
               AuthResponseModel? userLogin = snapshot.data;
-
               return Column(
                 children: [
                   Container(
@@ -85,13 +84,13 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       children: [
                         Container(
-                            alignment: Alignment.center,
-                            margin: const EdgeInsets.all(12),
-                            width: MediaQuery.sizeOf(context).width / 7,
-                            child: Image.asset(Variables.personIcon)
-                            // Image.network(
-                            //     'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/LEGO_logo.svg/512px-LEGO_logo.svg.png'),
-                            ),
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.all(12),
+                          width: MediaQuery.sizeOf(context).width / 7,
+                          child: Image.asset(
+                            Variables.personIcon,
+                          ),
+                        ),
                         Expanded(
                           child: ListTile(
                             title: Text("${userLogin?.user.name}"),
@@ -138,7 +137,7 @@ class _HomePageState extends State<HomePage> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        "Masuk",
+                                        "Antrian",
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       Text("1"),
@@ -179,7 +178,7 @@ class _HomePageState extends State<HomePage> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        "Selesai",
+                                        "Diproses",
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       Text("3"),
@@ -219,7 +218,7 @@ class _HomePageState extends State<HomePage> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        "Terlambat",
+                                        "Selesai",
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       Text("2"),

@@ -192,6 +192,8 @@ class _DialogPaymentMethodWidgetState extends State<DialogPaymentMethodWidget> {
                         transactionTime.toString();
                     widget.orderUser.amountPayment =
                         removeCurrency(amountPaymentController.text);
+                    widget.orderUser.status = "process";
+                    widget.orderUser.statusPayment = "paid";
                     BlocProvider.of<OrderBloc>(context)
                         .add(OrderEvent.addOrder(widget.orderUser));
                     Navigator.pop(context);

@@ -84,6 +84,8 @@ class OrderResponseItem {
   final String created_at;
   final int id;
   final Customer? customers;
+  final String? status;
+  final String? statusPayment;
 
   OrderResponseItem({
     this.transaction_time = "",
@@ -99,6 +101,8 @@ class OrderResponseItem {
     this.total_quantity = 0,
     this.updated_at = "",
     this.customers,
+    this.status,
+    this.statusPayment,
   });
 
   factory OrderResponseItem.fromJson(Map<String, dynamic> json) {
@@ -116,6 +120,8 @@ class OrderResponseItem {
       created_at: json["created_at"],
       updated_at: json["updated_at"],
       customers: json["customers"],
+      status: json["status"],
+      statusPayment: json["status_payment"],
     );
   }
 
@@ -136,6 +142,8 @@ class OrderResponseItem {
         created_at: json["created_at"],
         updated_at: json["updated_at"],
         customers: json["customers"],
+        status: json["status"],
+        statusPayment: json["status_payment"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -152,6 +160,8 @@ class OrderResponseItem {
         "created_at": created_at,
         "updated_at": updated_at,
         "customers": customers,
+        "status": status,
+        "status_payment": statusPayment,
       };
 }
 
@@ -197,7 +207,6 @@ class OrderResponseItem {
 //         "updated_at": updatedAt.toIso8601String(),
 //       };
 // }
-
 
 // OLD
 class OrderItem {
